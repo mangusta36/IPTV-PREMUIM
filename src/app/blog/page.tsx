@@ -101,7 +101,7 @@ export default function BlogIndex() {
             <h3 className="text-2xl md:text-3xl font-bold mb-4">Still need help setting up?</h3>
             <p className="text-muted-foreground mb-8">Our support team is available 24/7 on WhatsApp to help you install and configure your IPTV app in minutes.</p>
             <Link
-              href="https://wa.me/1234567890"
+              href="https://wa.me/447988033246"
               className="button-glow-success inline-flex h-14 items-center justify-center gap-2 rounded-full bg-success px-8 text-base font-bold text-background transition hover:-translate-y-0.5 hover:bg-success-hover"
             >
               <MessageCircle className="h-5 w-5" /> Chat with Support

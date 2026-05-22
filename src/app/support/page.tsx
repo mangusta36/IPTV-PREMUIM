@@ -89,7 +89,7 @@ export default function SupportPage() {
               Message us directly on WhatsApp. We typically reply within 5 minutes. Have your username or MAC address ready for faster service.
             </p>
             <Link
-              href="https://wa.me/1234567890"
+              href="https://wa.me/447988033246"
               className="button-glow-success cta-pulse-success inline-flex h-16 items-center justify-center gap-3 rounded-full bg-success px-10 text-lg font-bold text-background transition hover:-translate-y-1 hover:bg-success-hover"
             >
               <MessageCircle className="h-6 w-6" /> Chat with Support Now

@@ -224,7 +224,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                   <p className="text-muted-foreground text-sm">Join thousands of users enjoying zero-buffering IPTV.</p>
                 </div>
                 <Link
-                  href="https://wa.me/1234567890"
+                  href="https://wa.me/447988033246"
                   className="button-glow-success whitespace-nowrap inline-flex h-12 items-center justify-center gap-2 rounded-full bg-success px-6 text-sm font-bold text-background transition hover:-translate-y-0.5 hover:bg-success-hover"
                 >
                   <MessageCircle className="h-4 w-4" /> Start Free Trial
@@ -240,7 +240,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                   <h3 className="text-lg font-bold mb-3">Need Setup Help?</h3>
                   <p className="text-sm text-muted-foreground mb-6">Our WhatsApp support team is online 24/7. We can help you install apps on any device.</p>
                   <Link
-                    href="https://wa.me/1234567890"
+                    href="https://wa.me/447988033246"
                     className="flex w-full h-12 items-center justify-center gap-2 rounded-xl bg-success/20 text-success font-bold transition-colors hover:bg-success hover:text-background"
                   >
                     <MessageCircle className="h-4 w-4" /> Message Support

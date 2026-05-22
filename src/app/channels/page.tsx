@@ -524,7 +524,7 @@ export default function Home() {
             </p>
 
             <div className="mt-11 flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
-              <Link href="https://wa.me/1234567890"
+              <Link href="https://wa.me/447988033246"
                 className="btn-gold relative inline-flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full px-9 text-base tracking-wide">
                 <MessageCircle className="h-5 w-5" style={{ position: "relative", zIndex: 1 }} />
                 <span style={{ position: "relative", zIndex: 1 }}>Start Free Trial Now</span>
@@ -700,7 +700,7 @@ export default function Home() {
                   </span>
                   <h3 className="text-2xl font-extrabold text-white mb-3 leading-tight">{card.title}</h3>
                   <p className="text-sm leading-relaxed font-medium mb-7" style={{ color: "rgba(255,255,255,0.62)" }}>{card.description}</p>
-                  <Link href="https://wa.me/1234567890"
+                  <Link href="https://wa.me/447988033246"
                     className="btn-gold inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm tracking-wide">
                     <MessageCircle className="h-4 w-4" style={{ position: "relative", zIndex: 1 }} />
                     <span style={{ position: "relative", zIndex: 1 }}>{card.cta}</span>
@@ -882,7 +882,7 @@ export default function Home() {
 
                   {/* CTA */}
                   <Link
-                    href="https://wa.me/1234567890"
+                    href="https://wa.me/447988033246"
                     className={`inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-base tracking-wide ${
                       plan.tagType === "none" ? "btn-ghost" : "btn-gold"
                     }`}
@@ -995,7 +995,7 @@ export default function Home() {
           <p className="text-xl mb-10 max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.52)" }}>
             Get your login credentials delivered instantly via WhatsApp. Join the future of television.
           </p>
-          <Link href="https://wa.me/1234567890"
+          <Link href="https://wa.me/447988033246"
             className="btn-gold inline-flex h-16 items-center justify-center gap-3 rounded-full px-14 text-lg">
             <MessageCircle className="h-6 w-6" style={{ position: "relative", zIndex: 1 }} />
             <span style={{ position: "relative", zIndex: 1 }}>Get Your Pass Now</span>

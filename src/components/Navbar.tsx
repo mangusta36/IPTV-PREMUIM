@@ -130,7 +130,7 @@ export default function Navbar() {
 
             {/* Desktop CTA */}
             <div className="hidden md:flex">
-              <Link href="https://wa.me/1234567890" className="nav-cta">
+              <Link href="https://wa.me/447988033246" className="nav-cta">
                 <MessageCircle className="h-4 w-4" />
                 WhatsApp Us
               </Link>
@@ -147,7 +147,7 @@ export default function Navbar() {
                 </Link>
               ))}
 
-              <Link href="https://wa.me/1234567890" className="nav-pill bg-[#EBB616]/10 text-[#EBB616] border-[#EBB616]/40">
+              <Link href="https://wa.me/447988033246" className="nav-pill bg-[#EBB616]/10 text-[#EBB616] border-[#EBB616]/40">
                 WhatsApp
               </Link>
             </div>

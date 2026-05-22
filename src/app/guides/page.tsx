@@ -206,7 +206,7 @@ export default function GuidesPage() {
                   {/* WhatsApp CTA per Guide */}
                   <div className="mt-auto pt-6 border-t border-white/5">
                     <Link
-                      href="https://wa.me/1234567890"
+                      href="https://wa.me/447988033246"
                       className="flex w-full items-center justify-center gap-2 rounded-xl bg-success/10 px-4 py-3 text-sm font-bold text-success transition hover:bg-success hover:text-background border border-success/20"
                     >
                       <MessageCircle className="h-4 w-4" /> Need help? Message Support
@@ -229,7 +229,7 @@ export default function GuidesPage() {
                 Browse Blog Guides
               </Link>
               <Link
-                href="https://wa.me/1234567890"
+                href="https://wa.me/447988033246"
                 className="button-glow-success inline-flex h-14 items-center justify-center gap-2 rounded-full bg-success px-8 text-base font-bold text-background transition hover:-translate-y-0.5 hover:bg-success-hover"
               >
                 <MessageCircle className="h-5 w-5" /> Ask on WhatsApp
