@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import {
   ArrowRight,
   CheckCircle,
@@ -22,14 +23,128 @@ import EmblaSlider from "@/components/EmblaSlider";
 import AnimatedLogos from "@/components/AnimatedLogos";
 import { blogPosts } from "@/lib/blog-data";
 
+/* ══════════════════════════════════════════════════
+   SEO METADATA  — iFlexIPTV
+══════════════════════════════════════════════════ */
+export const metadata: Metadata = {
+  title: "iFlex IPTV | Best IPTV Subscription 2025 – 26,000+ Channels in 4K",
+  description:
+    "iFlex IPTV offers the best IPTV subscription with 26,000+ live channels, 100,000+ VODs, 4K & FHD quality, anti-freeze servers and 24/7 WhatsApp support. Buy IPTV online – instant activation.",
+  keywords: [
+    "iFlex IPTV",
+    "iFlexIPTV",
+    "best IPTV subscription",
+    "buy IPTV",
+    "IPTV premium",
+    "IPTV 4K",
+    "IPTV service",
+    "IPTV provider",
+    "cheap IPTV",
+    "IPTV subscription 2025",
+    "IPTV smarters",
+    "IPTV m3u playlist",
+    "IPTV firestick",
+    "IPTV smart TV",
+    "IPTV android",
+    "IPTV channels",
+    "live IPTV",
+    "IPTV sports",
+    "IPTV VOD",
+    "IPTV maroc",
+    "IPTV france",
+    "IPTV uk",
+    "abonnement IPTV",
+    "meilleur IPTV",
+    "IPTV pas cher",
+    "premium IPTV service",
+    "IPTV no buffering",
+    "IPTV anti freeze",
+    "IPTV 26000 channels",
+    "IPTV instant activation",
+  ].join(", "),
+  alternates: {
+    canonical: "https://www.iflexiptv.net",
+  },
+  openGraph: {
+    title: "iFlex IPTV – Best IPTV Subscription | 26,000+ Channels in 4K",
+    description:
+      "Stream 26,000+ live channels and 100,000+ VODs in 4K. iFlex IPTV – the best IPTV provider with instant activation, anti-freeze servers & 24/7 WhatsApp support.",
+    url: "https://www.iflexiptv.net",
+    siteName: "iFlexIPTV",
+    images: [
+      {
+        url: "https://www.iflexiptv.net/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "iFlex IPTV – Best IPTV Subscription Service",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "iFlex IPTV – Best IPTV Subscription | 26,000+ Channels in 4K",
+    description:
+      "Stream live sports, movies & series in 4K. Best IPTV service with instant activation.",
+    images: ["https://www.iflexiptv.net/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+};
+
 export default function Home() {
+  /* ── Rich structured data (Schema.org) ── */
   const schema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "iflexiptv",
+    name: "iFlex IPTV",
     url: "https://www.iflexiptv.net",
     logo: "https://www.iflexiptv.net/logo.png",
-    description: "Premium IPTV subscription service offering 4K/FHD channels, sports, and VODs.",
+    description:
+      "iFlex IPTV is a premium IPTV subscription service offering 26,000+ live channels, 100,000+ VODs, 4K & FHD quality, anti-freeze servers and 24/7 WhatsApp support.",
+    sameAs: ["https://wa.me/447988033246"],
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "EUR",
+      lowPrice: "37",
+      highPrice: "67",
+      offerCount: "3",
+      offers: [
+        {
+          "@type": "Offer",
+          name: "iFlex IPTV 3-Month Subscription",
+          price: "37",
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+          description: "3-month IPTV subscription with 26,000+ channels and 100,000+ VODs",
+        },
+        {
+          "@type": "Offer",
+          name: "iFlex IPTV 6-Month Subscription",
+          price: "49",
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+          description: "6-month IPTV subscription with 26,000+ channels and 100,000+ VODs",
+        },
+        {
+          "@type": "Offer",
+          name: "iFlex IPTV 12-Month Subscription",
+          price: "67",
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+          description: "12-month IPTV subscription with 26,000+ channels and 100,000+ VODs",
+        },
+      ],
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "2400",
+    },
   };
 
   const featureCards = [
@@ -37,28 +152,31 @@ export default function Home() {
       badge: "Live 24/7",
       title: "Every Big Match. Zero Miss.",
       description:
-        "Premier League, Champions League, UFC, F1, NBA — all in crystal-clear 4K UHD with anti-freeze servers.",
+        "Premier League, Champions League, UFC, F1, NBA — all in crystal-clear 4K UHD with anti-freeze servers. The best IPTV for live sports.",
       image:
         "https://images.pexels.com/photos/1884574/pexels-photo-1884574.jpeg?auto=compress&cs=tinysrgb&w=1200",
       cta: "Watch Live Sports",
+      alt: "iFlex IPTV – Live Sports Channels 4K – Premier League & Champions League",
     },
     {
       badge: "100K+ Titles",
       title: "Movies & Series Every Night.",
       description:
-        "An endless cinema of blockbusters, award-winning series, Arabic dramas, and kids shows. Updated daily.",
+        "An endless VOD library of blockbusters, award-winning series, Arabic dramas, and kids shows. Updated daily. Best IPTV VOD service.",
       image:
         "https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg?auto=compress&cs=tinysrgb&w=1200",
       cta: "Browse VOD Library",
+      alt: "iFlex IPTV – 100,000+ Movies and Series VOD Library",
     },
     {
       badge: "5-Min Setup",
       title: "Works on Every Screen.",
       description:
-        "Smart TV, Firestick, iPhone, Android, PC, MAG box — one subscription, unlimited screens.",
+        "Smart TV, Firestick, iPhone, Android, PC, MAG box — one IPTV subscription, unlimited screens. Setup in under 5 minutes.",
       image:
         "https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg?auto=compress&cs=tinysrgb&w=1200",
       cta: "See All Devices",
+      alt: "iFlex IPTV – Works on Smart TV, Firestick, Android and iPhone",
     },
   ];
 
@@ -68,81 +186,85 @@ export default function Home() {
       difficulty: "Easy",
       icon: <Tv className="h-8 w-8" style={{ color: "#F2C847" }} />,
       image: "https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg?auto=compress&cs=tinysrgb&w=800",
+      alt: "Install iFlex IPTV on Smart TV – Easy Setup Guide",
     },
     {
       name: "Firestick",
       difficulty: "Easy",
       icon: <MonitorPlay className="h-8 w-8" style={{ color: "#F2C847" }} />,
       image: "https://images.pexels.com/photos/5428830/pexels-photo-5428830.jpeg?auto=compress&cs=tinysrgb&w=800",
+      alt: "Install iFlex IPTV on Firestick – Best IPTV for Amazon Fire TV",
     },
     {
       name: "Apple TV",
       difficulty: "Easy",
       icon: <Tv className="h-8 w-8" style={{ color: "#F2C847" }} />,
       image: "https://images.pexels.com/photos/4009409/pexels-photo-4009409.jpeg?auto=compress&cs=tinysrgb&w=800",
+      alt: "Install iFlex IPTV on Apple TV – Premium IPTV Service",
     },
     {
       name: "Smartphones",
       difficulty: "Very Easy",
       icon: <Smartphone className="h-8 w-8" style={{ color: "#F2C847" }} />,
       image: "https://images.pexels.com/photos/5082567/pexels-photo-5082567.jpeg?auto=compress&cs=tinysrgb&w=800",
+      alt: "Watch iFlex IPTV on Android and iPhone – Mobile IPTV App",
     },
   ];
 
-const pricingPlans = [
-  {
-    months: "3 Months",
-    price: "€37",
-    perMonth: "€12.33 /mo",
-    tagType: "none",
-    tag: null,
-    image: "/imgs/movies/movie_1.webp",
-    features: [
-      "26,000+ Live Channels",
-      "100,000+ VODs",
-      "4K & FHD Quality",
-      "Anti-Freeze Servers",
-      "All Devices Supported",
-      "24/7 WhatsApp Support"
-    ],
-    cta: "Order Now"
-  },
-  {
-    months: "6 Months",
-    price: "€49",
-    perMonth: "€8.16 /mo",
-    tagType: "popular",
-    tag: "Most Popular",
-    image: "/imgs/movies/movie_2.webp",
-    features: [
-      "26,000+ Live Channels",
-      "100,000+ VODs",
-      "4K & FHD Quality",
-      "Anti-Freeze Servers",
-      "All Devices Supported",
-      "24/7 WhatsApp Support"
-    ],
-    cta: "Order Now"
-  },
-  {
-    months: "12 Months",
-    price: "€67",
-    perMonth: "€5.58 /mo",
-    tagType: "best",
-    tag: "Best Value",
-    image: "/imgs/movies/movie_3.webp",
-    features: [
-      "26,000+ Live Channels",
-      "100,000+ VODs",
-      "4K & FHD Quality",
-      "Anti-Freeze Servers",
-      "All Devices Supported",
-      "24/7 WhatsApp Support",
-      "Free Setup Assistance"
-    ],
-    cta: "Order Now"
-  }
-];
+  const pricingPlans = [
+    {
+      months: "3 Months",
+      price: "€37",
+      perMonth: "€12.33 /mo",
+      tagType: "none",
+      tag: null,
+      image: "/imgs/movies/movie_1.webp",
+      features: [
+        "26,000+ Live Channels",
+        "100,000+ VODs",
+        "4K & FHD Quality",
+        "Anti-Freeze Servers",
+        "All Devices Supported",
+        "24/7 WhatsApp Support",
+      ],
+      cta: "Order Now",
+    },
+    {
+      months: "6 Months",
+      price: "€49",
+      perMonth: "€8.16 /mo",
+      tagType: "popular",
+      tag: "Most Popular",
+      image: "/imgs/movies/movie_2.webp",
+      features: [
+        "26,000+ Live Channels",
+        "100,000+ VODs",
+        "4K & FHD Quality",
+        "Anti-Freeze Servers",
+        "All Devices Supported",
+        "24/7 WhatsApp Support",
+      ],
+      cta: "Order Now",
+    },
+    {
+      months: "12 Months",
+      price: "€67",
+      perMonth: "€5.58 /mo",
+      tagType: "best",
+      tag: "Best Value",
+      image: "/imgs/movies/movie_3.webp",
+      features: [
+        "26,000+ Live Channels",
+        "100,000+ VODs",
+        "4K & FHD Quality",
+        "Anti-Freeze Servers",
+        "All Devices Supported",
+        "24/7 WhatsApp Support",
+        "Free Setup Assistance",
+      ],
+      cta: "Order Now",
+    },
+  ];
 
   const latestPosts = blogPosts.slice(0, 4);
 
@@ -154,7 +276,6 @@ const pricingPlans = [
           GLOBAL LUXURY DESIGN TOKENS
       ───────────────────────────────────────────────────────── */}
       <style>{`
-        /* ── Gold palette ── */
         :root {
           --g1: #C9A020;
           --g2: #F2C847;
@@ -163,8 +284,6 @@ const pricingPlans = [
           --s1:  #08080F;
           --s2:  #0B0B16;
         }
-
-        /* ── Grain overlay ── */
         .grain::after {
           content: "";
           position: absolute;
@@ -174,14 +293,10 @@ const pricingPlans = [
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
           background-size: 160px 160px;
         }
-
-        /* ── Gold shimmer line ── */
         .gold-line {
           height: 1px;
           background: linear-gradient(90deg, transparent 0%, rgba(242,200,71,0.5) 30%, rgba(249,224,138,0.8) 50%, rgba(242,200,71,0.5) 70%, transparent 100%);
         }
-
-        /* ── Ambient glow orb ── */
         .g-orb {
           position: absolute;
           border-radius: 50%;
@@ -189,23 +304,17 @@ const pricingPlans = [
           pointer-events: none;
           z-index: 0;
         }
-
-        /* ── Gold text gradient ── */
         .tg {
           background: linear-gradient(130deg, #C9A020 0%, #F2C847 40%, #F9E08A 65%, #C9A020 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
-
-        /* ── Gold badge ── */
         .gold-badge {
           background: linear-gradient(130deg, #F2C847 0%, #F9E08A 50%, #C9A020 100%);
           color: #07070D;
           box-shadow: 0 0 18px rgba(242,200,71,0.5), inset 0 1px 0 rgba(255,255,255,0.4);
         }
-
-        /* ── Primary gold button ── */
         .btn-gold {
           background: linear-gradient(130deg, #F2C847 0%, #F9E08A 45%, #C9A020 100%);
           color: #07070D;
@@ -233,8 +342,6 @@ const pricingPlans = [
           transform: translateY(-3px);
           box-shadow: 0 8px 36px rgba(242,200,71,0.65), inset 0 1px 0 rgba(255,255,255,0.35);
         }
-
-        /* ── Ghost gold button ── */
         .btn-ghost {
           background: rgba(242,200,71,0.06);
           border: 1px solid rgba(242,200,71,0.28);
@@ -247,8 +354,6 @@ const pricingPlans = [
           border-color: rgba(242,200,71,0.55);
           box-shadow: 0 0 28px rgba(242,200,71,0.22);
         }
-
-        /* ── Card hover ── */
         .card-hover {
           transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
         }
@@ -257,8 +362,6 @@ const pricingPlans = [
           box-shadow: 0 0 50px rgba(242,200,71,0.14), 0 24px 64px rgba(0,0,0,0.75) !important;
           transform: translateY(-6px);
         }
-
-        /* ── Section heading ornament ── */
         .orn {
           display: flex;
           align-items: center;
@@ -272,8 +375,6 @@ const pricingPlans = [
         }
         .orn-line-l { background: linear-gradient(90deg, transparent, rgba(242,200,71,0.55)); }
         .orn-line-r { background: linear-gradient(90deg, rgba(242,200,71,0.55), transparent); }
-
-        /* ── Feature card bottom glow layer ── */
         .feat-card::after {
           content: "";
           position: absolute;
@@ -286,12 +387,6 @@ const pricingPlans = [
           transition: opacity 0.4s ease;
         }
         .feat-card:hover::after { opacity: 1; }
-
-        /* ─────────────────────────────────────────
-           PRICING SECTION  —  full rebuild
-        ───────────────────────────────────────── */
-
-        /* Container */
         .pricing-grid {
           display: grid;
           grid-template-columns: 1fr;
@@ -302,8 +397,6 @@ const pricingPlans = [
         @media (min-width: 768px) {
           .pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
         }
-
-        /* Base card */
         .p-card {
           position: relative;
           border-radius: 24px;
@@ -313,8 +406,6 @@ const pricingPlans = [
           transition: transform 0.4s ease, box-shadow 0.4s ease;
         }
         .p-card:hover { transform: translateY(-8px); }
-
-        /* ── Standard card ── */
         .p-card-std {
           background: linear-gradient(160deg, #0C0C18 0%, #08080F 100%);
           border: 1px solid rgba(242,200,71,0.12);
@@ -324,8 +415,6 @@ const pricingPlans = [
           border-color: rgba(242,200,71,0.32);
           box-shadow: 0 20px 64px rgba(0,0,0,0.7), 0 0 40px rgba(242,200,71,0.12);
         }
-
-        /* ── Popular card ── */
         .p-card-pop {
           background: linear-gradient(160deg, #10101E 0%, #0C0C18 100%);
           box-shadow: 0 8px 48px rgba(0,0,0,0.6), 0 0 32px rgba(242,200,71,0.12);
@@ -346,8 +435,6 @@ const pricingPlans = [
         .p-card-pop:hover {
           box-shadow: 0 24px 80px rgba(0,0,0,0.75), 0 0 60px rgba(242,200,71,0.25);
         }
-
-        /* ── Best value card ── */
         .p-card-best {
           background: linear-gradient(155deg, #0F0D08 0%, #0C0A06 50%, #0F0D08 100%);
           box-shadow: 0 0 80px rgba(242,200,71,0.22), 0 24px 80px rgba(0,0,0,0.7);
@@ -368,7 +455,6 @@ const pricingPlans = [
         .p-card-best:hover {
           box-shadow: 0 0 100px rgba(242,200,71,0.35), 0 32px 100px rgba(0,0,0,0.8);
         }
-        /* Animated gold top bar for best card */
         .p-card-best .p-topbar {
           position: absolute;
           top: 0; left: 0; right: 0;
@@ -382,8 +468,6 @@ const pricingPlans = [
           0%   { background-position: 0% 0; }
           100% { background-position: 200% 0; }
         }
-
-        /* Card image overlay */
         .p-img-wrap {
           position: absolute;
           inset: 0;
@@ -394,8 +478,6 @@ const pricingPlans = [
           inset: 0;
           background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.85) 55%, rgba(0,0,0,0.98) 100%);
         }
-
-        /* Card content */
         .p-body {
           position: relative;
           z-index: 5;
@@ -404,8 +486,6 @@ const pricingPlans = [
           flex: 1;
           padding: 32px 28px 28px;
         }
-
-        /* Price display */
         .p-price-num {
           font-size: 3.25rem;
           font-weight: 900;
@@ -413,9 +493,12 @@ const pricingPlans = [
           letter-spacing: -0.03em;
           color: white;
         }
-        .p-card-best .p-price-num { background: linear-gradient(135deg, #F2C847, #F9E08A 50%, #C9A020); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
-        /* Savings ribbon for best/popular */
+        .p-card-best .p-price-num {
+          background: linear-gradient(135deg, #F2C847, #F9E08A 50%, #C9A020);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
         .p-savings {
           display: inline-flex;
           align-items: center;
@@ -436,8 +519,6 @@ const pricingPlans = [
           border-color: rgba(242,200,71,0.5);
           box-shadow: 0 0 12px rgba(242,200,71,0.2);
         }
-
-        /* Feature list row */
         .p-feat {
           display: flex;
           align-items: center;
@@ -462,8 +543,6 @@ const pricingPlans = [
           border: 1px solid rgba(242,200,71,0.45);
           box-shadow: 0 0 8px rgba(242,200,71,0.25);
         }
-
-        /* Divider in pricing card */
         .p-divider {
           height: 1px;
           background: linear-gradient(90deg, transparent, rgba(242,200,71,0.2) 50%, transparent);
@@ -472,8 +551,6 @@ const pricingPlans = [
         .p-card-best .p-divider {
           background: linear-gradient(90deg, transparent, rgba(242,200,71,0.45) 50%, transparent);
         }
-
-        /* Pricing note at bottom */
         .pricing-note {
           text-align: center;
           margin-top: 36px;
@@ -505,61 +582,82 @@ const pricingPlans = [
         <div className="g-orb" style={{ width: 700, height: 700, top: "-15%", right: "-8%", opacity: 0.8 }} />
         <div className="g-orb" style={{ width: 450, height: 450, bottom: "-5%", left: "-8%", opacity: 0.5 }} />
 
-        {/* Video BG */}
         <div className="absolute inset-0 -z-20 bg-black">
-          <video autoPlay muted loop playsInline preload="metadata"
+          <video
+            autoPlay muted loop playsInline preload="metadata"
             poster="https://images.unsplash.com/photo-1508344928928-7137b29de216?q=80&w=2000"
-            className="object-cover w-full h-full opacity-35">
+            className="object-cover w-full h-full opacity-35"
+            aria-label="iFlex IPTV premium streaming background"
+          >
             <source src="/imgs/bg_movie.mp4" type="video/mp4" />
           </video>
         </div>
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#05050A] via-[#05050A]/55 to-[#05050A]/10" />
-        <div className="absolute inset-0 -z-10"
-          style={{ background: "radial-gradient(ellipse 65% 55% at 72% 18%, rgba(242,200,71,0.09), transparent)" }} />
-
+        <div
+          className="absolute inset-0 -z-10"
+          style={{ background: "radial-gradient(ellipse 65% 55% at 72% 18%, rgba(242,200,71,0.09), transparent)" }}
+        />
         <div className="gold-line absolute top-0 left-0 right-0" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left" style={{ position: "relative", zIndex: 5 }}>
           <div className="max-w-4xl mx-auto md:mx-0">
 
-            {/* Pill badge */}
-            <div className="mb-7 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold"
+            {/* SEO-rich pill badge */}
+            <div
+              className="mb-7 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold"
               style={{
                 background: "linear-gradient(135deg, rgba(242,200,71,0.12), rgba(242,200,71,0.04))",
                 border: "1px solid rgba(242,200,71,0.35)",
                 color: "#F2C847",
-                boxShadow: "0 0 24px rgba(242,200,71,0.18), inset 0 1px 0 rgba(242,200,71,0.15)"
-              }}>
+                boxShadow: "0 0 24px rgba(242,200,71,0.18), inset 0 1px 0 rgba(242,200,71,0.15)",
+              }}
+            >
               <Star className="h-4 w-4 fill-[#F2C847] text-[#F2C847]" />
-              The Ultimate IPTV Experience
+              #1 Best IPTV Subscription 2025 — iFlex IPTV
             </div>
 
-            <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl"
-              style={{ lineHeight: 1.08 }}>
-              Every Match. Every Movie.{" "}
-              <span className="tg">Zero Buffering.</span>
+            {/* H1 — primary keyword target */}
+            <h1
+              className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl"
+              style={{ lineHeight: 1.08 }}
+            >
+              Best IPTV Service.{" "}
+              <span className="tg">26,000+ Channels in 4K.</span>
             </h1>
 
-            <p className="mt-7 max-w-2xl text-lg leading-8 sm:text-xl mx-auto md:mx-0 font-medium"
-              style={{ color: "rgba(255,255,255,0.68)" }}>
-              Join thousands of cord-cutters. Get instant access to 26,000+ live premium channels, live sports in 4K, and a massive VOD library.
+            {/* Subheading with secondary keywords */}
+            <p
+              className="mt-7 max-w-2xl text-lg leading-8 sm:text-xl mx-auto md:mx-0 font-medium"
+              style={{ color: "rgba(255,255,255,0.68)" }}
+            >
+              iFlex IPTV — premium IPTV subscription with instant activation. Stream live sports,
+              movies &amp; series in 4K &amp; FHD on Smart TV, Firestick, Android, iPhone and more.
+              Anti-freeze servers. 24/7 WhatsApp support.
             </p>
 
             <div className="mt-11 flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
-              <Link href="https://wa.me/447988033246"
-                className="btn-gold relative inline-flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full px-9 text-base tracking-wide">
+              <Link
+                href="https://wa.me/447988033246"
+                className="btn-gold relative inline-flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full px-9 text-base tracking-wide"
+                aria-label="Buy iFlex IPTV subscription via WhatsApp"
+              >
                 <MessageCircle className="h-5 w-5" style={{ position: "relative", zIndex: 1 }} />
-                <span style={{ position: "relative", zIndex: 1 }}>Start Free Trial Now</span>
+                <span style={{ position: "relative", zIndex: 1 }}>Get Free IPTV Trial Now</span>
               </Link>
-              <Link href="/channels"
-                className="btn-ghost inline-flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full px-9 text-base font-semibold">
-                View Channel List
+              <Link
+                href="/channels"
+                className="btn-ghost inline-flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full px-9 text-base font-semibold"
+                aria-label="View full iFlex IPTV channel list"
+              >
+                View IPTV Channel List
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
 
-            <div className="mt-11 flex flex-wrap items-center justify-center md:justify-start gap-7 text-sm font-semibold uppercase tracking-wider"
-              style={{ color: "rgba(255,255,255,0.5)" }}>
+            <div
+              className="mt-11 flex flex-wrap items-center justify-center md:justify-start gap-7 text-sm font-semibold uppercase tracking-wider"
+              style={{ color: "rgba(255,255,255,0.5)" }}
+            >
               <span className="flex items-center gap-2">
                 <CheckCircle className="h-5 w-5" style={{ color: "#F2C847" }} />
                 Anti-Freeze Servers
@@ -567,6 +665,14 @@ const pricingPlans = [
               <span className="flex items-center gap-2">
                 <CheckCircle className="h-5 w-5" style={{ color: "#F2C847" }} />
                 4K &amp; FHD Quality
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5" style={{ color: "#F2C847" }} />
+                Instant Activation
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle className="h-5 w-5" style={{ color: "#F2C847" }} />
+                No Buffering
               </span>
             </div>
           </div>
@@ -578,19 +684,23 @@ const pricingPlans = [
       {/* ══════════════════════════════════════════════════
           2 · ANIMATED LOGOS
       ══════════════════════════════════════════════════ */}
-      <div style={{
-        background: "#080810",
-        borderTop: "1px solid rgba(242,200,71,0.07)",
-        borderBottom: "1px solid rgba(242,200,71,0.07)"
-      }}>
+      <div
+        style={{
+          background: "#080810",
+          borderTop: "1px solid rgba(242,200,71,0.07)",
+          borderBottom: "1px solid rgba(242,200,71,0.07)",
+        }}
+      >
         <AnimatedLogos />
       </div>
 
       {/* ══════════════════════════════════════════════════
           3 · LIVE SPORTS SLIDER
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: "linear-gradient(180deg, #080810 0%, #050510 100%)" }}>
+      <section
+        className="grain relative py-20 sm:py-28 overflow-hidden"
+        style={{ background: "linear-gradient(180deg, #080810 0%, #050510 100%)" }}
+      >
         <div className="g-orb" style={{ width: 700, height: 500, top: "-20%", right: "-10%", opacity: 0.65 }} />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl" style={{ position: "relative", zIndex: 5 }}>
@@ -600,30 +710,49 @@ const pricingPlans = [
               <Trophy style={{ width: 14, height: 14, color: "#F2C847" }} />
               <div className="orn-line orn-line-r" />
             </div>
+            {/* H2 — sports keywords */}
             <h2 className="text-3xl font-bold sm:text-4xl text-white flex items-center gap-3">
               <Trophy className="h-8 w-8" style={{ color: "#F2C847" }} />
-              Live <span className="tg" style={{ marginLeft: 8 }}>Sports Hub</span>
+              IPTV Live <span className="tg" style={{ marginLeft: 8 }}>Sports Channels</span>
             </h2>
-            <p className="mt-2" style={{ color: "rgba(255,255,255,0.48)" }}>Never miss a kickoff, punch, or pole position.</p>
+            <p className="mt-2" style={{ color: "rgba(255,255,255,0.48)" }}>
+              Stream Premier League, Champions League, UFC, F1 &amp; NBA live in 4K — never miss a kickoff.
+            </p>
           </div>
 
           <EmblaSlider delay={3500}>
             {[
-              { title: "World Cup 2030", img: "/imgs/sports/bg1.webp" },
-              { title: "Champions League", img: "/imgs/sports/bg2.jpg" },
-              { title: "La Liga", img: "/imgs/sports/bg3.jpg" },
-              { title: "Premier League", img: "/imgs/sports/bg4.jpg" },
-              { title: "UFC & Boxing",img: "/imgs/sports/bg5.jpg" },
+              { title: "World Cup 2030 — Live IPTV", img: "/imgs/sports/bg1.webp" },
+              { title: "Champions League IPTV 4K", img: "/imgs/sports/bg2.jpg" },
+              { title: "La Liga Live Streams", img: "/imgs/sports/bg3.jpg" },
+              { title: "Premier League IPTV", img: "/imgs/sports/bg4.jpg" },
+              { title: "UFC & Boxing Live IPTV", img: "/imgs/sports/bg5.jpg" },
             ].map((card, i) => (
-              <div key={i} className="card-hover relative aspect-video overflow-hidden rounded-2xl group"
-                style={{ border: "1px solid rgba(242,200,71,0.12)", background: "#0B0B14", boxShadow: "0 8px 40px rgba(0,0,0,0.55)" }}>
+              <div
+                key={i}
+                className="card-hover relative aspect-video overflow-hidden rounded-2xl group"
+                style={{
+                  border: "1px solid rgba(242,200,71,0.12)",
+                  background: "#0B0B14",
+                  boxShadow: "0 8px 40px rgba(0,0,0,0.55)",
+                }}
+              >
                 <div className="absolute inset-0 bg-black/30 z-10 transition-colors group-hover:bg-transparent" />
-                <Image src={card.img} alt={card.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
-                <div className="absolute inset-0 z-20 flex items-end p-6"
-                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.3) 50%, transparent)" }}>
+                <Image
+                  src={card.img}
+                  alt={`iFlex IPTV – ${card.title}`}
+                  fill
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                <div
+                  className="absolute inset-0 z-20 flex items-end p-6"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.85), rgba(0,0,0,0.3) 50%, transparent)" }}
+                >
                   <div className="flex items-center gap-3 w-full">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                      style={{ background: "linear-gradient(135deg,#F2C847,#C9A020)", boxShadow: "0 0 18px rgba(242,200,71,0.6)" }}>
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
+                      style={{ background: "linear-gradient(135deg,#F2C847,#C9A020)", boxShadow: "0 0 18px rgba(242,200,71,0.6)" }}
+                    >
                       <Play className="h-4 w-4 text-black fill-current" />
                     </div>
                     <h3 className="text-xl font-bold text-white uppercase tracking-wider">{card.title}</h3>
@@ -638,8 +767,14 @@ const pricingPlans = [
       {/* ══════════════════════════════════════════════════
           4 · MOVIES & SERIES SLIDER
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative py-20 overflow-hidden"
-        style={{ background: "#05050A", borderTop: "1px solid rgba(242,200,71,0.07)", borderBottom: "1px solid rgba(242,200,71,0.07)" }}>
+      <section
+        className="grain relative py-20 overflow-hidden"
+        style={{
+          background: "#05050A",
+          borderTop: "1px solid rgba(242,200,71,0.07)",
+          borderBottom: "1px solid rgba(242,200,71,0.07)",
+        }}
+      >
         <div className="g-orb" style={{ width: 500, height: 500, bottom: "-20%", left: "-5%", opacity: 0.45 }} />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl" style={{ position: "relative", zIndex: 5 }}>
@@ -649,25 +784,39 @@ const pricingPlans = [
               <Film style={{ width: 14, height: 14, color: "#F2C847" }} />
               <div className="orn-line orn-line-r" />
             </div>
+            {/* H2 — VOD keywords */}
             <h2 className="text-3xl font-bold sm:text-4xl text-white flex items-center gap-3">
               <Film className="h-8 w-8" style={{ color: "#F2C847" }} />
-              Premium <span className="tg" style={{ marginLeft: 8 }}>Cinema</span>
+              IPTV Movies &amp; Series — <span className="tg" style={{ marginLeft: 8 }}>100K+ VODs</span>
             </h2>
-            <p className="mt-2" style={{ color: "rgba(255,255,255,0.48)" }}>100,000+ VODs updated daily. Your home theater awaits.</p>
+            <p className="mt-2" style={{ color: "rgba(255,255,255,0.48)" }}>
+              The biggest IPTV VOD library — 100,000+ movies &amp; series updated daily. Your home theater awaits.
+            </p>
           </div>
 
           <EmblaSlider delay={4000}>
             {[
-              { title: "Blockbuster Action", img: "/imgs/movies/movie_1.webp", badge: "4K UHD" },
-              { title: "Crime & Drama", img: "/imgs/movies/movie_2.webp", badge: "HDR" },
-              { title: "Arabic Series", img: "/imgs/movies/movie_3.webp", badge: "NEW" },
-              { title: "Sci-Fi Fantasy", img: "/imgs/movies/movie_4.webp", badge: "4K UHD" },
-              { title: "Family & Kids", img: "/imgs/movies/movie_5.webp", badge: "HD" },
+              { title: "Blockbuster Action Movies", img: "/imgs/movies/movie_1.webp", badge: "4K UHD" },
+              { title: "Crime & Drama Series", img: "/imgs/movies/movie_2.webp", badge: "HDR" },
+              { title: "Arabic Series IPTV", img: "/imgs/movies/movie_3.webp", badge: "NEW" },
+              { title: "Sci-Fi Fantasy Films", img: "/imgs/movies/movie_4.webp", badge: "4K UHD" },
+              { title: "Family & Kids IPTV", img: "/imgs/movies/movie_5.webp", badge: "HD" },
             ].map((card, i) => (
-              <div key={i} className="card-hover relative aspect-[3/4] overflow-hidden rounded-2xl group"
-                style={{ border: "1px solid rgba(242,200,71,0.1)", boxShadow: "0 8px 40px rgba(0,0,0,0.55)" }}>
-                <Image src={card.img} alt={card.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.35) 50%, transparent)" }} />
+              <div
+                key={i}
+                className="card-hover relative aspect-[3/4] overflow-hidden rounded-2xl group"
+                style={{ border: "1px solid rgba(242,200,71,0.1)", boxShadow: "0 8px 40px rgba(0,0,0,0.55)" }}
+              >
+                <Image
+                  src={card.img}
+                  alt={`iFlex IPTV – ${card.title}`}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.35) 50%, transparent)" }}
+                />
                 <div className="absolute top-4 right-4" style={{ zIndex: 10 }}>
                   <span className="gold-badge text-xs font-black px-3 py-1 rounded-full tracking-wider">{card.badge}</span>
                 </div>
@@ -681,11 +830,16 @@ const pricingPlans = [
       </section>
 
       {/* ══════════════════════════════════════════════════
-          5 · FEATURE CARDS
+          5 · FEATURE CARDS  — "Why Choose iFlex IPTV"
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: "linear-gradient(170deg,#080810 0%,#05050D 60%,#080810 100%)" }}>
-        <div className="g-orb" style={{ width: 900, height: 450, top: 0, left: "50%", transform: "translateX(-50%)", opacity: 0.45 }} />
+      <section
+        className="grain relative py-20 sm:py-28 overflow-hidden"
+        style={{ background: "linear-gradient(170deg,#080810 0%,#05050D 60%,#080810 100%)" }}
+      >
+        <div
+          className="g-orb"
+          style={{ width: 900, height: 450, top: 0, left: "50%", transform: "translateX(-50%)", opacity: 0.45 }}
+        />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
           <div className="text-center max-w-2xl mx-auto" style={{ marginBottom: "4rem" }}>
@@ -694,36 +848,54 @@ const pricingPlans = [
               <Star style={{ width: 14, height: 14, color: "#F2C847" }} />
               <div className="orn-line orn-line-r" />
             </div>
+            {/* H2 — brand + trust keywords */}
             <h2 className="text-3xl font-bold sm:text-4xl text-white">
-              Why Thousands <span className="tg">Choose Us</span>
+              Why Choose <span className="tg">iFlex IPTV?</span>
             </h2>
-            <p className="mt-4 font-medium" style={{ color: "rgba(255,255,255,0.5)" }}>Premium entertainment. Zero compromise.</p>
+            <p className="mt-4 font-medium" style={{ color: "rgba(255,255,255,0.5)" }}>
+              The best IPTV provider — premium quality, zero compromise, instant activation.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {featureCards.map((card) => (
-              <div key={card.title}
+              <div
+                key={card.title}
                 className="feat-card card-hover group relative overflow-hidden rounded-[2rem] aspect-[3/4]"
-                style={{ border: "1px solid rgba(242,200,71,0.15)", boxShadow: "0 0 50px rgba(242,200,71,0.12), 0 20px 60px rgba(0,0,0,0.65)" }}>
-
-                {/* BG image */}
+                style={{
+                  border: "1px solid rgba(242,200,71,0.15)",
+                  boxShadow: "0 0 50px rgba(242,200,71,0.12), 0 20px 60px rgba(0,0,0,0.65)",
+                }}
+              >
                 <div className="absolute inset-0" style={{ zIndex: 0 }}>
-                  <Image src={card.image} alt={card.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-108" />
+                  <Image
+                    src={card.image}
+                    alt={card.alt}
+                    fill
+                    className="object-cover transition-transform duration-1000 group-hover:scale-108"
+                  />
                 </div>
-                {/* Gradient overlay */}
-                <div className="absolute inset-0" style={{ zIndex: 1, background: "linear-gradient(to top, #05050A 0%, rgba(5,5,10,0.75) 45%, rgba(5,5,10,0.2) 100%)" }} />
-                {/* Top shimmer line */}
-                <div className="absolute top-0 left-0 right-0 h-px" style={{ zIndex: 4, background: "linear-gradient(90deg, transparent, rgba(242,200,71,0.55) 50%, transparent)" }} />
-
-                {/* Content */}
+                <div
+                  className="absolute inset-0"
+                  style={{ zIndex: 1, background: "linear-gradient(to top, #05050A 0%, rgba(5,5,10,0.75) 45%, rgba(5,5,10,0.2) 100%)" }}
+                />
+                <div
+                  className="absolute top-0 left-0 right-0 h-px"
+                  style={{ zIndex: 4, background: "linear-gradient(90deg, transparent, rgba(242,200,71,0.55) 50%, transparent)" }}
+                />
                 <div className="absolute inset-0 flex flex-col justify-end p-8" style={{ zIndex: 5 }}>
                   <span className="gold-badge mb-4 inline-flex items-center rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-widest w-fit">
                     {card.badge}
                   </span>
                   <h3 className="text-2xl font-extrabold text-white mb-3 leading-tight">{card.title}</h3>
-                  <p className="text-sm leading-relaxed font-medium mb-7" style={{ color: "rgba(255,255,255,0.62)" }}>{card.description}</p>
-                  <Link href="https://wa.me/447988033246"
-                    className="btn-gold inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm tracking-wide">
+                  <p className="text-sm leading-relaxed font-medium mb-7" style={{ color: "rgba(255,255,255,0.62)" }}>
+                    {card.description}
+                  </p>
+                  <Link
+                    href="https://wa.me/447988033246"
+                    className="btn-gold inline-flex w-full items-center justify-center gap-2 rounded-full py-4 text-sm tracking-wide"
+                    aria-label={`iFlex IPTV – ${card.cta}`}
+                  >
                     <MessageCircle className="h-4 w-4" style={{ position: "relative", zIndex: 1 }} />
                     <span style={{ position: "relative", zIndex: 1 }}>{card.cta}</span>
                   </Link>
@@ -735,10 +907,16 @@ const pricingPlans = [
       </section>
 
       {/* ══════════════════════════════════════════════════
-          6 · DEVICES
+          6 · DEVICES  — "IPTV Compatible Devices"
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: "#05050A", borderTop: "1px solid rgba(242,200,71,0.07)", borderBottom: "1px solid rgba(242,200,71,0.07)" }}>
+      <section
+        className="grain relative py-20 sm:py-28 overflow-hidden"
+        style={{
+          background: "#05050A",
+          borderTop: "1px solid rgba(242,200,71,0.07)",
+          borderBottom: "1px solid rgba(242,200,71,0.07)",
+        }}
+      >
         <div className="g-orb" style={{ width: 600, height: 600, bottom: "-20%", right: "-5%", opacity: 0.5 }} />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
@@ -748,26 +926,49 @@ const pricingPlans = [
               <Tv style={{ width: 14, height: 14, color: "#F2C847" }} />
               <div className="orn-line orn-line-r" />
             </div>
+            {/* H2 — device keywords */}
             <h2 className="text-3xl font-bold sm:text-4xl text-white mb-4">
-              Watch on <span className="tg">Any Screen</span>
+              iFlex IPTV on <span className="tg">Any Device</span>
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.5)" }}>Setup takes less than 5 minutes on any of these devices.</p>
+            <p style={{ color: "rgba(255,255,255,0.5)" }}>
+              Smart TV, Firestick, Apple TV, Android &amp; iPhone — setup takes under 5 minutes.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {devices.map((device, i) => (
-              <div key={i} className="card-hover group relative overflow-hidden rounded-2xl aspect-[4/3]"
-                style={{ border: "1px solid rgba(242,200,71,0.12)", background: "#0B0B16", boxShadow: "0 8px 40px rgba(0,0,0,0.5)" }}>
-                <Image src={device.image} alt={device.name} fill
-                  className="object-cover opacity-25 transition-all duration-700 group-hover:scale-105 group-hover:opacity-18" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5) 60%, transparent)" }} />
-                {/* hover top accent */}
-                <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-400"
-                  style={{ background: "linear-gradient(90deg, transparent, #F2C847 50%, transparent)" }} />
-
+              <div
+                key={i}
+                className="card-hover group relative overflow-hidden rounded-2xl aspect-[4/3]"
+                style={{
+                  border: "1px solid rgba(242,200,71,0.12)",
+                  background: "#0B0B16",
+                  boxShadow: "0 8px 40px rgba(0,0,0,0.5)",
+                }}
+              >
+                <Image
+                  src={device.image}
+                  alt={device.alt}
+                  fill
+                  className="object-cover opacity-25 transition-all duration-700 group-hover:scale-105 group-hover:opacity-18"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5) 60%, transparent)" }}
+                />
+                <div
+                  className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-400"
+                  style={{ background: "linear-gradient(90deg, transparent, #F2C847 50%, transparent)" }}
+                />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 gap-4" style={{ zIndex: 5 }}>
-                  <div className="p-5 rounded-full transition-all duration-300"
-                    style={{ background: "rgba(242,200,71,0.08)", border: "1px solid rgba(242,200,71,0.22)", boxShadow: "0 0 22px rgba(242,200,71,0.1)" }}>
+                  <div
+                    className="p-5 rounded-full transition-all duration-300"
+                    style={{
+                      background: "rgba(242,200,71,0.08)",
+                      border: "1px solid rgba(242,200,71,0.22)",
+                      boxShadow: "0 0 22px rgba(242,200,71,0.1)",
+                    }}
+                  >
                     {device.icon}
                   </div>
                   <div>
@@ -782,158 +983,174 @@ const pricingPlans = [
           </div>
 
           <div className="mt-12 text-center">
-            <Link href="/guides" className="inline-flex items-center gap-2 font-bold transition-all hover:gap-3" style={{ color: "#F2C847" }}>
-              View Installation Guides <ArrowRight className="h-4 w-4" />
+            <Link
+              href="/guides"
+              className="inline-flex items-center gap-2 font-bold transition-all hover:gap-3"
+              style={{ color: "#F2C847" }}
+              aria-label="iFlex IPTV installation guides for all devices"
+            >
+              View IPTV Installation Guides <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════
-          7 · PRICING  (full luxury rebuild)
+          7 · PRICING  — "Buy IPTV Subscription"
       ══════════════════════════════════════════════════ */}
-     <section className="grain relative py-24 sm:py-32 overflow-hidden"
-  style={{ background: "linear-gradient(180deg, #080810 0%, #060610 50%, #080810 100%)" }}>
+      <section
+        className="grain relative py-24 sm:py-32 overflow-hidden"
+        style={{ background: "linear-gradient(180deg, #080810 0%, #060610 50%, #080810 100%)" }}
+      >
+        <div
+          className="g-orb"
+          style={{ width: 1000, height: 600, top: "-15%", left: "50%", transform: "translateX(-50%)", opacity: 0.35 }}
+        />
+        <div className="g-orb" style={{ width: 500, height: 500, bottom: "-10%", left: "10%", opacity: 0.2 }} />
+        <div className="g-orb" style={{ width: 400, height: 400, bottom: "-10%", right: "10%", opacity: 0.2 }} />
 
-  {/* Atmospheric gold glow */}
-  <div className="g-orb" style={{ width: 1000, height: 600, top: "-15%", left: "50%", transform: "translateX(-50%)", opacity: 0.35 }} />
-  <div className="g-orb" style={{ width: 500, height: 500, bottom: "-10%", left: "10%", opacity: 0.2 }} />
-  <div className="g-orb" style={{ width: 400, height: 400, bottom: "-10%", right: "10%", opacity: 0.2 }} />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
 
-  <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
-
-    {/* Section header */}
-    <div className="text-center max-w-2xl mx-auto" style={{ marginBottom: "56px" }}>
-      <div className="orn" style={{ justifyContent: "center" }}>
-        <div className="orn-line orn-line-l" />
-        <Star style={{ width: 14, height: 14, color: "#F2C847" }} />
-        <div className="orn-line orn-line-r" />
-      </div>
-      <h2 className="text-4xl font-extrabold sm:text-5xl text-white tracking-tight mb-3">
-        Choose Your <span className="tg">Access Pass</span>
-      </h2>
-      <p className="text-lg font-medium" style={{ color: "rgba(255,255,255,0.52)" }}>
-        Instant activation · Premium content · WhatsApp delivery
-      </p>
-    </div>
-
-    {/* Cards grid */}
-    <div className="pricing-grid">
-      {pricingPlans.map((plan) => (
-        <article
-          key={plan.months}
-          className={`p-card ${
-            plan.tagType === "best"
-              ? "p-card-best"
-              : plan.tagType === "popular"
-              ? "p-card-pop"
-              : "p-card-std"
-          }`}
-        >
-          {/* Animated top bar (best only) */}
-          {plan.tagType === "best" && <div className="p-topbar" />}
-
-          {/* Background image */}
-          <div className="p-img-wrap">
-            <Image src={plan.image} alt={plan.months} fill className="object-cover opacity-25" />
-            <div className="p-img-overlay" />
+          {/* Section header */}
+          <div className="text-center max-w-2xl mx-auto" style={{ marginBottom: "56px" }}>
+            <div className="orn" style={{ justifyContent: "center" }}>
+              <div className="orn-line orn-line-l" />
+              <Star style={{ width: 14, height: 14, color: "#F2C847" }} />
+              <div className="orn-line orn-line-r" />
+            </div>
+            {/* H2 — buy IPTV / pricing keywords */}
+            <h2 className="text-4xl font-extrabold sm:text-5xl text-white tracking-tight mb-3">
+              Buy <span className="tg">iFlex IPTV</span> — Best Price
+            </h2>
+            <p className="text-lg font-medium" style={{ color: "rgba(255,255,255,0.52)" }}>
+              Cheap IPTV subscription · Instant activation · Delivered via WhatsApp
+            </p>
           </div>
 
-          {/* Tag badge */}
-          {plan.tag && (
-            <div style={{ position: "absolute", top: plan.tagType === "best" ? "22px" : "20px", right: "20px", zIndex: 12 }}>
-              {plan.tagType === "best" ? (
-                <span className="gold-badge rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-widest block">
-                  ★ {plan.tag}
-                </span>
-              ) : (
-                <span className="p-savings">
-                  <Zap style={{ width: 9, height: 9 }} />
-                  {plan.tag}
-                </span>
-              )}
-            </div>
-          )}
+          {/* Cards grid */}
+          <div className="pricing-grid">
+            {pricingPlans.map((plan) => (
+              <article
+                key={plan.months}
+                className={`p-card ${
+                  plan.tagType === "best"
+                    ? "p-card-best"
+                    : plan.tagType === "popular"
+                    ? "p-card-pop"
+                    : "p-card-std"
+                }`}
+              >
+                {plan.tagType === "best" && <div className="p-topbar" />}
 
-          {/* Card body */}
-          <div className="p-body">
-
-            {/* Plan name */}
-            <div style={{ marginBottom: "20px" }}>
-              <p className="text-xs font-black uppercase tracking-[0.18em]"
-                style={{ color: plan.tagType === "best" ? "#F2C847" : "rgba(255,255,255,0.45)", marginBottom: 6 }}>
-                {plan.tagType === "best" ? "— Premium —" : plan.tagType === "popular" ? "— Popular —" : "— Starter —"}
-              </p>
-              <h3 className="text-2xl font-black tracking-tight"
-                style={{ color: plan.tagType === "best" ? "#F2C847" : "white" }}>
-                {plan.months}
-              </h3>
-            </div>
-
-            {/* Price block */}
-            <div style={{ marginBottom: "4px" }}>
-              <div className="p-price-num">{plan.price}</div>
-              <p className="text-sm font-semibold" style={{ color: "rgba(255,255,255,0.4)", marginTop: 4 }}>
-                {plan.perMonth}
-              </p>
-            </div>
-
-            {/* Savings pill */}
-            {plan.tagType !== "none" && (
-              <div style={{ marginTop: 12 }}>
-                <div className="p-savings">
-                  <Shield style={{ width: 9, height: 9 }} />
-                  {plan.tagType === "best" ? "Save 32% vs monthly" : "Save 18% vs monthly"}
+                <div className="p-img-wrap">
+                  <Image
+                    src={plan.image}
+                    alt={`iFlex IPTV ${plan.months} Subscription – ${plan.price}`}
+                    fill
+                    className="object-cover opacity-25"
+                  />
+                  <div className="p-img-overlay" />
                 </div>
-              </div>
-            )}
 
-            <div className="p-divider" />
-
-            {/* Features */}
-            <ul style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 28, flex: 1 }}>
-              {plan.features.map((feat) => (
-                <li key={feat} className="p-feat">
-                  <div className={`p-feat-icon ${plan.tagType === "best" ? "p-feat-icon-best" : "p-feat-icon-std"}`}>
-                    <CheckCircle style={{ width: 11, height: 11, color: "#F2C847" }} />
+                {plan.tag && (
+                  <div style={{ position: "absolute", top: plan.tagType === "best" ? "22px" : "20px", right: "20px", zIndex: 12 }}>
+                    {plan.tagType === "best" ? (
+                      <span className="gold-badge rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-widest block">
+                        ★ {plan.tag}
+                      </span>
+                    ) : (
+                      <span className="p-savings">
+                        <Zap style={{ width: 9, height: 9 }} />
+                        {plan.tag}
+                      </span>
+                    )}
                   </div>
-                  {feat}
-                </li>
-              ))}
-            </ul>
+                )}
 
-            {/* CTA */}
-            <Link
-              href="https://wa.me/447988033246"
-              className={`inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-base tracking-wide ${
-                plan.tagType === "none" ? "btn-ghost" : "btn-gold"
-              }`}
-              style={{ fontWeight: 800 }}
-            >
-              <MessageCircle className="h-5 w-5" style={{ position: "relative", zIndex: 1 }} />
-              <span style={{ position: "relative", zIndex: 1 }}>{plan.cta}</span>
-            </Link>
+                <div className="p-body">
+                  <div style={{ marginBottom: "20px" }}>
+                    <p
+                      className="text-xs font-black uppercase tracking-[0.18em]"
+                      style={{
+                        color: plan.tagType === "best" ? "#F2C847" : "rgba(255,255,255,0.45)",
+                        marginBottom: 6,
+                      }}
+                    >
+                      {plan.tagType === "best" ? "— Premium —" : plan.tagType === "popular" ? "— Popular —" : "— Starter —"}
+                    </p>
+                    <h3
+                      className="text-2xl font-black tracking-tight"
+                      style={{ color: plan.tagType === "best" ? "#F2C847" : "white" }}
+                    >
+                      iFlex IPTV {plan.months}
+                    </h3>
+                  </div>
+
+                  <div style={{ marginBottom: "4px" }}>
+                    <div className="p-price-num">{plan.price}</div>
+                    <p className="text-sm font-semibold" style={{ color: "rgba(255,255,255,0.4)", marginTop: 4 }}>
+                      {plan.perMonth}
+                    </p>
+                  </div>
+
+                  {plan.tagType !== "none" && (
+                    <div style={{ marginTop: 12 }}>
+                      <div className="p-savings">
+                        <Shield style={{ width: 9, height: 9 }} />
+                        {plan.tagType === "best" ? "Save 32% vs monthly" : "Save 18% vs monthly"}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="p-divider" />
+
+                  <ul style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 28, flex: 1 }}>
+                    {plan.features.map((feat) => (
+                      <li key={feat} className="p-feat">
+                        <div className={`p-feat-icon ${plan.tagType === "best" ? "p-feat-icon-best" : "p-feat-icon-std"}`}>
+                          <CheckCircle style={{ width: 11, height: 11, color: "#F2C847" }} />
+                        </div>
+                        {feat}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link
+                    href="https://wa.me/447988033246"
+                    className={`inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-base tracking-wide ${
+                      plan.tagType === "none" ? "btn-ghost" : "btn-gold"
+                    }`}
+                    style={{ fontWeight: 800 }}
+                    aria-label={`Buy iFlex IPTV ${plan.months} subscription for ${plan.price}`}
+                  >
+                    <MessageCircle className="h-5 w-5" style={{ position: "relative", zIndex: 1 }} />
+                    <span style={{ position: "relative", zIndex: 1 }}>{plan.cta}</span>
+                  </Link>
+                </div>
+              </article>
+            ))}
           </div>
-        </article>
-      ))}
-    </div>
 
-    {/* Trust row */}
-    <div className="pricing-note">
-      <span><Zap style={{ width: 13, height: 13, color: "#F2C847" }} /> Instant Activation</span>
-      <span><Shield style={{ width: 13, height: 13, color: "#F2C847" }} /> No Contract</span>
-      <span><Infinity style={{ width: 13, height: 13, color: "#F2C847" }} /> 24/7 Support</span>
-      <span><MessageCircle style={{ width: 13, height: 13, color: "#F2C847" }} /> WhatsApp Delivery</span>
-    </div>
-  </div>
-</section>
+          <div className="pricing-note">
+            <span><Zap style={{ width: 13, height: 13, color: "#F2C847" }} /> Instant Activation</span>
+            <span><Shield style={{ width: 13, height: 13, color: "#F2C847" }} /> No Contract</span>
+            <span><Infinity style={{ width: 13, height: 13, color: "#F2C847" }} /> 24/7 Support</span>
+            <span><MessageCircle style={{ width: 13, height: 13, color: "#F2C847" }} /> WhatsApp Delivery</span>
+          </div>
+        </div>
+      </section>
 
       {/* ══════════════════════════════════════════════════
-          8 · BLOG PREVIEW
+          8 · BLOG PREVIEW  — "IPTV Guides & Tutorials"
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative py-20 sm:py-28 overflow-hidden"
-        style={{ background: "#05050A", borderTop: "1px solid rgba(242,200,71,0.07)" }}>
-        <div className="g-orb" style={{ width: 600, height: 400, top: 0, left: "50%", transform: "translateX(-50%)", opacity: 0.3 }} />
+      <section
+        className="grain relative py-20 sm:py-28 overflow-hidden"
+        style={{ background: "#05050A", borderTop: "1px solid rgba(242,200,71,0.07)" }}
+      >
+        <div
+          className="g-orb"
+          style={{ width: 600, height: 400, top: 0, left: "50%", transform: "translateX(-50%)", opacity: 0.3 }}
+        />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8" style={{ position: "relative", zIndex: 5 }}>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6" style={{ marginBottom: "3.5rem" }}>
@@ -943,26 +1160,52 @@ const pricingPlans = [
                 <Calendar style={{ width: 14, height: 14, color: "#F2C847" }} />
                 <div className="orn-line orn-line-r" />
               </div>
+              {/* H2 — blog/guide SEO keywords */}
               <h2 className="text-3xl font-bold sm:text-4xl text-white">
-                Latest IPTV <span className="tg">Guides</span>
+                iFlex IPTV <span className="tg">Guides &amp; Tips</span>
               </h2>
+              <p className="mt-2" style={{ color: "rgba(255,255,255,0.48)" }}>
+                How to set up IPTV, best IPTV apps, device guides and more.
+              </p>
             </div>
-            <Link href="/blog" className="font-bold inline-flex items-center gap-2 whitespace-nowrap transition-all hover:gap-3" style={{ color: "#F2C847" }}>
-              Read all articles <ArrowRight className="h-4 w-4" />
+            <Link
+              href="/blog"
+              className="font-bold inline-flex items-center gap-2 whitespace-nowrap transition-all hover:gap-3"
+              style={{ color: "#F2C847" }}
+            >
+              Read all IPTV articles <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {latestPosts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`}
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
                 className="card-hover group flex flex-col overflow-hidden rounded-2xl"
-                style={{ border: "1px solid rgba(242,200,71,0.1)", background: "#0B0B16", boxShadow: "0 8px 32px rgba(0,0,0,0.5)" }}>
+                style={{
+                  border: "1px solid rgba(242,200,71,0.1)",
+                  background: "#0B0B16",
+                  boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+                }}
+              >
                 <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image src={post.image} alt={post.title} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <Image
+                    src={post.image}
+                    alt={`iFlex IPTV Blog – ${post.title}`}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
                   <div className="absolute inset-0 bg-black/25 group-hover:bg-transparent transition-colors" />
                   <div className="absolute top-3 left-3">
-                    <span className="inline-flex items-center rounded-full px-3 py-1 text-xs font-black backdrop-blur"
-                      style={{ background: "rgba(242,200,71,0.15)", border: "1px solid rgba(242,200,71,0.35)", color: "#F2C847" }}>
+                    <span
+                      className="inline-flex items-center rounded-full px-3 py-1 text-xs font-black backdrop-blur"
+                      style={{
+                        background: "rgba(242,200,71,0.15)",
+                        border: "1px solid rgba(242,200,71,0.35)",
+                        color: "#F2C847",
+                      }}
+                    >
                       {post.category}
                     </span>
                   </div>
@@ -971,8 +1214,10 @@ const pricingPlans = [
                   <h3 className="text-base font-bold mb-3 text-white line-clamp-2 leading-snug transition-colors group-hover:text-[#F2C847]">
                     {post.title}
                   </h3>
-                  <div className="mt-auto flex items-center justify-between text-xs pt-4"
-                    style={{ color: "rgba(255,255,255,0.4)", borderTop: "1px solid rgba(242,200,71,0.08)" }}>
+                  <div
+                    className="mt-auto flex items-center justify-between text-xs pt-4"
+                    style={{ color: "rgba(255,255,255,0.4)", borderTop: "1px solid rgba(242,200,71,0.08)" }}
+                  >
                     <span className="flex items-center gap-1.5 font-semibold">
                       <Calendar className="h-3.5 w-3.5" />
                       {new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
@@ -992,16 +1237,30 @@ const pricingPlans = [
       {/* ══════════════════════════════════════════════════
           9 · FINAL CTA
       ══════════════════════════════════════════════════ */}
-      <section className="grain relative isolate overflow-hidden py-32"
-        style={{ background: "#080810", borderTop: "1px solid rgba(242,200,71,0.1)" }}>
+      <section
+        className="grain relative isolate overflow-hidden py-32"
+        style={{ background: "#080810", borderTop: "1px solid rgba(242,200,71,0.1)" }}
+      >
         <div className="absolute inset-0" style={{ zIndex: -2 }}>
-          <Image src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=2000"
-            alt="Cinematic TV Glow" fill className="object-cover opacity-12" />
+          <Image
+            src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=2000"
+            alt="iFlex IPTV – Start Streaming Tonight"
+            fill
+            className="object-cover opacity-12"
+          />
         </div>
-        <div className="absolute inset-0" style={{ zIndex: -1, background: "linear-gradient(to top, #080810 0%, rgba(8,8,16,0.72) 60%, transparent 100%)" }} />
-        <div className="absolute inset-0" style={{ zIndex: -1, background: "radial-gradient(ellipse 80% 55% at 50% 100%, rgba(242,200,71,0.1), transparent)" }} />
-
-        <div className="g-orb" style={{ width: 800, height: 500, bottom: "-10%", left: "50%", transform: "translateX(-50%)", opacity: 0.65 }} />
+        <div
+          className="absolute inset-0"
+          style={{ zIndex: -1, background: "linear-gradient(to top, #080810 0%, rgba(8,8,16,0.72) 60%, transparent 100%)" }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{ zIndex: -1, background: "radial-gradient(ellipse 80% 55% at 50% 100%, rgba(242,200,71,0.1), transparent)" }}
+        />
+        <div
+          className="g-orb"
+          style={{ width: 800, height: 500, bottom: "-10%", left: "50%", transform: "translateX(-50%)", opacity: 0.65 }}
+        />
 
         <div className="gold-line absolute top-0 left-0 right-0" />
 
@@ -1011,23 +1270,39 @@ const pricingPlans = [
             <Star style={{ width: 18, height: 18, color: "#F2C847" }} />
             <div className="orn-line orn-line-r" />
           </div>
+          {/* H2 — final CTA with keywords */}
           <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-6">
-            Start Watching <span className="tg">Tonight.</span>
+            Best IPTV Service —{" "}
+            <span className="tg">Start Tonight.</span>
           </h2>
           <p className="text-xl mb-10 max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.52)" }}>
-            Get your login credentials delivered instantly via WhatsApp. Join the future of television.
+            Get your iFlex IPTV login delivered instantly via WhatsApp. The best IPTV subscription — no contract, instant activation.
           </p>
-          <Link href="https://wa.me/447988033246"
-            className="btn-gold inline-flex h-16 items-center justify-center gap-3 rounded-full px-14 text-lg">
+          <Link
+            href="https://wa.me/447988033246"
+            className="btn-gold inline-flex h-16 items-center justify-center gap-3 rounded-full px-14 text-lg"
+            aria-label="Buy iFlex IPTV subscription – instant activation"
+          >
             <MessageCircle className="h-6 w-6" style={{ position: "relative", zIndex: 1 }} />
-            <span style={{ position: "relative", zIndex: 1 }}>Get Your Pass Now</span>
+            <span style={{ position: "relative", zIndex: 1 }}>Get iFlex IPTV Now</span>
           </Link>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-8 text-sm font-semibold uppercase tracking-wider"
-            style={{ color: "rgba(255,255,255,0.4)" }}>
-            <span className="flex items-center gap-2"><CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} /> Instant Activation</span>
-            <span className="flex items-center gap-2"><CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} /> 24/7 Support</span>
-            <span className="flex items-center gap-2"><CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} /> No Contract</span>
+          <div
+            className="mt-10 flex flex-wrap items-center justify-center gap-8 text-sm font-semibold uppercase tracking-wider"
+            style={{ color: "rgba(255,255,255,0.4)" }}
+          >
+            <span className="flex items-center gap-2">
+              <CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} /> Instant Activation
+            </span>
+            <span className="flex items-center gap-2">
+              <CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} /> 24/7 WhatsApp Support
+            </span>
+            <span className="flex items-center gap-2">
+              <CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} /> No Contract
+            </span>
+            <span className="flex items-center gap-2">
+              <CheckCircle className="h-4 w-4" style={{ color: "#F2C847" }} /> Anti-Freeze Servers
+            </span>
           </div>
         </div>
 
