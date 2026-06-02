@@ -1,21 +1,5 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.iflexiptv.net'),
+  metadataBase: new URL('https://www.iflexiptv.pro'),  // Beddel .net -> .pro
   title: {
     default: "iflexiptv - Premium IPTV Subscription Service",
     template: "%s | iflexiptv",
@@ -25,7 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "iflexiptv - Premium IPTV Subscription Service",
     description: "Experience the ultimate premium IPTV service with iflexiptv. 4K & FHD channels, global sports, movies, and VODs.",
-    url: "https://www.iflexiptv.net",
+    url: "https://www.iflexiptv.pro",  // Beddel .net -> .pro
     siteName: "iflexiptv",
     images: [
       {
@@ -45,27 +29,6 @@ export const metadata: Metadata = {
     images: ["/og-image.jpg"],
   },
   alternates: {
-    canonical: "https://www.iflexiptv.net",
+    canonical: "https://www.iflexiptv.pro",  // Beddel .net -> .pro
   },
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-brand selection:text-background">
-        <Navbar />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
-      </body>
-    </html>
-  );
-}
