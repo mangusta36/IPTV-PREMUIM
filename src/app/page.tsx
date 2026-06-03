@@ -603,11 +603,11 @@ export default function Home() {
 
             {/* H1 — primary keyword target */}
             <h1
-              className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl"
-              style={{ lineHeight: 1.08 }}
-            >
-              iflexiptv Best IPTV Service.{" "}
-              <span className="tg">26,000+ Channels in 4K.</span>
+  className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl"
+  style={{ lineHeight: 1.08 }}
+>
+  iFlex IPTV –{" "}
+  <span className="tg">Best IPTV | 26,000+ Channels in 4K</span>
             </h1>
 
             {/* Subheading with secondary keywords */}
