@@ -27,73 +27,58 @@ import { blogPosts } from "@/lib/blog-data";
    SEO METADATA  — iFlexIPTV
 ══════════════════════════════════════════════════ */
 export const metadata: Metadata = {
-  title: "iFlex IPTV | Best IPTV Subscription 2025 – 26,000+ Channels in 4K",
-  description:
-    "iFlex IPTV offers the best IPTV subscription with 26,000+ live channels, 100,000+ VODs, 4K & FHD quality, anti-freeze servers and 24/7 WhatsApp support. Buy IPTV online – instant activation.",
-  keywords: [
-    "iFlex IPTV",
-    "iFlexIPTV",
-    "best IPTV subscription",
-    "buy IPTV",
-    "IPTV premium",
-    "IPTV 4K",
-    "IPTV service",
-    "IPTV provider",
-    "cheap IPTV",
-    "IPTV subscription 2025",
-    "IPTV smarters",
-    "IPTV m3u playlist",
-    "IPTV firestick",
-    "IPTV smart TV",
-    "IPTV android",
-    "IPTV channels",
-    "live IPTV",
-    "IPTV sports",
-    "IPTV VOD",
-    "IPTV maroc",
-    "IPTV france",
-    "IPTV uk",
-    "abonnement IPTV",
-    "meilleur IPTV",
-    "IPTV pas cher",
-    "premium IPTV service",
-    "IPTV no buffering",
-    "IPTV anti freeze",
-    "IPTV 26000 channels",
-    "IPTV instant activation",
-  ].join(", "),
-  alternates: {
-    canonical: "https://www.iflexiptv.net",
-  },
-  openGraph: {
-    title: "iFlex IPTV – Best IPTV Subscription | 26,000+ Channels in 4K",
-    description:
-      "Stream 26,000+ live channels and 100,000+ VODs in 4K. iFlex IPTV – the best IPTV provider with instant activation, anti-freeze servers & 24/7 WhatsApp support.",
-    url: "https://www.iflexiptv.net",
-    siteName: "iFlexIPTV",
-    images: [
-      {
-        url: "https://www.iflexiptv.net/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "iFlex IPTV – Best IPTV Subscription Service",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "iFlex IPTV – Best IPTV Subscription | 26,000+ Channels in 4K",
-    description:
-      "Stream live sports, movies & series in 4K. Best IPTV service with instant activation.",
-    images: ["https://www.iflexiptv.net/og-image.jpg"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
+title: "iFlex IPTV | Best IPTV Subscription 2025",
+
+description:
+"Stream 26,000+ live channels and 100,000+ VODs in 4K. Instant activation, stable servers, and premium IPTV support.",
+
+keywords: [
+"iFlex IPTV",
+"best IPTV subscription",
+"IPTV 4K",
+"buy IPTV",
+"premium IPTV",
+"IPTV 2025",
+].join(", "),
+
+alternates: {
+canonical: "https://www.iflexiptv.pro",
+},
+
+openGraph: {
+title: "iFlex IPTV | Best IPTV Subscription 2025",
+description:
+"Stream 26,000+ channels and 100,000+ VODs in 4K with instant activation.",
+url: "https://www.iflexiptv.pro",
+siteName: "iFlex IPTV",
+images: [
+{
+url: "https://www.iflexiptv.pro/og-image.jpg",
+width: 1200,
+height: 630,
+alt: "iFlex IPTV",
+},
+],
+locale: "en_US",
+type: "website",
+},
+
+twitter: {
+card: "summary_large_image",
+title: "iFlex IPTV | Best IPTV Subscription 2025",
+description:
+"26,000+ channels and 100,000+ VODs in 4K with instant activation.",
+images: ["https://www.iflexiptv.pro/og-image.jpg"],
+},
+
+robots: {
+index: true,
+follow: true,
+googleBot: {
+index: true,
+follow: true,
+},
+},
 };
 
 export default function Home() {
@@ -102,8 +87,8 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "iFlex IPTV",
-    url: "https://www.iflexiptv.net",
-    logo: "https://www.iflexiptv.net/logo.png",
+    url: "https://www.iflexiptv.pro",
+    logo: "https://www.iflexiptv.pro/logo.png",
     description:
       "iFlex IPTV is a premium IPTV subscription service offering 26,000+ live channels, 100,000+ VODs, 4K & FHD quality, anti-freeze servers and 24/7 WhatsApp support.",
     sameAs: ["https://wa.me/447988033246"],
@@ -621,7 +606,7 @@ export default function Home() {
               className="text-5xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl"
               style={{ lineHeight: 1.08 }}
             >
-              Best IPTV Service.{" "}
+              iflexiptv Best IPTV Service.{" "}
               <span className="tg">26,000+ Channels in 4K.</span>
             </h1>
 
@@ -644,14 +629,7 @@ export default function Home() {
                 <MessageCircle className="h-5 w-5" style={{ position: "relative", zIndex: 1 }} />
                 <span style={{ position: "relative", zIndex: 1 }}>Get Free IPTV Trial Now</span>
               </Link>
-              <Link
-                href="/channels"
-                className="btn-ghost inline-flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-full px-9 text-base font-semibold"
-                aria-label="View full iFlex IPTV channel list"
-              >
-                View IPTV Channel List
-                <ArrowRight className="h-5 w-5" />
-              </Link>
+              
             </div>
 
             <div

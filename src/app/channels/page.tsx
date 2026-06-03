@@ -27,8 +27,8 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "iflexiptv",
-    url: "https://www.iflexiptv.net",
-    logo: "https://www.iflexiptv.net/logo.png",
+    url: "https://www.iflexiptv.pro",
+    logo: "https://www.iflexiptv.pro/logo.png",
     description: "Premium IPTV subscription service offering 4K/FHD channels, sports, and VODs.",
   };
 
