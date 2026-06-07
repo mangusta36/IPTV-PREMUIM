@@ -1,144 +1,115 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { MessageCircle, Settings, Wifi, Key, Tv, ShieldAlert, ArrowRight } from "lucide-react";
+import { ArrowRight, Key, Settings, ShieldAlert, Tv, Wifi } from "lucide-react";
 import FAQAccordion from "@/components/FAQAccordion";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
+import { createWhatsAppSupportUrl } from "@/lib/whatsapp";
 
-export const metadata = {
-  title: "Contact & Support | iflexiptv",
-  description: "Need help setting up your IPTV? Experiencing buffering? Contact our 24/7 WhatsApp support team for instant assistance.",
+export const metadata: Metadata = {
+  title: "iFlex IPTV Support - Setup, EPG & Troubleshooting Help",
+  description:
+    "Get iFlex IPTV support for setup, activation, EPG refreshes, device login, buffering checks, and package questions.",
   alternates: {
-    canonical: "https://www.iflexiptv.com/support",
+    canonical: absoluteUrl("/support"),
   },
 };
+
+const commonProblems = [
+  {
+    icon: <Wifi className="h-6 w-6 text-brand" />,
+    title: "Buffering & Freezing",
+    solution: "Check Wi-Fi strength, try Ethernet where possible, clear your app cache, and ask support to review your setup before major live events.",
+  },
+  {
+    icon: <Key className="h-6 w-6 text-brand" />,
+    title: "Login Not Working",
+    solution: "Confirm username, password, and server URL are copied exactly. IPTV login details are case-sensitive.",
+  },
+  {
+    icon: <Settings className="h-6 w-6 text-brand" />,
+    title: "App Not Loading",
+    solution: "Restart your device, refresh the playlist, and reinstall the app only if support recommends it.",
+  },
+  {
+    icon: <ShieldAlert className="h-6 w-6 text-brand" />,
+    title: "Channels Not Opening",
+    solution: "Try refreshing your playlist or EPG. Availability can vary by package, region, app, and connection quality.",
+  },
+  {
+    icon: <Tv className="h-6 w-6 text-brand" />,
+    title: "Smart TV MAC Issue",
+    solution: "If your app uses a MAC address and device key, send both details to support so the setup can be checked.",
+  },
+];
 
 export default function SupportPage() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Support & Contact - iflexiptv",
-    "url": "https://www.iflexiptv.com/support",
-    "description": "Contact our 24/7 WhatsApp support team for instant assistance.",
+    name: `Support & Contact - ${siteConfig.brandName}`,
+    url: absoluteUrl("/support"),
+    description: "Contact 24/7 iFlex IPTV support for setup and troubleshooting assistance.",
   };
-
-  const commonProblems = [
-    {
-      icon: <Wifi className="h-6 w-6 text-brand" />,
-      title: "Buffering & Freezing",
-      solution: "Usually caused by weak Wi-Fi or ISP throttling. We recommend using an Ethernet cable or clearing your app's cache. If it persists, contact us."
-    },
-    {
-      icon: <Key className="h-6 w-6 text-brand" />,
-      title: "Login Not Working",
-      solution: "Double-check your username and password for typos (they are case-sensitive). Ensure your subscription hasn't expired."
-    },
-    {
-      icon: <Settings className="h-6 w-6 text-brand" />,
-      title: "App Not Loading",
-      solution: "Restart your device (Firestick, Smart TV). If that fails, uninstall and reinstall the IPTV app, then log in again."
-    },
-    {
-      icon: <ShieldAlert className="h-6 w-6 text-brand" />,
-      title: "Channels Not Opening",
-      solution: "Sometimes your ISP blocks IPTV. A VPN usually fixes this. Alternatively, try refreshing your playlist from the app settings."
-    },
-    {
-      icon: <Tv className="h-6 w-6 text-brand" />,
-      title: "Smart TV MAC Issue",
-      solution: "If using SIPTV or IBO Player, ensure you provided us with the correct MAC address so we can upload your playlist."
-    }
-  ];
 
   return (
     <>
       <SchemaMarkup schema={schema} />
 
-      <section className="relative isolate overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24 border-b border-white/5">
-        <div className="absolute inset-0 -z-20 bg-black">
-          {/* Replace with licensed/user-provided asset. */}
-          <Image
-            src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?q=80&w=2000"
-            alt="Cinematic background for support"
-            fill
-            priority
-            className="object-cover opacity-20"
-          />
-        </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-background/80 to-transparent" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl text-foreground">Need Help Setting Up IPTV?</h1>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              Whether you are experiencing technical issues or just need help installing an app, we are here for you 24/7.
-            </p>
-          </div>
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-black pt-28 pb-16 sm:pt-36">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_18%,rgba(22,163,74,0.18),transparent_24rem),radial-gradient(circle_at_80%_12%,rgba(234,179,8,0.16),transparent_24rem),linear-gradient(180deg,#020617,#000)]" />
+        <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
+          <h1 className="mx-auto max-w-4xl text-4xl font-black tracking-tight text-white sm:text-6xl">Need help setting up iFlex IPTV?</h1>
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/68">
+            Message support for plan questions, activation, device setup, EPG refreshes, and practical troubleshooting.
+          </p>
+          <Link
+            href={createWhatsAppSupportUrl("support with my IPTV setup")}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cta="support-whatsapp"
+            className="mt-8 inline-flex h-14 items-center justify-center gap-3 rounded-full bg-green-500 px-8 font-black text-white transition hover:bg-green-400"
+          >
+            <WhatsAppIcon className="h-6 w-6" />
+            Chat with Support Now
+          </Link>
         </div>
       </section>
 
-      <section className="py-20 bg-background -mt-10">
+      <section className="bg-black py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Primary Support Card */}
-          <div className="max-w-4xl mx-auto luxury-surface rounded-3xl p-8 sm:p-12 text-center border-brand/30 shadow-2xl shadow-brand/10 relative overflow-hidden z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-success/10 to-transparent pointer-events-none" />
-            <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-success/20 mb-6">
-              <MessageCircle className="h-10 w-10 text-success" />
-            </div>
-            <h2 className="text-3xl font-bold mb-4">Fastest Way to Get Help</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Message us directly on WhatsApp. We typically reply within 5 minutes. Have your username or MAC address ready for faster service.
-            </p>
-            <Link
-              href="https://wa.me/447988033246"
-              className="button-glow-success cta-pulse-success inline-flex h-16 items-center justify-center gap-3 rounded-full bg-success px-10 text-lg font-bold text-background transition hover:-translate-y-1 hover:bg-success-hover"
-            >
-              <MessageCircle className="h-6 w-6" /> Chat with Support Now
-            </Link>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {commonProblems.map((problem) => (
+              <article key={problem.title} className="rounded-2xl border border-white/10 bg-white/[0.055] p-6">
+                <div className="mb-4 inline-flex rounded-xl border border-brand/20 bg-brand/10 p-3">{problem.icon}</div>
+                <h2 className="text-xl font-black text-white">{problem.title}</h2>
+                <p className="mt-3 text-sm leading-6 text-white/62">{problem.solution}</p>
+              </article>
+            ))}
           </div>
 
-          {/* Common Problems */}
-          <div className="max-w-6xl mx-auto mt-24">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold">Troubleshooting Common Problems</h2>
-              <p className="text-muted-foreground mt-4">Check these quick fixes before contacting support.</p>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {commonProblems.map((prob, i) => (
-                <div key={i} className="luxury-surface p-6 rounded-2xl hover:border-brand/40 transition-colors">
-                  <div className="mb-4 inline-flex p-3 rounded-xl bg-brand/10 border border-brand/20">
-                    {prob.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-3">{prob.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{prob.solution}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Setup Guides Link */}
-          <div className="max-w-4xl mx-auto mt-16 bg-card border border-white/10 rounded-2xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+          <div className="mx-auto mt-16 flex max-w-4xl flex-col items-center justify-between gap-6 rounded-2xl border border-white/10 bg-white/[0.05] p-8 text-center sm:flex-row sm:text-left">
             <div>
-              <h3 className="text-xl font-bold mb-2">Looking for Installation Instructions?</h3>
-              <p className="text-muted-foreground">We have step-by-step guides for Firestick, Smart TVs, Android, and Apple devices.</p>
+              <h2 className="text-xl font-black text-white">Looking for installation instructions?</h2>
+              <p className="mt-2 text-white/60">Use our device setup guides for Fire Stick, Smart TVs, Android TV, Apple devices, MAG boxes, and more.</p>
             </div>
-            <Link href="/guides" className="inline-flex h-12 whitespace-nowrap items-center justify-center gap-2 rounded-full border border-brand/50 bg-brand/10 px-6 text-sm font-bold text-brand transition hover:bg-brand hover:text-background">
+            <Link href="/guides" className="inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-brand/50 bg-brand/10 px-6 text-sm font-black text-brand transition hover:bg-brand hover:text-black">
               View Setup Guides <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
-          {/* FAQ Section */}
-          <div className="max-w-3xl mx-auto mt-24">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold">Frequently Asked Questions</h2>
-            </div>
-            <FAQAccordion items={[
-              { question: "How fast is activation?", answer: "Activation is instant. As soon as you message us on WhatsApp and choose a plan, we generate your credentials." },
-              { question: "Can I use it on multiple devices?", answer: "One subscription allows you to watch on one device at a time. For multiple simultaneous connections, please ask our support team for a family plan." },
-              { question: "Do you offer a free trial?", answer: "Yes, we offer a 24-hour free trial so you can test the channels and VODs before purchasing." },
-              { question: "What internet speed do I need?", answer: "We recommend at least 20Mbps for a smooth, buffer-free 4K streaming experience." }
-            ]} />
+          <div className="mx-auto mt-16 max-w-3xl">
+            <h2 className="mb-8 text-center text-3xl font-black text-white">Support FAQ</h2>
+            <FAQAccordion
+              items={[
+                { question: "How fast is activation?", answer: "Activation details are prepared after payment confirmation and device/package details are collected on WhatsApp." },
+                { question: "Can I use it on multiple devices?", answer: siteConfig.claims.devicePolicy },
+                { question: "Which internet speed do I need?", answer: "We recommend at least 15 Mbps for HD, 25 Mbps for FHD, and a stronger stable connection for 4K where available." },
+                { question: "What should I send support?", answer: "Send your device type, selected app, package, active device count, and a short description of the issue." },
+              ]}
+            />
           </div>
-
         </div>
       </section>
     </>

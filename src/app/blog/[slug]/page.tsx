@@ -1,23 +1,34 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, MessageCircle } from "lucide-react";
-import { blogPosts } from "@/lib/blog-data";
+import { ArrowLeft } from "lucide-react";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { blogPosts } from "@/lib/blog-data";
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
+import { createWhatsAppSupportUrl } from "@/lib/whatsapp";
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const resolvedParams = await params;
-  const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
-  
+  const post = blogPosts.find((item) => item.slug === resolvedParams.slug);
+
   if (!post) {
     return { title: "Post Not Found" };
   }
 
   return {
-    title: `${post.title} | iflexiptv Blog`,
+    title: `${post.title} | iFlex IPTV Blog`,
     description: post.description,
     alternates: {
-      canonical: `https://www.iflexiptv.com/blog/${post.slug}`,
+      canonical: absoluteUrl(`/blog/${post.slug}`),
+    },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      url: absoluteUrl(`/blog/${post.slug}`),
+      images: [{ url: absoluteUrl(post.image), width: 1200, height: 630, alt: post.title }],
+      type: "article",
     },
   };
 }
@@ -28,89 +39,74 @@ export function generateStaticParams() {
   }));
 }
 
-// Proper markdown parser for blog content
-function renderContent(content: string) {
-  const blocks = content.trim().split("\n\n");
-  
-  return blocks.map((block, index) => {
-    // H3 headings
-    if (block.startsWith("### ")) {
-      return <h3 key={index} className="text-xl font-bold mt-8 mb-3 text-foreground">{block.replace("### ", "")}</h3>;
+function renderInline(text: string) {
+  const tokens = text.split(/(\*\*.*?\*\*)/g);
+  return tokens.map((token, index) => {
+    if (token.startsWith("**") && token.endsWith("**")) {
+      return (
+        <strong key={index} className="font-semibold text-white">
+          {token.slice(2, -2)}
+        </strong>
+      );
     }
 
-    // H2 headings
+    return token;
+  });
+}
+
+function renderContent(content: string) {
+  return content.trim().split("\n\n").map((block, index) => {
     if (block.startsWith("## ")) {
-      return <h2 key={index} className="text-2xl font-bold mt-10 mb-4 text-foreground">{block.replace("## ", "")}</h2>;
+      return <h2 key={index} className="mt-10 mb-4 text-2xl font-black text-white">{block.replace("## ", "")}</h2>;
     }
-    
-    // Unordered list
+
+    if (block.startsWith("### ")) {
+      return <h3 key={index} className="mt-8 mb-3 text-xl font-black text-white">{block.replace("### ", "")}</h3>;
+    }
+
     if (block.startsWith("- ")) {
-      const items = block.split("\n").filter(i => i.startsWith("- "));
       return (
-        <ul key={index} className="list-disc pl-6 space-y-2 mb-6 text-muted-foreground leading-relaxed">
-          {items.map((item, i) => {
-            const text = item.replace("- ", "");
-            const parts = text.split(/\*\*(.*?)\*\*/g);
-            return (
-              <li key={i}>
-                {parts.map((part, j) => (j % 2 === 1 ? <strong key={j} className="text-foreground font-semibold">{part}</strong> : part))}
-              </li>
-            );
-          })}
+        <ul key={index} className="mb-6 list-disc space-y-2 pl-6 leading-7 text-white/68">
+          {block.split("\n").filter((item) => item.startsWith("- ")).map((item) => (
+            <li key={item}>{renderInline(item.replace("- ", ""))}</li>
+          ))}
         </ul>
       );
     }
-    
-    // Ordered list
+
     if (/^\d+\./.test(block)) {
-      const items = block.split("\n").filter(i => /^\d+\./.test(i));
       return (
-        <ol key={index} className="list-decimal pl-6 space-y-2 mb-6 text-muted-foreground leading-relaxed">
-           {items.map((item, i) => {
-            const text = item.replace(/^\d+\.\s/, "");
-            const parts = text.split(/\*\*(.*?)\*\*/g);
-            return (
-              <li key={i}>
-                {parts.map((part, j) => (j % 2 === 1 ? <strong key={j} className="text-foreground font-semibold">{part}</strong> : part))}
-              </li>
-            );
-          })}
+        <ol key={index} className="mb-6 list-decimal space-y-2 pl-6 leading-7 text-white/68">
+          {block.split("\n").filter((item) => /^\d+\./.test(item)).map((item) => (
+            <li key={item}>{renderInline(item.replace(/^\d+\.\s/, ""))}</li>
+          ))}
         </ol>
       );
     }
 
-    // Table support (pipe-separated)
     if (block.includes("|") && block.split("\n").length >= 3) {
-      const rows = block.split("\n").filter(r => r.trim());
-      if (rows.length >= 2 && rows[1]?.includes("---")) {
-        const headers = rows[0].split("|").map(h => h.trim()).filter(Boolean);
+      const rows = block.split("\n").filter((row) => row.trim());
+      if (rows[1]?.includes("---")) {
+        const headers = rows[0].split("|").map((cell) => cell.trim()).filter(Boolean);
         const dataRows = rows.slice(2);
         return (
-          <div key={index} className="overflow-x-auto mb-6">
-            <table className="w-full text-sm border border-white/10 rounded-xl overflow-hidden">
-              <thead>
-                <tr className="bg-white/5">
-                  {headers.map((h, i) => (
-                    <th key={i} className="px-4 py-3 text-left font-bold text-foreground border-b border-white/10">{h}</th>
+          <div key={index} className="mb-8 overflow-x-auto rounded-2xl border border-white/10">
+            <table className="w-full min-w-[34rem] text-sm">
+              <thead className="bg-white/[0.08]">
+                <tr>
+                  {headers.map((header) => (
+                    <th key={header} className="px-4 py-3 text-left font-black text-white">{header}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {dataRows.map((row, i) => {
-                  const cells = row.split("|").map(c => c.trim()).filter(Boolean);
-                  return (
-                    <tr key={i} className="border-b border-white/5 hover:bg-white/3">
-                      {cells.map((cell, j) => {
-                        const parts = cell.split(/\*\*(.*?)\*\*/g);
-                        return (
-                          <td key={j} className="px-4 py-3 text-muted-foreground">
-                            {parts.map((part, k) => (k % 2 === 1 ? <strong key={k} className="text-foreground font-semibold">{part}</strong> : part))}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  );
-                })}
+                {dataRows.map((row) => (
+                  <tr key={row} className="border-t border-white/10">
+                    {row.split("|").map((cell) => cell.trim()).filter(Boolean).map((cell) => (
+                      <td key={cell} className="px-4 py-3 text-white/68">{renderInline(cell)}</td>
+                    ))}
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -118,19 +114,14 @@ function renderContent(content: string) {
       }
     }
 
-    // Default paragraph with bold support
-    const lines = block.split("\n");
     return (
-      <p key={index} className="mb-6 text-muted-foreground leading-relaxed">
-        {lines.map((line, i) => {
-           const parts = line.split(/\*\*(.*?)\*\*/g);
-           return (
-             <span key={i}>
-               {parts.map((part, j) => (j % 2 === 1 ? <strong key={j} className="text-foreground font-semibold">{part}</strong> : part))}
-               {i < lines.length - 1 && <br />}
-             </span>
-           );
-        })}
+      <p key={index} className="mb-6 leading-8 text-white/68">
+        {block.split("\n").map((line, lineIndex) => (
+          <span key={`${line}-${lineIndex}`}>
+            {renderInline(line)}
+            {lineIndex < block.split("\n").length - 1 && <br />}
+          </span>
+        ))}
       </p>
     );
   });
@@ -138,7 +129,7 @@ function renderContent(content: string) {
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params;
-  const post = blogPosts.find((p) => p.slug === resolvedParams.slug);
+  const post = blogPosts.find((item) => item.slug === resolvedParams.slug);
 
   if (!post) {
     notFound();
@@ -147,129 +138,97 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   const schema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": post.title,
-    "datePublished": post.date,
-    "url": `https://www.iflexiptv.com/blog/${post.slug}`,
-    "image": `https://www.iflexiptv.com${post.image}`,
-    "author": {
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    url: absoluteUrl(`/blog/${post.slug}`),
+    image: absoluteUrl(post.image),
+    author: {
       "@type": "Organization",
-      "name": "iflexiptv"
-    }
+      name: siteConfig.brandName,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.brandName,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl(siteConfig.logoPath),
+      },
+    },
   };
 
   return (
     <>
       <SchemaMarkup schema={schema} />
 
-      <article className="pb-20">
-        {/* Post Hero */}
-        <section className="relative isolate pt-24 pb-16 sm:pt-32 sm:pb-24 border-b border-white/5">
-          <div className="absolute inset-0 -z-20 bg-black">
-            <Image
-              src={post.image}
-              alt={post.title}
-              fill
-              priority
-              className="object-cover opacity-20 blur-sm"
-            />
-          </div>
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-background/90 to-background/60" />
-          
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-            <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-hover mb-8 transition-colors">
+      <article className="bg-black pb-20">
+        <section className="relative isolate overflow-hidden border-b border-white/10 pt-28 pb-16 sm:pt-36">
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            priority
+            sizes="100vw"
+            className="-z-20 object-cover opacity-20 blur-sm"
+          />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/90 to-black/70" />
+
+          <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <Link href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-black text-brand hover:text-brand-hover">
               <ArrowLeft className="h-4 w-4" /> Back to Blog
             </Link>
-            
-            <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-wider text-brand mb-4">
+            <div className="mb-4 flex items-center gap-3 text-xs font-black uppercase tracking-widest text-brand">
               <span>{post.category}</span>
-              <span className="h-1 w-1 rounded-full bg-white/20"></span>
+              <span className="h-1 w-1 rounded-full bg-white/25" />
               <span>{post.readTime}</span>
             </div>
-            
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 text-foreground leading-tight">
-              {post.title}
-            </h1>
-            
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <time dateTime={post.date}>
-                {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-              </time>
+            <h1 className="text-4xl font-black tracking-tight text-white sm:text-6xl">{post.title}</h1>
+            <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/55">
+              <time dateTime={post.date}>{new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</time>
               <span>•</span>
-              <span>By iflexiptv Team</span>
+              <span>By iFlex IPTV Team</span>
             </div>
           </div>
         </section>
 
-        {/* Content & Sidebar Layout */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl mt-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
-            {/* Main Content */}
-            <div className="lg:col-span-8">
-              <div className="relative aspect-video rounded-2xl overflow-hidden mb-12 shadow-2xl border border-white/10">
-                <Image src={post.image} alt={post.title} fill className="object-cover" />
-              </div>
+        <div className="container mx-auto mt-12 grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_22rem] lg:px-8">
+          <div>
+            <div className="relative mb-10 aspect-video overflow-hidden rounded-2xl border border-white/10">
+              <Image src={post.image} alt={post.title} fill sizes="(min-width: 1024px) 62vw, 92vw" className="object-cover" />
+            </div>
+            <p className="mb-10 border-l-4 border-brand pl-6 text-xl font-semibold leading-8 text-white/88">{post.description}</p>
+            {renderContent(post.content)}
 
-              <div className="prose prose-invert max-w-none">
-                <p className="text-xl text-white/90 leading-relaxed mb-10 font-medium border-l-4 border-brand pl-6">
-                  {post.description}
-                </p>
-                {renderContent(post.content)}
-              </div>
+            <div className="mt-14 rounded-2xl border border-green-400/20 bg-green-500/10 p-8">
+              <h2 className="text-2xl font-black text-white">Need help with this setup?</h2>
+              <p className="mt-3 leading-7 text-white/64">Message iFlex IPTV support with your device, app, internet speed, and the article topic you are following.</p>
+              <Link
+                href={createWhatsAppSupportUrl(`help with ${post.title}`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cta="support-whatsapp"
+                className="mt-6 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-green-500 px-6 font-black text-white transition hover:bg-green-400"
+              >
+                <WhatsAppIcon className="h-5 w-5" />
+                Message Support
+              </Link>
+            </div>
+          </div>
 
-              {/* In-article CTA */}
-              <div className="mt-16 bg-brand/10 border border-brand/20 rounded-2xl p-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6">
-                <div>
-                  <h3 className="text-xl font-bold text-brand mb-2">Ready to cut the cord?</h3>
-                  <p className="text-muted-foreground text-sm">Join thousands of users enjoying zero-buffering IPTV.</p>
-                </div>
-                <Link
-                  href="https://wa.me/447988033246"
-                  className="button-glow-success whitespace-nowrap inline-flex h-12 items-center justify-center gap-2 rounded-full bg-success px-6 text-sm font-bold text-background transition hover:-translate-y-0.5 hover:bg-success-hover"
-                >
-                  <MessageCircle className="h-4 w-4" /> Start Free Trial
-                </Link>
+          <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-6">
+              <h2 className="text-lg font-black text-white">Related guides</h2>
+              <div className="mt-5 space-y-4">
+                {blogPosts.filter((item) => item.slug !== post.slug).slice(0, 4).map((item) => (
+                  <Link key={item.slug} href={`/blog/${item.slug}`} className="block rounded-xl border border-white/10 bg-black/25 p-4 transition hover:border-brand/40">
+                    <p className="text-xs font-bold uppercase tracking-widest text-brand">{item.category}</p>
+                    <h3 className="mt-2 text-sm font-black leading-5 text-white">{item.title}</h3>
+                  </Link>
+                ))}
               </div>
             </div>
-
-            {/* Sidebar */}
-            <aside className="lg:col-span-4">
-              <div className="sticky top-32 space-y-8">
-                {/* Support Card */}
-                <div className="luxury-surface rounded-2xl p-6 border-t-4 border-t-success">
-                  <h3 className="text-lg font-bold mb-3">Need Setup Help?</h3>
-                  <p className="text-sm text-muted-foreground mb-6">Our WhatsApp support team is online 24/7. We can help you install apps on any device.</p>
-                  <Link
-                    href="https://wa.me/447988033246"
-                    className="flex w-full h-12 items-center justify-center gap-2 rounded-xl bg-success/20 text-success font-bold transition-colors hover:bg-success hover:text-background"
-                  >
-                    <MessageCircle className="h-4 w-4" /> Message Support
-                  </Link>
-                </div>
-
-                {/* Popular Posts */}
-                <div className="luxury-surface rounded-2xl p-6">
-                  <h3 className="text-lg font-bold mb-4">Related Guides</h3>
-                  <ul className="space-y-4">
-                    {blogPosts.filter(p => p.slug !== post.slug).slice(0, 4).map((p) => (
-                      <li key={p.slug} className="group">
-                        <Link href={`/blog/${p.slug}`} className="flex gap-4 items-center">
-                          <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-md">
-                            <Image src={p.image} alt={p.title} fill className="object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
-                          </div>
-                          <div>
-                            <h4 className="text-sm font-bold line-clamp-2 group-hover:text-brand transition-colors">{p.title}</h4>
-                            <p className="text-xs text-muted-foreground mt-1">{p.readTime}</p>
-                          </div>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </aside>
-            
-          </div>
+          </aside>
         </div>
       </article>
     </>

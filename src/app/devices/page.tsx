@@ -1,14 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { ArrowRight, CheckCircle, Monitor, Smartphone, Tv } from "lucide-react";
 import { premiumImages } from "@/lib/media";
 import { whatsappSetupGuidanceUrl } from "@/lib/whatsapp";
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
 
-export const metadata = {
-  title: "Supported Devices & Setup - iflexiptv",
-  description: "Learn how to set up iflexiptv on your Smart TV, Android box, Firestick, Apple TV, MAG, smartphone, or PC.",
+export const metadata: Metadata = {
+  title: "iFlex IPTV Supported Devices - Smart TV, Fire Stick, Android TV & Mobile",
+  description: "Learn how to set up iFlex IPTV on Smart TV, Fire Stick, Android TV, Apple TV, MAG Box, iPhone/iPad, Windows/Mac, and more.",
   alternates: {
-    canonical: "https://www.iflexiptv.com/devices",
+    canonical: absoluteUrl("/devices"),
   },
 };
 
@@ -67,7 +69,7 @@ export default function DevicesPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Setup in minutes</p>
             <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-6xl">Supported Devices</h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              iflexiptv is designed to work seamlessly across all your favorite devices. Setup is fast and simple.
+              iFlex IPTV works across popular IPTV devices and apps. {siteConfig.claims.devicePolicy}
             </p>
           </div>
         </div>

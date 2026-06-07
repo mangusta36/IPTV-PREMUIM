@@ -1,159 +1,136 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { MonitorPlay, MessageCircle } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Menu, MonitorPlay, X } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { createWhatsAppSupportUrl } from "@/lib/whatsapp";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/features", label: "Features" },
+  { href: "/channels", label: "Channels" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/devices", label: "Devices" },
+  { href: "/guides", label: "Guides" },
+  { href: "/blog", label: "Blog" },
+  { href: "/support", label: "Support" },
+];
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 18);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const links = [
-    { href: "/", label: "Home" },
-    { href: "/features", label: "Features" },
-    { href: "/pricing", label: "Pricing" },
-    { href: "/guides", label: "Guides" },
-    { href: "/blog", label: "Blog" },
-    { href: "/support", label: "Support" },
-  ];
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <>
-      <style>{`
-        .nav-root {
-          position: sticky;
-          top: 0;
-          z-index: 50;
-          width: 100%;
-          transition: all 0.4s ease;
-        }
-        .nav-root.scrolled {
-          background: rgba(5,5,10,0.92);
-          backdrop-filter: blur(24px);
-          border-bottom: 1px solid rgba(235,182,22,0.2);
-          box-shadow: 0 4px 40px rgba(0,0,0,0.6);
-        }
-        .nav-root.top {
-          background: rgba(5,5,10,0.6);
-          backdrop-filter: blur(12px);
-        }
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5">
+      <div
+        className={`mx-auto max-w-7xl rounded-2xl border transition-all duration-300 ${
+          scrolled || open
+            ? "border-white/12 bg-black/78 shadow-2xl shadow-black/40 backdrop-blur-2xl"
+            : "border-white/8 bg-black/36 shadow-xl shadow-black/20 backdrop-blur-xl"
+        }`}
+      >
+        <div className="flex h-16 items-center justify-between gap-3 px-3 sm:px-4 lg:px-5">
+          <Link href="/" className="group flex min-w-0 items-center gap-3" aria-label="iFlex IPTV home">
+            <span className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-brand/35 bg-brand/10 text-brand shadow-lg shadow-brand/10 transition group-hover:scale-105">
+              <span className="absolute inset-0 rounded-2xl bg-brand/10 opacity-0 blur-xl transition group-hover:opacity-100" />
+              <MonitorPlay className="relative h-5 w-5" />
+            </span>
+            <span className="min-w-0 text-lg font-black tracking-tight text-white">
+              iFlex <span className="bg-gradient-to-r from-brand via-yellow-200 to-brand bg-clip-text text-transparent">IPTV</span>
+            </span>
+          </Link>
 
-        /* Scrollable mobile nav */
-        .nav-scroll {
-          display: flex;
-          gap: 10px;
-          overflow-x: auto;
-          scrollbar-width: none;
-        }
-        .nav-scroll::-webkit-scrollbar {
-          display: none;
-        }
+          <nav className="hidden items-center gap-1 rounded-full border border-white/8 bg-white/[0.045] p-1 lg:flex">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`rounded-full px-4 py-2 text-sm font-bold transition ${
+                  isActive(link.href)
+                    ? "bg-brand text-black shadow-lg shadow-brand/20"
+                    : "text-white/68 hover:bg-white/8 hover:text-white"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
-        .nav-pill {
-          flex: none;
-          padding: 8px 14px;
-          border-radius: 999px;
-          font-size: 13px;
-          font-weight: 600;
-          color: rgba(255,255,255,0.7);
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(255,255,255,0.08);
-          transition: all 0.25s ease;
-        }
-        .nav-pill:hover {
-          color: #EBB616;
-          border-color: rgba(235,182,22,0.4);
-          background: rgba(235,182,22,0.08);
-        }
-
-        /* Desktop link */
-        .nav-link {
-          font-size: 14px;
-          font-weight: 600;
-          color: rgba(255,255,255,0.7);
-          transition: color 0.2s;
-        }
-        .nav-link:hover {
-          color: #EBB616;
-        }
-
-        /* CTA */
-        .nav-cta {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          height: 40px;
-          padding: 0 18px;
-          border-radius: 999px;
-          font-weight: 800;
-          font-size: 13px;
-          color: black;
-          background: linear-gradient(135deg, #EBB616, #F9D976, #C99800);
-          box-shadow: 0 4px 20px rgba(235,182,22,0.5);
-          transition: all 0.3s ease;
-        }
-        .nav-cta:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 30px rgba(235,182,22,0.7);
-        }
-      `}</style>
-
-      <header className={`nav-root ${scrolled ? "scrolled" : "top"}`}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-
-          <div className="flex h-16 items-center justify-between">
-
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-9 h-9 flex items-center justify-center rounded-lg border border-[#EBB616]/40 bg-[#EBB616]/10">
-                <MonitorPlay className="h-4 w-4 text-[#EBB616]" />
-              </div>
-              <span className="text-white font-extrabold text-lg">
-                iflex<span className="bg-gradient-to-r from-[#EBB616] to-[#F9D976] bg-clip-text text-transparent">iptv</span>
-              </span>
+          <div className="flex items-center gap-2">
+            <Link
+              href={createWhatsAppSupportUrl("help choosing an IPTV plan")}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cta="navbar-whatsapp"
+              className="hidden h-11 items-center justify-center gap-2 rounded-full bg-green-500 px-5 text-sm font-black text-white shadow-lg shadow-green-500/25 transition hover:-translate-y-0.5 hover:bg-green-400 md:inline-flex"
+            >
+              <WhatsAppIcon className="h-5 w-5" />
+              WhatsApp
             </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-6">
-              {links.map((link) => (
-                <Link key={link.href} href={link.href} className="nav-link">
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Desktop CTA */}
-            <div className="hidden md:flex">
-              <Link href="https://wa.me/447988033246" className="nav-cta">
-                <MessageCircle className="h-4 w-4" />
-                WhatsApp Us
-              </Link>
-            </div>
-
+            <button
+              type="button"
+              onClick={() => setOpen((value) => !value)}
+              aria-expanded={open}
+              aria-controls="mobile-navigation"
+              aria-label={open ? "Close navigation" : "Open navigation"}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white transition hover:border-brand/40 hover:text-brand lg:hidden"
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
-
-          {/* Mobile Scrollable Nav (NO hamburger) */}
-          <div className="md:hidden pb-3">
-            <div className="nav-scroll">
-              {links.map((link) => (
-                <Link key={link.href} href={link.href} className="nav-pill">
-                  {link.label}
-                </Link>
-              ))}
-
-              <Link href="https://wa.me/447988033246" className="nav-pill bg-[#EBB616]/10 text-[#EBB616] border-[#EBB616]/40">
-                WhatsApp
-              </Link>
-            </div>
-          </div>
-
         </div>
-      </header>
-    </>
+
+        <div
+          id="mobile-navigation"
+          className={`grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 lg:hidden ${
+            open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+          }`}
+        >
+          <div className="min-h-0">
+            <nav className="grid gap-2 border-t border-white/8 px-3 pb-4 pt-3 sm:grid-cols-2 sm:px-4">
+              {links.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className={`rounded-xl px-4 py-3 text-sm font-bold transition ${
+                    isActive(link.href)
+                      ? "bg-brand text-black"
+                      : "bg-white/[0.045] text-white/72 hover:bg-white/10 hover:text-white"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <Link
+                href={createWhatsAppSupportUrl("help choosing an IPTV plan")}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cta="navbar-whatsapp"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-green-500 px-4 py-3 text-sm font-black text-white transition hover:bg-green-400 sm:col-span-2"
+              >
+                <WhatsAppIcon className="h-5 w-5" />
+                Start on WhatsApp
+              </Link>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
   );
 }

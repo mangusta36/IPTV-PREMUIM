@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next';
 import { blogPosts } from '@/lib/blog-data';
+import { absoluteUrl } from '@/lib/site-config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.iflexiptv.pro';
+  const siteUpdated = new Date('2026-06-07');
 
   const staticRoutes = [
     '',
@@ -14,18 +15,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/contact',
     '/blog',
     '/guides',
-    '/support'
+    '/support',
+    '/terms',
+    '/privacy',
+    '/refund-policy',
+    '/disclaimer'
   ];
 
   const staticSitemap = staticRoutes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
+    url: absoluteUrl(route || '/'),
+    lastModified: siteUpdated,
     changeFrequency: route === '' ? 'weekly' : 'monthly',
     priority: route === '' ? 1 : 0.8,
   } as MetadataRoute.Sitemap[0]));
 
   const dynamicBlogSitemap = blogPosts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
+    url: absoluteUrl(`/blog/${post.slug}`),
     lastModified: new Date(post.date),
     changeFrequency: 'monthly',
     priority: 0.7,

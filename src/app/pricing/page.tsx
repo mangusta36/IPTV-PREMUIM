@@ -1,225 +1,120 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, CheckCircle, Info, ShieldCheck, MessageCircle, Star, Zap, Shield, Infinity } from "lucide-react";
+import { ArrowRight, ShieldCheck, Smartphone, Sparkles } from "lucide-react";
+import PricingSelector from "@/components/PricingSelector";
 import SchemaMarkup from "@/components/SchemaMarkup";
-import { createWhatsAppOrderUrl } from "@/lib/whatsapp";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
+import { createWhatsAppSupportUrl } from "@/lib/whatsapp";
+import { pricingDeviceOptions } from "@/lib/pricing-data";
 
-export const metadata = {
-  title: "Premium IPTV Pricing | 3 to 12 Month Subscriptions",
-  description: "Choose your premium iflexiptv subscription plan. 3 Months, 6 Months, or 12 Months. WhatsApp ordering and instant delivery.",
+export const metadata: Metadata = {
+  title: "iFlex IPTV Pricing - 1, 2 & 3 Device Subscription Plans",
+  description:
+    "Choose an iFlex IPTV plan for 1, 2, or 3 active devices. 3-month, 6-month, and 12-month IPTV subscriptions with WhatsApp activation and setup support.",
   alternates: {
-    canonical: "https://www.iflexiptv.com/pricing",
+    canonical: absoluteUrl("/pricing"),
   },
 };
 
-const plans = [
-  {
-    name: "3 Months",
-    price: "€37",
-    duration: "/3 mos",
-    perMonth: "€12.33/mo",
-    description: "Save more with our quarterly plan.",
-    features: ["26,000+ Live Channels", "100,000+ VODs", "4K & FHD Quality", "Anti-Freeze Servers", "All Devices Supported", "24/7 WhatsApp Support"],
-    popular: false,
-    bestValue: false,
-    image: "/imgs/movies/movie_1.webp",
-  },
-  {
-    name: "6 Months",
-    price: "€49",
-    duration: "/6 mos",
-    perMonth: "€8.16/mo",
-    description: "Our most popular long-term choice.",
-    features: ["26,000+ Live Channels", "100,000+ VODs", "4K & FHD Quality", "Anti-Freeze Servers", "All Devices Supported", "24/7 WhatsApp Support"],
-    popular: true,
-    bestValue: false,
-    image: "/imgs/movies/movie_2.webp",
-  },
-  {
-    name: "12 Months",
-    price: "€67",
-    duration: "/yr",
-    perMonth: "€5.58/mo",
-    description: "Best value. Stream all year uninterrupted.",
-    features: ["26,000+ Live Channels", "100,000+ VODs", "4K & FHD Quality", "Anti-Freeze Servers", "All Devices Supported", "24/7 WhatsApp Support", "Free Setup Assistance"],
-    popular: false,
-    bestValue: true,
-    image: "/imgs/movies/movie_3.webp",
-  },
-];
+export default function PricingPage() {
+  const allPlans = pricingDeviceOptions.flatMap((option) =>
+    option.plans.map((plan) => ({
+      "@type": "Offer",
+      name: `${siteConfig.brandName} ${plan.duration} - ${option.label}`,
+      price: String(plan.price),
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: absoluteUrl("/pricing"),
+      description: `${option.label} IPTV subscription with ${siteConfig.claims.channels}, ${siteConfig.claims.vod}, EPG, and setup support.`,
+    }))
+  );
 
-export default function Pricing() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "iflexiptv Premium Subscription",
-    "description": "Premium IPTV subscription with 4K/FHD channels.",
-    "offers": {
+    name: `${siteConfig.brandName} IPTV Subscription`,
+    description: siteConfig.defaultDescription,
+    brand: {
+      "@type": "Brand",
+      name: siteConfig.brandName,
+    },
+    image: absoluteUrl(siteConfig.ogImagePath),
+    offers: {
       "@type": "AggregateOffer",
-      "lowPrice": "37",
-      "highPrice": "67",
-      "priceCurrency": "EUR",
+      lowPrice: "35",
+      highPrice: "149",
+      priceCurrency: "USD",
+      offerCount: allPlans.length,
+      offers: allPlans,
     },
   };
 
   return (
     <>
       <SchemaMarkup schema={schema} />
-      
-      <div className="bg-[#020617] min-h-screen">
-        {/* Cinematic Header - UNCHANGED */}
-        <section className="relative isolate pt-32 pb-16 sm:pt-40 sm:pb-24 border-b border-white/5">
-          <div className="absolute inset-0 -z-20 bg-black">
-             <Image
-                src="/imgs/bg_sliders/bg_slider_2.webp"
-                alt="Cinematic premium entertainment"
-                fill
-                priority
-                className="object-cover opacity-20 grayscale"
-              />
+
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-black pt-28 pb-16 sm:pt-36">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_18%_16%,rgba(234,179,8,0.2),transparent_25rem),radial-gradient(circle_at_80%_20%,rgba(22,163,74,0.16),transparent_26rem),linear-gradient(180deg,#020617,#000)]" />
+        <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
+          <p className="text-sm font-bold uppercase tracking-[0.28em] text-brand">Pricing by device count</p>
+          <h1 className="mx-auto mt-3 max-w-4xl text-4xl font-black tracking-tight text-white sm:text-6xl">
+            iFlex IPTV plans for 1, 2, or 3 active devices
+          </h1>
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/68">
+            Choose 3 months, 6 months, or the 12-month best value package. Every plan includes EPG support, setup help, and WhatsApp activation.
+          </p>
+          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+            <Link
+              href={createWhatsAppSupportUrl("help choosing the right iFlex IPTV pricing plan")}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cta="hero-whatsapp"
+              className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-green-500 px-8 font-black text-white transition hover:bg-green-400"
+            >
+              <WhatsAppIcon className="h-6 w-6" />
+              Ask on WhatsApp
+            </Link>
+            <Link
+              href="#plans"
+              className="inline-flex h-14 items-center justify-center gap-3 rounded-full border border-white/15 bg-white/10 px-8 font-black text-white transition hover:border-brand/40 hover:text-brand"
+            >
+              Compare Plans
+              <ArrowRight className="h-5 w-5" />
+            </Link>
           </div>
-          <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(234,179,8,0.15),transparent_50rem)]" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent" />
-          
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <div className="max-w-3xl mx-auto reveal-up">
-              <p className="text-sm font-bold uppercase tracking-[0.2em] text-brand mb-4 flex items-center justify-center gap-2">
-                <Star className="h-4 w-4 fill-brand" /> VIP Access
-              </p>
-              <h1 className="text-5xl font-extrabold tracking-tight sm:text-7xl text-white mb-6">Choose Your IPTV Plan</h1>
-              <p className="text-xl leading-8 text-white/80 font-medium">
-                Instant activation. Premium channels. WhatsApp support.
-              </p>
-            </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-20 -mt-10 relative z-20">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-3 gap-8 max-w-[75rem] mx-auto">
-              {plans.map((plan) => (
-                <article
-                  key={plan.name}
-                  className={`relative flex flex-col overflow-hidden rounded-[2rem] transition-all duration-500 hover:-translate-y-3 group ${
-                    plan.bestValue 
-                      ? "border border-brand shadow-[0_0_60px_rgba(234,179,8,0.25)] lg:scale-105 " 
-                      : plan.popular 
-                        ? "border border-white/20 shadow-[0_0_40px_rgba(255,255,255,0.05)] " 
-                        : "border border-white/10 shadow-2xl shadow-black/80 "
-                  }`}
-                >
-                  {/* Background Image Layer */}
-                  <div className="absolute inset-0 -z-10 bg-black">
-                    <Image 
-                      src={plan.image} 
-                      alt={plan.name} 
-                      fill 
-                      className="object-cover opacity-20 transition-transform duration-1000 group-hover:scale-110 group-hover:opacity-30" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent" />
-                  </div>
-
-                  {/* Animated Top Bar for Best Value */}
-                  {plan.bestValue && (
-                    <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-brand via-yellow-200 to-brand z-30" />
-                  )}
-                  
-                  {/* Badge */}
-                  {(plan.popular || plan.bestValue) && (
-                    <div className="absolute right-6 top-6 z-30">
-                      {plan.bestValue ? (
-                        <span className="bg-brand text-black rounded-full px-4 py-1.5 text-xs font-black uppercase tracking-widest shadow-[0_0_20px_rgba(234,179,8,0.5)]">
-                          ★ Best Value
-                        </span>
-                      ) : (
-                        <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
-                          <Zap size={12} className="text-brand" /> Popular
-                        </span>
-                      )}
-                    </div>
-                  )}
-
-                  <div className="flex flex-1 flex-col p-8 sm:p-10 relative z-20">
-                    <p className="text-xs font-black uppercase tracking-[0.2em] mb-2" style={{ color: plan.bestValue ? '#EAB308' : 'rgba(255,255,255,0.4)' }}>
-                      {plan.bestValue ? "— Premium —" : plan.popular ? "— Standard —" : "— Starter —"}
-                    </p>
-                    <h2 className={`text-3xl font-black mb-6 tracking-tight ${plan.bestValue ? 'text-brand' : 'text-white'}`}>{plan.name}</h2>
-                    
-                    <div className="mb-4">
-                      <div className="flex items-baseline gap-1">
-                        <span className="text-5xl lg:text-6xl font-black text-white tracking-tighter drop-shadow-md">{plan.price}</span>
-                        <span className="text-white/40 font-bold">{plan.duration}</span>
-                      </div>
-                      <p className="text-sm font-semibold mt-1 text-white/40">{plan.perMonth}</p>
-                    </div>
-
-                    {/* Savings Pill */}
-                    {(plan.popular || plan.bestValue) && (
-                      <div className="mb-8 inline-flex items-center gap-1.5 rounded-lg bg-white/5 px-3 py-1 text-[11px] font-bold text-white/70 border border-white/10 uppercase tracking-wider">
-                        <Shield size={10} className="text-brand" />
-                        {plan.bestValue ? "Save 32% vs Monthly" : "Save 18% vs Monthly"}
-                      </div>
-                    )}
-
-                    <div className="h-[1px] w-full bg-white/10 mb-8" />
-
-                    <ul className="space-y-4 flex-1 text-sm text-white/90 font-medium mb-10">
-                      {plan.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-3">
-                          <div className={`flex items-center justify-center shrink-0 h-5 w-5 rounded-full ${plan.bestValue ? 'bg-brand/10' : 'bg-white/5'}`}>
-                            <CheckCircle className={`h-3.5 w-3.5 ${plan.bestValue ? 'text-brand' : 'text-success'}`} />
-                          </div>
-                          <span className="text-base">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <Link
-  href={createWhatsAppOrderUrl(plan.name, plan.price)}
-  target="_blank"
-  rel="noopener noreferrer"
-  className={`relative overflow-hidden inline-flex w-full items-center justify-center gap-3 rounded-full px-6 py-5 text-center font-black text-lg uppercase tracking-widest transition-all duration-500 group ${
-    plan.bestValue || plan.popular
-      ? "bg-gradient-to-r from-[#F2C847] via-[#FFF3AD] to-[#D4A017] text-black shadow-[0_0_30px_rgba(242,200,71,0.4)] hover:shadow-[0_0_50px_rgba(242,200,71,0.6)]"
-      : "bg-white/5 text-white border border-white/20 backdrop-blur-md hover:bg-white/10"
-  } hover:scale-[1.03] active:scale-[0.98]`}
->
-  {/* Luxury Shine/Sweep Animation */}
-  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] transition-transform" />
-
-  {/* Icon with subtle pulse */}
-  <MessageCircle className={`h-6 w-6 relative z-10 ${plan.bestValue || plan.popular ? 'animate-pulse' : ''}`} />
-  
-  <span className="relative z-10 drop-shadow-sm">
-    {plan.bestValue ? "Order Vip" : "Order Now"}
-  </span>
-
-  {/* Subtle Inner Glow for Premium look */}
-  <span className="absolute inset-0 rounded-full border border-white/20 pointer-events-none" />
-</Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            {/* Trust Row - Updated to match new theme */}
-            <div className="mt-20 flex flex-wrap justify-center items-center gap-6 md:gap-12 py-8 px-6 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm max-w-5xl mx-auto text-sm font-bold text-white/60">
-                <div className="flex items-center gap-2">
-                  <Zap size={16} className="text-brand" /> Instant Activation
-                </div>
-                <div className="flex items-center gap-2">
-                  <ShieldCheck size={16} className="text-brand" /> Secure WhatsApp Order
-                </div>
-                <div className="flex items-center gap-2">
-                  <Infinity size={16} className="text-brand" /> 24/7 Support
-                </div>
-                <div className="flex items-center gap-2">
-                  <MessageCircle size={16} className="text-success" /> Start Watching in 3m
-                </div>
-            </div>
-          </div>
-        </section>
+      <div id="plans" className="scroll-mt-24">
+        <PricingSelector />
       </div>
+
+      <section className="bg-black pb-20">
+        <div className="container mx-auto grid gap-6 px-4 sm:px-6 md:grid-cols-3 lg:px-8">
+          <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-6">
+            <Smartphone className="mb-4 h-7 w-7 text-brand" />
+            <h2 className="font-black text-white">Device-based clarity</h2>
+            <p className="mt-2 text-sm leading-6 text-white/60">
+              Install on supported devices. Active streams depend on your selected 1, 2, or 3 device package.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-6">
+            <ShieldCheck className="mb-4 h-7 w-7 text-green-300" />
+            <h2 className="font-black text-white">7-day guarantee</h2>
+            <p className="mt-2 text-sm leading-6 text-white/60">
+              If a technical issue cannot be resolved by support, you can request a refund within the policy window.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-6">
+            <Sparkles className="mb-4 h-7 w-7 text-blue-300" />
+            <h2 className="font-black text-white">Setup included</h2>
+            <p className="mt-2 text-sm leading-6 text-white/60">
+              WhatsApp support helps with app setup, playlist login, EPG refreshes, and basic troubleshooting.
+            </p>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

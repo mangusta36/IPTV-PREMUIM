@@ -1,14 +1,19 @@
-import Link from "next/link";
+import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight, MessageCircle } from "lucide-react";
-import { blogPosts } from "@/lib/blog-data";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { blogPosts } from "@/lib/blog-data";
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
+import { createWhatsAppSupportUrl } from "@/lib/whatsapp";
 
-export const metadata = {
-  title: "IPTV Setup Guides & Streaming Tips | iflexiptv Blog",
-  description: "Read our expert guides on how to install IPTV, fix buffering, choose the best apps, and get the most out of your premium streaming subscription.",
+export const metadata: Metadata = {
+  title: "iFlex IPTV Blog - 2026 IPTV Setup, Sports Streaming & Device Guides",
+  description:
+    "Read 2026 iFlex IPTV guides about live sports setup, Fire Stick, Smart TV, EPG, buffering fixes, internet speed, and choosing 1, 2, or 3 device plans.",
   alternates: {
-    canonical: "https://www.iflexiptv.com/blog",
+    canonical: absoluteUrl("/blog"),
   },
 };
 
@@ -16,95 +21,80 @@ export default function BlogIndex() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "name": "iflexiptv Blog",
-    "url": "https://www.iflexiptv.com/blog",
-    "description": "Expert guides on how to install IPTV, fix buffering, choose the best apps, and get the most out of your premium streaming subscription.",
-    "blogPost": blogPosts.map((post) => ({
+    name: `${siteConfig.brandName} Blog`,
+    url: absoluteUrl("/blog"),
+    description: "2026 IPTV setup, troubleshooting, device, EPG, and streaming guides.",
+    blogPost: blogPosts.map((post) => ({
       "@type": "BlogPosting",
-      "headline": post.title,
-      "datePublished": post.date,
-      "url": `https://www.iflexiptv.com/blog/${post.slug}`,
-      "image": `https://www.iflexiptv.com${post.image}`
-    }))
+      headline: post.title,
+      datePublished: post.date,
+      url: absoluteUrl(`/blog/${post.slug}`),
+      image: absoluteUrl(post.image),
+    })),
   };
 
   return (
     <>
       <SchemaMarkup schema={schema} />
 
-      <section className="relative isolate overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24 border-b border-white/5">
-        <div className="absolute inset-0 -z-20 bg-black">
-          {/* Replace with licensed/user-provided asset. */}
-          <Image
-            src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?q=80&w=2000"
-            alt="Cinematic background for blog"
-            fill
-            priority
-            className="object-cover opacity-20"
-          />
-        </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-background/80 to-transparent" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Resources & Guides</p>
-            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-6xl">IPTV Support Blog</h1>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              Everything you need to know about setting up IPTV, fixing buffering, and finding the best channels.
-            </p>
-          </div>
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-black pt-28 pb-16 sm:pt-36">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_22%_16%,rgba(59,130,246,0.2),transparent_25rem),radial-gradient(circle_at_80%_16%,rgba(234,179,8,0.16),transparent_24rem),linear-gradient(180deg,#020617,#000)]" />
+        <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
+          <p className="text-sm font-bold uppercase tracking-[0.28em] text-brand">Resources & guides</p>
+          <h1 className="mx-auto mt-3 max-w-4xl text-4xl font-black tracking-tight text-white sm:text-6xl">iFlex IPTV Blog</h1>
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/68">
+            Helpful 2026 IPTV guides for live sports readiness, EPG, buffering fixes, Smart TV setup, Fire Stick setup, internet speed, and active device plans.
+          </p>
         </div>
       </section>
 
-      <section className="py-20 bg-background">
+      <section className="bg-black py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
             {blogPosts.map((post) => (
-              <article key={post.slug} className="luxury-surface group flex flex-col overflow-hidden rounded-2xl hover:border-brand/40 transition-colors">
+              <article key={post.slug} className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055] shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:border-brand/40">
                 <Link href={`/blog/${post.slug}`} className="relative aspect-[16/9] overflow-hidden">
-                  {/* Replace with licensed/user-provided asset. */}
                   <Image
                     src={post.image}
                     alt={post.title}
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className="inline-flex items-center rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-brand backdrop-blur">
-                      {post.category}
-                    </span>
-                  </div>
+                  <span className="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-1 text-xs font-bold text-brand backdrop-blur">
+                    {post.category}
+                  </span>
                 </Link>
-                <div className="flex flex-1 flex-col justify-between p-6">
-                  <div>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
-                      <time dateTime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
-                      <span>•</span>
-                      <span>{post.readTime}</span>
-                    </div>
-                    <Link href={`/blog/${post.slug}`}>
-                      <h2 className="text-xl font-bold mb-3 group-hover:text-brand transition-colors line-clamp-2">{post.title}</h2>
-                    </Link>
-                    <p className="text-muted-foreground text-sm line-clamp-3 mb-6">
-                      {post.description}
-                    </p>
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="mb-3 flex items-center gap-2 text-xs text-white/45">
+                    <time dateTime={post.date}>{new Date(post.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</time>
+                    <span>•</span>
+                    <span>{post.readTime}</span>
                   </div>
-                  <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2 text-sm font-semibold text-foreground group-hover:text-brand transition-colors">
-                    Read Article <ArrowRight className="h-4 w-4" />
+                  <Link href={`/blog/${post.slug}`}>
+                    <h2 className="text-xl font-black text-white transition group-hover:text-brand">{post.title}</h2>
+                  </Link>
+                  <p className="mt-3 line-clamp-3 text-sm leading-6 text-white/60">{post.description}</p>
+                  <Link href={`/blog/${post.slug}`} className="mt-6 inline-flex items-center gap-2 text-sm font-black text-brand">
+                    Read article <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </article>
             ))}
           </div>
 
-          <div className="mt-20 luxury-surface rounded-3xl p-8 md:p-12 text-center max-w-4xl mx-auto border-brand/20">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">Still need help setting up?</h3>
-            <p className="text-muted-foreground mb-8">Our support team is available 24/7 on WhatsApp to help you install and configure your IPTV app in minutes.</p>
+          <div className="mx-auto mt-20 max-w-4xl rounded-3xl border border-white/10 bg-white/[0.055] p-8 text-center md:p-12">
+            <h3 className="text-2xl font-black text-white md:text-3xl">Need help setting up?</h3>
+            <p className="mt-4 text-white/62">Message iFlex IPTV support with your device, selected app, internet speed, and package questions.</p>
             <Link
-              href="https://wa.me/447988033246"
-              className="button-glow-success inline-flex h-14 items-center justify-center gap-2 rounded-full bg-success px-8 text-base font-bold text-background transition hover:-translate-y-0.5 hover:bg-success-hover"
+              href={createWhatsAppSupportUrl("help with an IPTV setup question from the blog")}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cta="support-whatsapp"
+              className="mt-8 inline-flex h-14 items-center justify-center gap-2 rounded-full bg-green-500 px-8 font-black text-white transition hover:bg-green-400"
             >
-              <MessageCircle className="h-5 w-5" /> Chat with Support
+              <WhatsAppIcon className="h-6 w-6" />
+              Chat with Support
             </Link>
           </div>
         </div>

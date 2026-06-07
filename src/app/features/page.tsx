@@ -1,21 +1,23 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { Activity, ArrowRight, MonitorPlay, RefreshCw, Shield, Wifi, Zap } from "lucide-react";
 import { premiumImages } from "@/lib/media";
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
 
-export const metadata = {
-  title: "Premium IPTV Features - Anti-Freeze & 4K Quality",
-  description: "Discover the powerful features of iflexiptv. From anti-freeze technology and 4K streaming to our massive VOD library and EPG support.",
+export const metadata: Metadata = {
+  title: "iFlex IPTV Features - EPG, Device Support & HD/FHD/4K Quality",
+  description: "Discover iFlex IPTV features including EPG TV guide support, HD/FHD/4K quality where available, device compatibility, setup help, and stable streaming guidance.",
   alternates: {
-    canonical: "https://www.iflexiptv.com/features",
+    canonical: absoluteUrl("/features"),
   },
 };
 
 const features = [
   {
     icon: <Zap className="h-8 w-8 text-brand" />,
-    title: "Anti-Freeze Technology",
-    description: "Our dedicated servers ensure minimal buffering and freezing. We route your traffic through the fastest available nodes for seamless streaming.",
+    title: "Stable Streaming Focus",
+    description: "Our setup guidance focuses on stable internet, the right device, app configuration, and support checks before major live viewing moments.",
   },
   {
     icon: <MonitorPlay className="h-8 w-8 text-brand" />,
@@ -24,8 +26,8 @@ const features = [
   },
   {
     icon: <Activity className="h-8 w-8 text-brand" />,
-    title: "Premium Sports & PPV",
-    description: "Never miss a game. Get full access to global sports networks, live matches, and major Pay-Per-View events without extra charges.",
+    title: "Sports-Ready Categories",
+    description: "Prepare for popular live sports categories and major event nights with setup support, EPG guidance, and device recommendations.",
   },
   {
     icon: <RefreshCw className="h-8 w-8 text-brand" />,
@@ -34,13 +36,13 @@ const features = [
   },
   {
     icon: <Shield className="h-8 w-8 text-brand" />,
-    title: "Secure & Private",
-    description: "Your streaming data is completely secure. We respect your privacy and provide safe, encrypted connections for all our users.",
+    title: "Clear Support Process",
+    description: "WhatsApp support helps with package choice, payment instructions, activation details, login checks, and troubleshooting.",
   },
   {
     icon: <Wifi className="h-8 w-8 text-brand" />,
     title: "Multi-Device Support",
-    description: "Watch on Smart TVs, smartphones, tablets, computers, and dedicated streaming boxes. Our service is compatible with almost everything.",
+    description: siteConfig.claims.devicePolicy,
   },
 ];
 
@@ -62,7 +64,7 @@ export default function FeaturesPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Premium engineering</p>
             <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-6xl">Why We Are The Best</h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              We have built our infrastructure from the ground up to provide the ultimate viewing experience. Here is what you get with every iflexiptv subscription.
+              iFlex IPTV is built around practical setup support, clear device plans, EPG guidance, and HD/FHD/4K streaming quality where available.
             </p>
           </div>
         </div>

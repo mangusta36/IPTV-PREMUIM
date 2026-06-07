@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { CreditCard, Mail, MessageCircle, MonitorPlay, ShieldCheck } from "lucide-react";
+import { CreditCard, Mail, MonitorPlay, ShieldCheck } from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { siteConfig } from "@/lib/site-config";
+import { createWhatsAppSupportUrl } from "@/lib/whatsapp";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,10 +17,10 @@ export default function Footer() {
               <span className="flex h-10 w-10 items-center justify-center rounded-2xl border border-brand/25 bg-brand/10">
                 <MonitorPlay className="h-5 w-5 text-brand" />
               </span>
-              <span className="text-xl font-bold tracking-tight">iflex<span className="text-brand">iptv</span></span>
+              <span className="text-xl font-bold tracking-tight">iFlex <span className="text-brand">IPTV</span></span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Experience the ultimate premium IPTV service. 4K & FHD channels, global sports, movies, and VODs with advanced anti-freeze technology.
+              Premium IPTV access for live sports categories, movies, series, news, kids, and international entertainment with guided setup support.
             </p>
             <div className="flex items-center gap-2 pt-2">
               <ShieldCheck className="h-5 w-5 text-accent" />
@@ -42,8 +45,8 @@ export default function Footer() {
               <li><Link href="/support" className="text-sm text-muted-foreground hover:text-brand transition-colors">Help & Support</Link></li>
               <li><Link href="/guides" className="text-sm text-muted-foreground hover:text-brand transition-colors">Setup Guides</Link></li>
               <li><Link href="/faq" className="text-sm text-muted-foreground hover:text-brand transition-colors">FAQ</Link></li>
-              <li><Link href="#" className="text-sm text-muted-foreground hover:text-brand transition-colors">Terms of Service</Link></li>
-              <li><Link href="#" className="text-sm text-muted-foreground hover:text-brand transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-sm text-muted-foreground hover:text-brand transition-colors">Terms of Service</Link></li>
+              <li><Link href="/privacy" className="text-sm text-muted-foreground hover:text-brand transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
 
@@ -52,14 +55,24 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <Mail className="h-5 w-5 text-muted-foreground shrink-0 mt-0.5" />
-                <span className="text-sm text-muted-foreground">support@iflexiptv.com<br/>24/7 Customer Support</span>
+                <span className="text-sm text-muted-foreground">{siteConfig.supportEmail}<br/>24/7 iFlex IPTV Support</span>
               </li>
             </ul>
+            <Link
+              href={createWhatsAppSupportUrl("support with my IPTV subscription")}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cta="support-whatsapp"
+              className="mt-5 inline-flex items-center gap-2 rounded-full bg-green-500 px-5 py-3 text-sm font-black text-white transition hover:bg-green-400"
+            >
+              <WhatsAppIcon className="h-5 w-5" />
+              WhatsApp Support
+            </Link>
             <div className="mt-6">
               <h4 className="text-xs font-semibold text-muted-foreground mb-3 uppercase tracking-wider">Accepted Payments</h4>
               <div className="flex gap-2">
                 <div className="rounded-xl border border-white/10 bg-white/8 p-2"><CreditCard className="h-5 w-5 text-muted-foreground" /></div>
-                <div className="rounded-xl border border-white/10 bg-white/8 p-2"><MessageCircle className="h-5 w-5 text-muted-foreground" /></div>
+                <div className="rounded-xl border border-white/10 bg-white/8 p-2"><WhatsAppIcon className="h-5 w-5 text-muted-foreground" /></div>
                 {/* Additional payment icons can go here */}
               </div>
             </div>
@@ -69,11 +82,11 @@ export default function Footer() {
         
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground text-center md:text-left">
-            &copy; {currentYear} iflexiptv. All rights reserved. This service does not host any copyrighted content.
+            &copy; {currentYear} iFlex IPTV. All rights reserved. Channel availability may vary by package and region.
           </p>
           <div className="flex gap-4">
-            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Disclaimer</Link>
-            <Link href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Refund Policy</Link>
+            <Link href="/disclaimer" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Disclaimer</Link>
+            <Link href="/refund-policy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">Refund Policy</Link>
           </div>
         </div>
       </div>

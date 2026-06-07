@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,24 +17,24 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.iflexiptv.pro'),
+  metadataBase: new URL(siteConfig.domain),
   title: {
-    default: "iflexiptv - Premium IPTV Subscription Service",
-    template: "%s | iflexiptv",
+    default: siteConfig.defaultTitle,
+    template: `%s | ${siteConfig.brandName}`,
   },
-  description: "Experience the ultimate premium IPTV service with iflexiptv. 4K & FHD channels, global sports, movies, and VODs with anti-freeze technology.",
-  keywords: ["iflexiptv", "premium iptv", "iptv subscription", "4k iptv", "best iptv service"],
+  description: siteConfig.defaultDescription,
+  keywords: ["iFlex IPTV", "premium IPTV", "IPTV subscription", "4K IPTV", "live sports IPTV", "IPTV 2026"],
   openGraph: {
-    title: "iflexiptv - Premium IPTV Subscription Service",
-    description: "Experience the ultimate premium IPTV service with iflexiptv. 4K & FHD channels, global sports, movies, and VODs.",
-    url: "https://www.iflexiptv.pro",
-    siteName: "iflexiptv",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
+    url: siteConfig.domain,
+    siteName: siteConfig.brandName,
     images: [
       {
-        url: "/og-image.jpg",
+        url: siteConfig.ogImagePath,
         width: 1200,
         height: 630,
-        alt: "iflexiptv Premium Service",
+        alt: "iFlex IPTV premium streaming service",
       },
     ],
     locale: "en_US",
@@ -40,13 +42,26 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "iflexiptv - Premium IPTV Subscription Service",
-    description: "Experience the ultimate premium IPTV service with iflexiptv.",
-    images: ["/og-image.jpg"],
+    title: siteConfig.defaultTitle,
+    description: siteConfig.defaultDescription,
+    images: [siteConfig.ogImagePath],
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png", type: "image/png" }],
   },
   alternates: {
-    canonical: "https://www.iflexiptv.pro",
+    canonical: absoluteUrl("/"),
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#020617",
 };
 
 export default function RootLayout({
@@ -57,14 +72,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-brand selection:text-background">
+      <body
+        suppressHydrationWarning
+        className="relative min-h-full overflow-x-hidden flex flex-col bg-background text-foreground selection:bg-brand selection:text-background"
+      >
         <Navbar />
-        <main className="flex-1">
+        <main className="relative flex-1">
           {children}
         </main>
         <Footer />
+        <FloatingWhatsAppButton />
       </body>
     </html>
   );

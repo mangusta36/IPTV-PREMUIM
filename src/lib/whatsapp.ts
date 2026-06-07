@@ -1,17 +1,42 @@
-const PHONE_NUMBER = "447988033246";
+import { siteConfig } from "@/lib/site-config";
+import { DeviceCount, formatPrice, PricingPlan } from "@/lib/pricing-data";
 
-export function createWhatsAppOrderUrl(
-  planName: string,
-  price: string
-) {
-  const message = encodeURIComponent(
-    `Hi iflexiptv, I want to order the ${planName} plan (${price}). Please send me the activation details.`
-  );
-
-  return `https://wa.me/${PHONE_NUMBER}?text=${message}`;
+function createWhatsAppUrl(message: string) {
+  return `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
-export const whatsappSetupGuidanceUrl =
-  `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(
-    "Hi iflexiptv, I need setup guidance for my device."
-  )}`;
+export function createWhatsAppUrlForMessage(message?: string) {
+  return createWhatsAppUrl(
+    message ??
+      "Hello iFlex IPTV, I want to learn more about your IPTV subscriptions and activation options."
+  );
+}
+
+export function createWhatsAppOrderUrl(planName: string, price: string, devices?: string | number) {
+  return createWhatsAppUrl(
+    [
+      "Hello iFlex IPTV, I want to start a subscription.",
+      "",
+      `Plan: ${planName}`,
+      devices ? `Devices: ${devices}` : null,
+      `Price: ${price}`,
+      "",
+      "Please help me activate my IPTV subscription.",
+    ]
+      .filter(Boolean)
+      .join("\n")
+  );
+}
+
+export function createWhatsAppPlanUrl(
+  plan: PricingPlan,
+  devices: DeviceCount
+) {
+  return createWhatsAppOrderUrl(plan.duration, formatPrice(plan.price), `${devices} ${devices === 1 ? "Device" : "Devices"}`);
+}
+
+export function createWhatsAppSupportUrl(topic = "setup guidance for my device") {
+  return createWhatsAppUrl(`Hello iFlex IPTV, I need ${topic}.`);
+}
+
+export const whatsappSetupGuidanceUrl = createWhatsAppSupportUrl();

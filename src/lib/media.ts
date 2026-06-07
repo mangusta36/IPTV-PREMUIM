@@ -167,7 +167,7 @@ export const topChannels: CarouselItem[] = [
     eyebrow: "International",
     title: "Worldwide Lineup",
     description: "Channels from the USA, UK, Europe, Latino, Arabic, Asian regions, and more.",
-    meta: "15,000+ live",
+    meta: "26,000+ live",
     image: premiumImages.topInternational,
     alt: "Large modern football stadium representing worldwide live channels",
     href: "/channels",

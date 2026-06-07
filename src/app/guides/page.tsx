@@ -1,13 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import { MessageCircle, MonitorPlay, Smartphone, Tv, CheckCircle, Clock, Zap } from "lucide-react";
+import type { Metadata } from "next";
+import { MonitorPlay, Smartphone, Tv, Clock, Zap } from "lucide-react";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { absoluteUrl } from "@/lib/site-config";
+import { createWhatsAppSupportUrl } from "@/lib/whatsapp";
 
-export const metadata = {
-  title: "IPTV Setup Guides | How to Install on Any Device",
-  description: "Learn how to easily set up your IPTV subscription on Firestick, Smart TVs (Samsung, LG, Android), Apple TV, and mobile devices in minutes.",
+export const metadata: Metadata = {
+  title: "iFlex IPTV Setup Guides - Fire Stick, Smart TV, Android TV & Mobile",
+  description: "Learn how to set up iFlex IPTV on Fire Stick, Smart TVs, Android TV, Apple TV, mobile devices, IPTV Smarters, IBO Player, XCIPTV, and MAG Box.",
   alternates: {
-    canonical: "https://www.iflexiptv.com/guides",
+    canonical: absoluteUrl("/guides"),
   },
 };
 
@@ -64,7 +68,7 @@ const guides = [
     steps: [
       "Download IPTV Smarters Pro on your device.",
       "Open the application and select 'Login with Xtream Codes API'.",
-      "Enter a profile name (e.g., iflexiptv).",
+      "Enter a profile name (e.g., iFlex IPTV).",
       "Enter your Username, Password, and Server URL exactly as provided by us."
     ]
   },
@@ -119,7 +123,7 @@ const guides = [
     time: "5 mins",
     steps: [
       "Go to Settings > System Settings > Servers > Portals.",
-      "Set Portal 1 Name to 'iflexiptv' and Portal 1 URL to the MAG Portal URL we provided.",
+      "Set Portal 1 Name to 'iFlex IPTV' and Portal 1 URL to the MAG Portal URL we provided.",
       "Save the settings and restart your portal.",
       "Ensure you have sent us your MAC address starting with 00:1A:79... so we can activate it."
     ]
@@ -167,7 +171,7 @@ export default function GuidesPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           
           <div className="grid lg:grid-cols-2 gap-8">
-            {guides.map((guide, idx) => (
+            {guides.map((guide) => (
               <div key={guide.id} id={guide.id} className="luxury-surface rounded-[2rem] overflow-hidden flex flex-col group hover:border-brand/40 transition-colors scroll-mt-24">
                 
                 {/* Guide Image Header */}
@@ -206,10 +210,13 @@ export default function GuidesPage() {
                   {/* WhatsApp CTA per Guide */}
                   <div className="mt-auto pt-6 border-t border-white/5">
                     <Link
-                      href="https://wa.me/447988033246"
+                      href={createWhatsAppSupportUrl(`help setting up ${guide.title}`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-cta="support-whatsapp"
                       className="flex w-full items-center justify-center gap-2 rounded-xl bg-success/10 px-4 py-3 text-sm font-bold text-success transition hover:bg-success hover:text-background border border-success/20"
                     >
-                      <MessageCircle className="h-4 w-4" /> Need help? Message Support
+                      <WhatsAppIcon className="h-4 w-4" /> Need help? Message Support
                     </Link>
                   </div>
                 </div>
@@ -229,10 +236,13 @@ export default function GuidesPage() {
                 Browse Blog Guides
               </Link>
               <Link
-                href="https://wa.me/447988033246"
+                href={createWhatsAppSupportUrl("help with a device not listed in the setup guides")}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cta="support-whatsapp"
                 className="button-glow-success inline-flex h-14 items-center justify-center gap-2 rounded-full bg-success px-8 text-base font-bold text-background transition hover:-translate-y-0.5 hover:bg-success-hover"
               >
-                <MessageCircle className="h-5 w-5" /> Ask on WhatsApp
+                <WhatsAppIcon className="h-5 w-5" /> Ask on WhatsApp
               </Link>
             </div>
           </div>

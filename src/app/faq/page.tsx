@@ -2,21 +2,23 @@ import FAQAccordion from "@/components/FAQAccordion";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { ArrowRight } from "lucide-react";
 import { premiumImages } from "@/lib/media";
+import { absoluteUrl, siteConfig } from "@/lib/site-config";
 
-export const metadata = {
-  title: "Frequently Asked Questions",
-  description: "Have questions about iflexiptv? Read our FAQ for answers on setup, buffering, channels, supported devices, and subscriptions.",
+export const metadata: Metadata = {
+  title: "iFlex IPTV FAQ - Setup, Pricing, Devices & Support",
+  description: "Read iFlex IPTV FAQ answers about setup, buffering, live channels, VOD titles, active device plans, refunds, and support.",
   alternates: {
-    canonical: "https://www.iflexiptv.com/faq",
+    canonical: absoluteUrl("/faq"),
   },
 };
 
 const faqs = [
   {
-    question: "What is iflexiptv?",
-    answer: "iflexiptv is a premium IPTV subscription service that provides access to over 15,000 live TV channels, sports, movies, and VODs directly over the internet. No dish or cable box required.",
+    question: "What is iFlex IPTV?",
+    answer: `iFlex IPTV is a premium IPTV subscription service with ${siteConfig.claims.channels}, ${siteConfig.claims.vod}, EPG support, HD/FHD/4K quality where available, and setup help for major devices.`,
   },
   {
     question: "What devices do you support?",
@@ -24,15 +26,15 @@ const faqs = [
   },
   {
     question: "Will I experience freezing or buffering?",
-    answer: "We use advanced anti-freeze technology and powerful global servers to ensure a 99.9% uptime. As long as you have a stable internet connection (at least 15 Mbps), your stream will be smooth.",
+    answer: "Streaming quality depends on your internet speed, device, app, and connection stability. We help you check practical fixes like Ethernet, cache clearing, EPG refreshes, and app setup.",
   },
   {
     question: "How long does it take to get my account?",
-    answer: "Accounts are usually activated instantly after payment is confirmed. You will receive your login credentials and setup instructions via email within minutes.",
+    answer: "Activation details are prepared after payment confirmation and package/device details are collected. WhatsApp is the fastest support channel.",
   },
   {
     question: "Can I use my subscription on multiple devices?",
-    answer: "Our standard plans come with 1 connection, meaning you can install it on multiple devices but only watch on one device at a time. If you need simultaneous connections, you can contact support.",
+    answer: siteConfig.claims.devicePolicy,
   },
   {
     question: "Do you offer a money-back guarantee?",
@@ -61,7 +63,7 @@ export default function FAQPage() {
         <section className="relative isolate overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24">
           <Image
             src={premiumImages.faqHero}
-            alt="Dark premium television room behind iflexiptv frequently asked questions"
+            alt="Dark premium television room behind iFlex IPTV frequently asked questions"
             fill
             priority
             sizes="100vw"

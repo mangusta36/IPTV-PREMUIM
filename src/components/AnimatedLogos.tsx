@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { STRIP_LOGOS } from "@/lib/channel-logos";
 
 // Triple the array for perfectly seamless CSS loop
