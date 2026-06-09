@@ -2,7 +2,9 @@ import { siteConfig } from "@/lib/site-config";
 import { DeviceCount, formatPrice, PricingPlan } from "@/lib/pricing-data";
 
 function createWhatsAppUrl(message: string) {
-  return `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappNumber = siteConfig.whatsappNumber.replace(/\D/g, "");
+
+  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
 export function createWhatsAppUrlForMessage(message?: string) {
