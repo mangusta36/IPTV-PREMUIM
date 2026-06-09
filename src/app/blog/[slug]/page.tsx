@@ -18,14 +18,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    title: `${post.title} | iFlex IPTV Blog`,
-    description: post.description,
+    title: `${post.seoTitle ?? post.title} | iFlex IPTV Blog`,
+    description: post.metaDescription ?? post.description,
     alternates: {
       canonical: absoluteUrl(`/blog/${post.slug}`),
     },
     openGraph: {
-      title: post.title,
-      description: post.description,
+      title: post.ogTitle ?? post.title,
+      description: post.ogDescription ?? post.metaDescription ?? post.description,
       url: absoluteUrl(`/blog/${post.slug}`),
       images: [{ url: absoluteUrl(post.image), width: 1200, height: 630, alt: post.title }],
       type: "article",
@@ -40,8 +40,17 @@ export function generateStaticParams() {
 }
 
 function renderInline(text: string) {
-  const tokens = text.split(/(\*\*.*?\*\*)/g);
+  const tokens = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*.*?\*\*)/g);
   return tokens.map((token, index) => {
+    const link = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (link) {
+      return (
+        <Link key={index} href={link[2]} className="font-semibold text-brand underline-offset-4 hover:underline">
+          {link[1]}
+        </Link>
+      );
+    }
+
     if (token.startsWith("**") && token.endsWith("**")) {
       return (
         <strong key={index} className="font-semibold text-white">
@@ -135,11 +144,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     notFound();
   }
 
-  const schema = {
+  const blogSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
-    description: post.description,
+    description: post.metaDescription ?? post.description,
     datePublished: post.date,
     dateModified: post.date,
     url: absoluteUrl(`/blog/${post.slug}`),
@@ -157,6 +166,25 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
       },
     },
   };
+  const schema = post.faqs?.length
+    ? {
+        "@context": "https://schema.org",
+        "@graph": [
+          blogSchema,
+          {
+            "@type": "FAQPage",
+            mainEntity: post.faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+              },
+            })),
+          },
+        ],
+      }
+    : blogSchema;
 
   return (
     <>
@@ -199,6 +227,68 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
             </div>
             <p className="mb-10 border-l-4 border-brand pl-6 text-xl font-semibold leading-8 text-white/88">{post.description}</p>
             {renderContent(post.content)}
+
+            {post.imagePlan?.length ? (
+              <section className="mt-12">
+                <h2 className="mb-5 text-2xl font-black text-white">Recommended Images & Media Plan</h2>
+                <div className="space-y-4">
+                  {post.imagePlan.map((item) => (
+                    <div key={item.filename} className="rounded-2xl border border-white/10 bg-white/[0.045] p-5">
+                      <h3 className="text-lg font-black text-white">{item.filename}</h3>
+                      <dl className="mt-3 grid gap-3 text-sm leading-6 text-white/68 sm:grid-cols-2">
+                        <div>
+                          <dt className="font-semibold text-white">Placement</dt>
+                          <dd>{item.placement}</dd>
+                        </div>
+                        <div>
+                          <dt className="font-semibold text-white">Purpose</dt>
+                          <dd>{item.purpose}</dd>
+                        </div>
+                        <div>
+                          <dt className="font-semibold text-white">Aspect ratio</dt>
+                          <dd>{item.aspectRatio}</dd>
+                        </div>
+                        <div>
+                          <dt className="font-semibold text-white">Loading</dt>
+                          <dd>{item.loading}</dd>
+                        </div>
+                        <div>
+                          <dt className="font-semibold text-white">Alt text</dt>
+                          <dd>{item.alt}</dd>
+                        </div>
+                        <div>
+                          <dt className="font-semibold text-white">Caption</dt>
+                          <dd>{item.caption}</dd>
+                        </div>
+                        <div>
+                          <dt className="font-semibold text-white">Image type</dt>
+                          <dd>{item.imageType}</dd>
+                        </div>
+                        <div>
+                          <dt className="font-semibold text-white">File size target</dt>
+                          <dd>{item.sizeTarget}</dd>
+                        </div>
+                      </dl>
+                      <p className="mt-4 rounded-xl bg-black/25 p-4 text-sm leading-6 text-white/62">{item.prompt}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            ) : null}
+
+            {post.faqs?.length ? (
+              <section className="mt-12">
+                <h2 className="mb-5 text-2xl font-black text-white">FAQs</h2>
+                <div className="space-y-4">
+                  {post.faqs.map((faq) => (
+                    <div key={faq.question} className="rounded-2xl border border-white/10 bg-white/[0.045] p-5">
+                      <h3 className="text-lg font-black text-white">{faq.question}</h3>
+                      <p className="mt-2 leading-7 text-white/68">{renderInline(faq.answer)}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            ) : null}
 
             <div className="mt-14 rounded-2xl border border-green-400/20 bg-green-500/10 p-8">
               <h2 className="text-2xl font-black text-white">Need help with this setup?</h2>
