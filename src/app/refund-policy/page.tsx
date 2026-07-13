@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 
 export default function RefundPolicyPage() {
   return (
-    <main className="bg-black py-24 sm:py-32">
+    <main className="bg-background py-24 sm:py-32">
       <article className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <p className="text-sm font-bold uppercase tracking-[0.28em] text-brand">Refunds</p>
-        <h1 className="mt-3 text-4xl font-black text-white sm:text-6xl">Refund Policy</h1>
-        <div className="mt-10 space-y-8 text-white/68">
+        <p className="text-sm font-bold uppercase tracking-[0.28em] luxury-gradient-text">Refunds</p>
+        <h1 className="mt-3 text-4xl font-black text-white sm:text-6xl font-serif">Refund Policy</h1>
+        <div className="mt-10 space-y-8 text-muted-foreground">
           <section>
             <h2 className="text-xl font-black text-white">7-Day Money-Back Guarantee</h2>
             <p className="mt-3 leading-7">iFlex IPTV offers a 7-day money-back guarantee for eligible technical issues that support cannot resolve after reasonable troubleshooting.</p>

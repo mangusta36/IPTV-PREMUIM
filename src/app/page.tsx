@@ -1,7 +1,11 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, CheckCircle, Clock, MonitorPlay, ShieldCheck, Sparkles, Tv, Zap } from "lucide-react";
-import HeroStreamingMockup from "@/components/HeroStreamingMockup";
+import { ArrowRight, CheckCircle, Clock, Globe, ShieldCheck, Tv } from "lucide-react";
+import PremiumHero from "@/components/PremiumHero";
+import ChannelTicker from "@/components/ChannelTicker";
+import StatsBar from "@/components/StatsBar";
+import MovieCarousel from "@/components/MovieCarousel";
+import DeviceMarquee from "@/components/DeviceMarquee";
 import PricingSelector from "@/components/PricingSelector";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
@@ -33,35 +37,6 @@ export const metadata: Metadata = {
   },
 };
 
-const trustBadges = [
-  siteConfig.claims.channels,
-  siteConfig.claims.vod,
-  siteConfig.claims.quality,
-  "Fast Activation",
-  "24/7 Support",
-];
-
-const featureCards = [
-  {
-    icon: <Zap className="h-6 w-6 text-brand" />,
-    title: "Sports-ready streaming setup",
-    description:
-      "Prepare your Smart TV, Fire Stick, Android TV, or mobile device before major sports nights with EPG support and guided setup.",
-  },
-  {
-    icon: <MonitorPlay className="h-6 w-6 text-blue-300" />,
-    title: "Live TV, movies, and series",
-    description:
-      "Browse live entertainment categories, movie nights, series shelves, news, kids content, and international options in one IPTV setup.",
-  },
-  {
-    icon: <ShieldCheck className="h-6 w-6 text-green-300" />,
-    title: "Clear device plans",
-    description:
-      "Choose 1, 2, or 3 active device plans. Install on supported devices and watch according to your selected connection package.",
-  },
-];
-
 const deviceChips = ["Smart TV", "Fire Stick", "Android TV", "iPhone/iPad", "Windows/Mac", "MAG Box"];
 
 export default function Home() {
@@ -86,89 +61,34 @@ export default function Home() {
     <>
       <SchemaMarkup schema={schema} />
 
-      <section className="relative isolate overflow-hidden border-b border-white/10 bg-black pt-20 sm:pt-24">
-        <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_18%_18%,rgba(37,99,235,0.24),transparent_28rem),radial-gradient(circle_at_80%_12%,rgba(234,179,8,0.18),transparent_26rem),radial-gradient(circle_at_70%_82%,rgba(22,163,74,0.18),transparent_28rem),linear-gradient(180deg,#020617_0%,#000_76%)]" />
-        <div className="absolute inset-0 -z-10 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.055)_1px,transparent_1px)] [background-size:72px_72px]" />
+      {/* ─── HERO ─── */}
+      <PremiumHero />
 
-        <div className="container mx-auto grid min-h-[calc(100svh-4rem)] items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.95fr] lg:px-8">
-          <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-400/25 bg-green-500/10 px-4 py-2 text-sm font-bold text-green-200">
-              <span className="h-2 w-2 rounded-full bg-green-300 shadow-[0_0_18px_rgba(134,239,172,0.85)]" />
-              Fast WhatsApp activation for IPTV setup
-            </div>
+      {/* ─── CHANNEL TICKER ─── */}
+      <ChannelTicker />
 
-            <h1 className="text-4xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
-              iFlex IPTV - Premium Live TV, Sports, Movies & 4K Streaming
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72 sm:text-xl">
-              Get instant IPTV access for live sports, movies, series, news, kids, and international categories across Smart TV, Fire Stick, Android TV, iPhone, PC, and more.
-            </p>
+      {/* ─── STATS BAR ─── */}
+      <StatsBar />
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-              <Link
-                href={createWhatsAppSupportUrl("help starting my iFlex IPTV subscription")}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cta="hero-whatsapp"
-                className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-green-500 px-8 text-base font-black text-white shadow-[0_14px_40px_rgba(22,163,74,0.36)] transition hover:-translate-y-1 hover:bg-green-400"
-              >
-                <WhatsAppIcon className="h-6 w-6" />
-                Start on WhatsApp
-              </Link>
-              <Link
-                href="/pricing"
-                className="inline-flex h-14 items-center justify-center gap-3 rounded-full border border-white/15 bg-white/10 px-8 text-base font-black text-white backdrop-blur transition hover:-translate-y-1 hover:border-brand/50 hover:text-brand"
-              >
-                View Pricing
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
+      {/* ─── MOVIE CAROUSEL ─── */}
+      <MovieCarousel />
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              {trustBadges.map((badge) => (
-                <span key={badge} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-sm font-bold text-white/72">
-                  <CheckCircle className="h-4 w-4 text-brand" />
-                  {badge}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <HeroStreamingMockup />
-        </div>
-      </section>
-
-      <section className="border-b border-white/10 bg-[#030712] py-16">
+      {/* ─── DEVICES ─── */}
+      <section className="relative bg-background py-20" aria-label="Supported devices">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 lg:grid-cols-3">
-            {featureCards.map((feature) => (
-              <article key={feature.title} className="rounded-2xl border border-white/10 bg-white/[0.055] p-6 shadow-xl shadow-black/20">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-black/35">
-                  {feature.icon}
-                </div>
-                <h2 className="text-xl font-black text-white">{feature.title}</h2>
-                <p className="mt-3 leading-7 text-white/62">{feature.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-black py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <div className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.26em] text-brand">All major devices</p>
-              <h2 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-5xl">Install on your favorite screen</h2>
-              <p className="mt-5 leading-7 text-white/62">
+              <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">All major devices</p>
+              <h2 className="mt-4 text-3xl font-black tracking-tight text-foreground sm:text-5xl">Install on your favorite screen</h2>
+              <p className="mt-5 leading-7 text-muted-foreground">
                 iFlex IPTV supports common IPTV players and devices. Active streams depend on your selected 1, 2, or 3 device plan.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {deviceChips.map((device) => (
-                <div key={device} className="rounded-2xl border border-white/10 bg-white/[0.055] p-5">
-                  <Tv className="mb-4 h-6 w-6 text-brand" />
-                  <p className="font-black text-white">{device}</p>
+              {deviceChips.map((device, i) => (
+                <div key={device} className={`stagger-in group rounded-2xl border border-border bg-card/50 p-5 transition-all duration-400 hover:border-accent/30 hover:bg-card`}>
+                  <Tv className="mb-4 h-6 w-6 text-accent transition-transform duration-400 group-hover:scale-110" />
+                  <p className="font-bold text-foreground">{device}</p>
                 </div>
               ))}
             </div>
@@ -176,69 +96,100 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── DEVICE MARQUEE ─── */}
+      <DeviceMarquee />
+
+      {/* ─── PRICING ─── */}
       <PricingSelector />
 
-      <section className="border-y border-white/10 bg-[#020617] py-16">
+      {/* ─── TIPS ─── */}
+      <section className="relative border-y border-border bg-card/30 py-20">
+        <div className="pointer-events-none absolute inset-0 -z-10 dot-grid opacity-20 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Before you watch</p>
+            <h2 className="mt-4 text-3xl font-black tracking-tight text-foreground sm:text-5xl">Get the best experience</h2>
+          </div>
           <div className="grid gap-6 md:grid-cols-3">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-6">
-              <Clock className="mb-4 h-7 w-7 text-brand" />
-              <h3 className="font-black text-white">Before match time</h3>
-              <p className="mt-2 text-sm leading-6 text-white/60">Message support early, test your device, and confirm your EPG/channel categories are loaded.</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-6">
-              <Sparkles className="mb-4 h-7 w-7 text-blue-300" />
-              <h3 className="font-black text-white">Quality where available</h3>
-              <p className="mt-2 text-sm leading-6 text-white/60">HD, FHD, and 4K streams depend on your internet speed, selected channel, device, and connection stability.</p>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.05] p-6">
-              <ShieldCheck className="mb-4 h-7 w-7 text-green-300" />
-              <h3 className="font-black text-white">Support-led setup</h3>
-              <p className="mt-2 text-sm leading-6 text-white/60">Our WhatsApp support helps with app selection, login details, EPG refreshes, and basic troubleshooting.</p>
-            </div>
+            {[
+              { icon: <Clock className="h-6 w-6 text-accent" />, title: "Before match time", desc: "Message support early, test your device, and confirm your EPG/channel categories are loaded." },
+              { icon: <Globe className="h-6 w-6 text-accent" />, title: "Quality where available", desc: "HD, FHD, and 4K streams depend on your internet speed, selected channel, device, and connection stability." },
+              { icon: <ShieldCheck className="h-6 w-6 text-accent" />, title: "Support-led setup", desc: "Our WhatsApp support helps with app selection, login details, EPG refreshes, and basic troubleshooting." },
+            ].map((tip) => (
+              <div key={tip.title} className="stagger-in group relative overflow-hidden rounded-2xl border border-border bg-card/50 p-8 transition-all duration-500 hover:border-accent/25 hover:shadow-[0_16px_48px_-12px_rgba(212,175,55,0.08)]">
+                <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-accent/[0.06] blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-accent/15 bg-accent/[0.06]">
+                  {tip.icon}
+                </div>
+                <h3 className="text-lg font-bold text-foreground">{tip.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-muted-foreground">{tip.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-black py-20">
+      {/* ─── BLOG ─── */}
+      <section className="relative bg-background py-20" aria-label="Blog articles">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+          <div className="mb-12 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.26em] text-brand">2026 IPTV guides</p>
-              <h2 className="mt-3 text-3xl font-black text-white sm:text-5xl">Helpful setup articles</h2>
+              <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">2026 IPTV guides</p>
+              <h2 className="mt-4 text-3xl font-black text-foreground sm:text-5xl">Helpful setup articles</h2>
             </div>
-            <Link href="/blog" className="inline-flex items-center gap-2 font-bold text-brand hover:text-brand-hover">
-              Browse blog <ArrowRight className="h-4 w-4" />
+            <Link href="/blog" className="group inline-flex items-center gap-2 font-bold text-accent transition-colors hover:text-accent-hover">
+              Browse blog <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             {blogPosts.slice(0, 3).map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="group rounded-2xl border border-white/10 bg-white/[0.055] p-6 transition hover:-translate-y-1 hover:border-brand/40">
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">{post.category}</p>
-                <h3 className="mt-3 text-xl font-black text-white group-hover:text-brand">{post.title}</h3>
-                <p className="mt-3 line-clamp-3 text-sm leading-6 text-white/60">{post.description}</p>
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="stagger-in group relative overflow-hidden rounded-2xl border border-border bg-card/50 p-7 transition-all duration-500 hover:-translate-y-1 hover:border-accent/30 hover:shadow-[0_20px_60px_-12px_rgba(212,175,55,0.1)]">
+                <div className="absolute -bottom-16 -right-16 h-40 w-40 rounded-full bg-accent/[0.05] blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <p className="relative text-xs font-bold uppercase tracking-[0.22em] text-accent">{post.category}</p>
+                <h3 className="relative mt-3 text-xl font-bold text-foreground transition-colors duration-300 group-hover:text-accent">{post.title}</h3>
+                <p className="relative mt-3 line-clamp-3 text-sm leading-6 text-muted-foreground">{post.description}</p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[radial-gradient(circle_at_center,rgba(22,163,74,0.18),transparent_30rem),#020617] py-20 text-center">
+      {/* ─── CTA ─── */}
+      <section className="relative overflow-hidden border-t border-border bg-card/20 py-28 text-center" aria-label="Get started">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.04] blur-[120px]" />
+          <div className="absolute bottom-0 left-[20%] h-[300px] w-[400px] rounded-full bg-accent/[0.02] blur-[100px]" />
+        </div>
+        <div className="pointer-events-none absolute inset-0 -z-5 dot-grid opacity-25 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,black,transparent)]" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="mx-auto max-w-3xl text-3xl font-black tracking-tight text-white sm:text-5xl">Ready to activate iFlex IPTV?</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-white/65">
-            Send a WhatsApp message, choose your package, receive payment instructions, and get your activation details with setup help.
-          </p>
+          <div className="mx-auto max-w-3xl">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-accent/15 bg-accent/[0.05] px-4 py-2 text-sm font-semibold text-accent">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-40" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+              </span>
+              Limited time offer
+            </div>
+            <h2 className="font-serif text-3xl font-black tracking-tight text-foreground sm:text-5xl">Ready to activate <span className="luxury-gradient-text">{siteConfig.brandName}</span>?</h2>
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
+              Send a WhatsApp message, choose your package, receive payment instructions, and get your activation details with setup help.
+            </p>
+          </div>
           <Link
             href={createWhatsAppSupportUrl("help activating iFlex IPTV")}
             target="_blank"
             rel="noopener noreferrer"
             data-cta="support-whatsapp"
-            className="mt-8 inline-flex h-14 items-center justify-center gap-3 rounded-full bg-green-500 px-8 text-base font-black text-white transition hover:-translate-y-1 hover:bg-green-400"
+            className="mt-10 inline-flex h-14 items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-accent to-accent-hover px-9 text-base font-bold text-background shadow-[0_12px_40px_rgba(212,175,55,0.3)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_16px_60px_rgba(212,175,55,0.45)] hover:scale-[1.02]"
           >
-            <WhatsAppIcon className="h-6 w-6" />
-            Start on WhatsApp
+            <WhatsAppIcon className="h-5 w-5" />
+            Start Premium Experience
           </Link>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
+            <span className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-accent" /> 7-day guarantee</span>
+            <span className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-accent" /> No contracts</span>
+            <span className="flex items-center gap-2"><CheckCircle className="h-4 w-4 text-accent" /> Cancel anytime</span>
+          </div>
         </div>
       </section>
     </>

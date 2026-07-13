@@ -17,28 +17,28 @@ export const metadata: Metadata = {
 const devices = [
   {
     category: "Smart TVs",
-    icon: <Tv className="h-9 w-9 text-brand" />,
+    icon: <Tv className="h-9 w-9 text-accent" />,
     items: ["Samsung Smart TV (Tizen)", "LG Smart TV (WebOS)", "Android TV", "Sony & Philips Smart TVs"],
     image: premiumImages.deviceSmartTv,
     alt: "Premium smart television displaying IPTV content in a dark room",
   },
   {
     category: "Streaming Devices",
-    icon: <Monitor className="h-9 w-9 text-brand" />,
+    icon: <Monitor className="h-9 w-9 text-accent" />,
     items: ["Amazon Firestick & Fire TV", "Apple TV", "Roku (via Web Player)", "Chromecast"],
     image: premiumImages.deviceStreaming,
     alt: "Modern television setup for Firestick Apple TV and streaming devices",
   },
   {
     category: "Mobile & Tablets",
-    icon: <Smartphone className="h-9 w-9 text-brand" />,
+    icon: <Smartphone className="h-9 w-9 text-accent" />,
     items: ["iPhone & iPad (iOS)", "Android Phones & Tablets"],
     image: premiumImages.deviceMobile,
     alt: "Mobile and laptop devices prepared for premium IPTV streaming",
   },
   {
     category: "Other Devices",
-    icon: <Tv className="h-9 w-9 text-brand" />,
+    icon: <Tv className="h-9 w-9 text-accent" />,
     items: ["Windows PC & Mac", "MAG Boxes", "Enigma2", "Formuler (MYTVOnline)"],
     image: premiumImages.deviceOther,
     alt: "Living room television showing cross-device IPTV compatibility",
@@ -60,14 +60,15 @@ export default function DevicesPage() {
           alt="Premium IPTV streaming on a living room television and supported devices"
           fill
           priority
+          unoptimized
           sizes="100vw"
           className="-z-20 object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(5,5,6,0.96),rgba(5,5,6,0.72)_55%,rgba(5,5,6,0.96)),radial-gradient(circle_at_78%_20%,rgba(244,199,107,0.22),transparent_32rem)]" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Setup in minutes</p>
-            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-6xl">Supported Devices</h1>
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-accent">Setup in minutes</p>
+            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-6xl font-serif">Supported Devices</h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground">
               iFlex IPTV works across popular IPTV devices and apps. {siteConfig.claims.devicePolicy}
             </p>
@@ -79,12 +80,13 @@ export default function DevicesPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-20">
             {devices.map((device) => (
-              <article key={device.category} className="luxury-surface group overflow-hidden rounded-[1.5rem] transition duration-500 hover:-translate-y-1 hover:border-brand/40">
+              <article key={device.category} className="luxury-surface group overflow-hidden rounded-[1.5rem] transition duration-500 hover:-translate-y-1 hover:border-accent/30">
                 <div className="relative aspect-[16/9]">
                   <Image
                     src={device.image}
                     alt={device.alt}
                     fill
+                    unoptimized
                     sizes="(min-width: 768px) 46vw, 92vw"
                     className="object-cover transition duration-700 group-hover:scale-105"
                   />
@@ -113,11 +115,12 @@ export default function DevicesPage() {
               src={premiumImages.setupGuidance}
               alt="Dark premium television room behind device setup support call to action"
               fill
+              unoptimized
               sizes="(min-width: 1024px) 64rem, 92vw"
               className="-z-20 object-cover"
             />
             <div className="absolute inset-0 -z-10 bg-background/78 backdrop-blur-[2px]" />
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Guided setup</p>
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-accent">Guided setup</p>
             <h3 className="mt-3 text-2xl font-bold mb-4">Need help setting up your device?</h3>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
               Once you purchase a subscription, you will receive a comprehensive setup guide tailored to your specific device. Our support team is also available 24/7 to assist you.
@@ -125,7 +128,7 @@ export default function DevicesPage() {
             <div className="mx-auto mb-8 grid max-w-3xl gap-4 text-left md:grid-cols-3">
               {setupSteps.map((step, index) => (
                 <div key={step} className="border-t border-white/15 pt-4">
-                  <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-brand text-sm font-bold text-background">
+                  <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-accent text-sm font-bold text-background">
                     {index + 1}
                   </div>
                   <p className="text-sm leading-6 text-white/78">{step}</p>
@@ -136,7 +139,7 @@ export default function DevicesPage() {
               href={whatsappSetupGuidanceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="button-glow-success inline-flex h-12 items-center justify-center gap-2 rounded-full bg-success px-8 text-base font-bold text-background transition hover:-translate-y-0.5 hover:bg-success-hover"
+              className="button-glow inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 text-base font-bold text-background transition hover:-translate-y-0.5"
             >
               Get Setup Guidance on WhatsApp
               <ArrowRight className="h-5 w-5" />

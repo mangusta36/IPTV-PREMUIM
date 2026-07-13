@@ -19,7 +19,7 @@ const guides = [
   {
     id: "firestick",
     title: "Amazon Firestick Setup",
-    icon: <MonitorPlay className="h-6 w-6 text-brand" />,
+    icon: <MonitorPlay className="h-6 w-6 text-accent" />,
     image: "https://images.pexels.com/photos/5428830/pexels-photo-5428830.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Easy",
     time: "5 mins",
@@ -33,7 +33,7 @@ const guides = [
   {
     id: "smart-tv",
     title: "Samsung & LG Smart TVs",
-    icon: <Tv className="h-6 w-6 text-brand" />,
+    icon: <Tv className="h-6 w-6 text-accent" />,
     image: "https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Very Easy",
     time: "3 mins",
@@ -47,7 +47,7 @@ const guides = [
   {
     id: "android-tv",
     title: "Android TV & TiviMate",
-    icon: <Tv className="h-6 w-6 text-brand" />,
+    icon: <Tv className="h-6 w-6 text-accent" />,
     image: "https://images.pexels.com/photos/5721865/pexels-photo-5721865.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Medium",
     time: "5 mins",
@@ -61,7 +61,7 @@ const guides = [
   {
     id: "iptv-smarters",
     title: "IPTV Smarters Pro Setup",
-    icon: <Smartphone className="h-6 w-6 text-brand" />,
+    icon: <Smartphone className="h-6 w-6 text-accent" />,
     image: "https://images.pexels.com/photos/5082567/pexels-photo-5082567.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Very Easy",
     time: "2 mins",
@@ -75,7 +75,7 @@ const guides = [
   {
     id: "ibo-player",
     title: "IBO Player Setup",
-    icon: <Tv className="h-6 w-6 text-brand" />,
+    icon: <Tv className="h-6 w-6 text-accent" />,
     image: "https://images.pexels.com/photos/33129/popcorn-movie-party-entertainment.jpg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Easy",
     time: "3 mins",
@@ -89,7 +89,7 @@ const guides = [
   {
     id: "xciptv",
     title: "XCIPTV Setup",
-    icon: <MonitorPlay className="h-6 w-6 text-brand" />,
+    icon: <MonitorPlay className="h-6 w-6 text-accent" />,
     image: "https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Easy",
     time: "3 mins",
@@ -103,7 +103,7 @@ const guides = [
   {
     id: "apple-tv",
     title: "Apple TV & iOS",
-    icon: <Smartphone className="h-6 w-6 text-brand" />,
+    icon: <Smartphone className="h-6 w-6 text-accent" />,
     image: "https://images.pexels.com/photos/4009409/pexels-photo-4009409.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Very Easy",
     time: "3 mins",
@@ -117,7 +117,7 @@ const guides = [
   {
     id: "mag-box",
     title: "MAG Box Setup",
-    icon: <Tv className="h-6 w-6 text-brand" />,
+    icon: <Tv className="h-6 w-6 text-accent" />,
     image: "https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=800",
     difficulty: "Medium",
     time: "5 mins",
@@ -146,20 +146,21 @@ export default function GuidesPage() {
     <>
       <SchemaMarkup schema={schema} />
 
-      <section className="relative isolate overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24 border-b border-white/5">
-        <div className="absolute inset-0 -z-20 bg-black">
-          <Image
-            src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=2000"
-            alt="Cinematic background for guides"
-            fill
-            priority
-            className="object-cover opacity-20 blur-[2px]"
-          />
-        </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-background via-background/90 to-transparent" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl text-foreground">Setup Guides for Every Device</h1>
+      <section className="relative isolate overflow-hidden bg-background noise-overlay pt-24 pb-16 sm:pt-32 sm:pb-24">
+        <Image
+          src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=2000"
+          alt=""
+          fill
+          unoptimized
+          priority
+          sizes="100vw"
+          className="-z-30 object-cover opacity-20"
+        />
+        <div className="pointer-events-none absolute inset-0 -z-20 bg-gradient-to-b from-background/80 via-background/50 to-background" />
+        <div className="pointer-events-none absolute inset-0 -z-19 bg-gradient-to-r from-background/90 via-background/40 to-background/60" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl text-foreground font-serif">Setup Guides for Every Device</h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground">
               Follow these simple, step-by-step instructions to get your IPTV running in less than 5 minutes. No technical skills required.
             </p>
@@ -172,22 +173,22 @@ export default function GuidesPage() {
           
           <div className="grid lg:grid-cols-2 gap-8">
             {guides.map((guide) => (
-              <div key={guide.id} id={guide.id} className="luxury-surface rounded-[2rem] overflow-hidden flex flex-col group hover:border-brand/40 transition-colors scroll-mt-24">
+              <div key={guide.id} id={guide.id} className="luxury-surface rounded-[2rem] overflow-hidden flex flex-col group hover:border-accent/30 transition-colors scroll-mt-24">
                 
                 {/* Guide Image Header */}
                 <div className="relative h-48 sm:h-56 w-full bg-card">
-                  <Image src={guide.image} alt={guide.title} fill className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                  <Image src={guide.image} alt={guide.title} fill unoptimized sizes="(min-width: 1024px) 48vw, 92vw" className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
                   <div className="absolute top-4 right-4 flex gap-2">
-                    <span className="inline-flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 text-xs font-bold text-white backdrop-blur border border-white/10">
-                      <Zap className="h-3 w-3 text-brand" /> {guide.difficulty}
+                    <span className="inline-flex items-center gap-1 rounded-full bg-background/60 px-2.5 py-1 text-xs font-bold text-white backdrop-blur border border-white/10">
+                      <Zap className="h-3 w-3 text-accent" /> {guide.difficulty}
                     </span>
-                    <span className="inline-flex items-center gap-1 rounded-full bg-black/60 px-2.5 py-1 text-xs font-bold text-white backdrop-blur border border-white/10">
-                      <Clock className="h-3 w-3 text-brand" /> {guide.time}
+                    <span className="inline-flex items-center gap-1 rounded-full bg-background/60 px-2.5 py-1 text-xs font-bold text-white backdrop-blur border border-white/10">
+                      <Clock className="h-3 w-3 text-accent" /> {guide.time}
                     </span>
                   </div>
                   <div className="absolute bottom-4 left-6 right-6 flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-black/60 backdrop-blur border border-white/20">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-background/60 backdrop-blur border border-white/20">
                       {guide.icon}
                     </div>
                     <h2 className="text-2xl font-bold text-white">{guide.title}</h2>
@@ -199,7 +200,7 @@ export default function GuidesPage() {
                   <ol className="space-y-5 mb-8 flex-1">
                     {guide.steps.map((step, i) => (
                       <li key={i} className="flex gap-4">
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand/20 font-bold text-brand text-xs">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent/20 font-bold text-accent text-xs">
                           {i + 1}
                         </span>
                         <span className="text-muted-foreground text-sm leading-relaxed">{step}</span>
@@ -214,7 +215,7 @@ export default function GuidesPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       data-cta="support-whatsapp"
-                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-success/10 px-4 py-3 text-sm font-bold text-success transition hover:bg-success hover:text-background border border-success/20"
+                      className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-accent to-[#c9a227] px-4 py-3 text-sm font-bold text-background transition hover:-translate-y-0.5"
                     >
                       <WhatsAppIcon className="h-4 w-4" /> Need help? Message Support
                     </Link>
@@ -231,7 +232,7 @@ export default function GuidesPage() {
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link
                 href="/blog"
-                className="inline-flex h-14 items-center justify-center rounded-full border border-white/12 bg-white/8 px-8 text-base font-bold text-foreground transition hover:border-brand/40 hover:text-brand"
+                className="inline-flex h-14 items-center justify-center rounded-full border border-white/12 bg-white/8 px-8 text-base font-bold text-foreground transition hover:border-accent/30 hover:text-accent"
               >
                 Browse Blog Guides
               </Link>
@@ -240,7 +241,7 @@ export default function GuidesPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cta="support-whatsapp"
-                className="button-glow-success inline-flex h-14 items-center justify-center gap-2 rounded-full bg-success px-8 text-base font-bold text-background transition hover:-translate-y-0.5 hover:bg-success-hover"
+                className="inline-flex h-14 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-[#c9a227] px-8 text-base font-bold text-background transition hover:-translate-y-0.5"
               >
                 <WhatsAppIcon className="h-5 w-5" /> Ask on WhatsApp
               </Link>

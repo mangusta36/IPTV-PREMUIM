@@ -23,7 +23,7 @@ export default function PricingSelector({ compact = false }: { compact?: boolean
     <section className={compact ? "py-14" : "py-20"}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.26em] text-brand">Simple IPTV pricing</p>
+          <p className="text-sm font-bold uppercase tracking-[0.26em] text-accent">Simple IPTV pricing</p>
           <h2 className="mt-3 text-3xl font-black tracking-tight text-white sm:text-5xl">Choose your active device plan</h2>
           <p className="mt-5 text-base leading-7 text-white/65 sm:text-lg">
             Select 1, 2, or 3 active device plans. Every package includes live channels, VOD, EPG support, and guided WhatsApp activation.
@@ -38,7 +38,7 @@ export default function PricingSelector({ compact = false }: { compact?: boolean
               onClick={() => setSelectedDevices(deviceOption.devices)}
               className={`rounded-xl px-5 py-4 text-left transition ${
                 selectedDevices === deviceOption.devices
-                  ? "bg-brand text-black shadow-lg shadow-brand/25"
+                  ? "bg-gradient-to-r from-accent to-[#c9a227] text-background shadow-lg shadow-accent/25"
                   : "bg-black/35 text-white hover:bg-white/10"
               }`}
             >
@@ -46,7 +46,7 @@ export default function PricingSelector({ compact = false }: { compact?: boolean
                 <Smartphone className="h-5 w-5" />
                 {deviceOption.label}
               </span>
-              <span className={`mt-1 block text-xs font-semibold ${selectedDevices === deviceOption.devices ? "text-black/70" : "text-white/45"}`}>
+              <span className={`mt-1 block text-xs font-semibold ${selectedDevices === deviceOption.devices ? "text-background/70" : "text-white/45"}`}>
                 {deviceOption.helper}
               </span>
             </button>
@@ -61,12 +61,12 @@ export default function PricingSelector({ compact = false }: { compact?: boolean
                 key={plan.duration}
                 className={`relative flex min-h-full flex-col overflow-hidden rounded-2xl border p-6 shadow-2xl transition hover:-translate-y-1 ${
                   isBest
-                    ? "border-brand bg-[linear-gradient(155deg,rgba(234,179,8,0.18),rgba(12,12,12,0.96)_35%,rgba(22,163,74,0.12))] shadow-brand/20"
+                    ? "border-accent bg-[linear-gradient(155deg,rgba(212,175,55,0.18),rgba(12,12,12,0.96)_35%,rgba(22,163,74,0.12))] shadow-accent/20"
                     : "border-white/10 bg-white/[0.055] shadow-black/30"
                 }`}
               >
                 {isBest && (
-                  <div className="absolute right-5 top-5 rounded-full bg-brand px-3 py-1 text-[11px] font-black uppercase tracking-widest text-black">
+                  <div className="absolute right-5 top-5 rounded-full bg-accent px-3 py-1 text-[11px] font-black uppercase tracking-widest text-background">
                     BEST VALUE
                   </div>
                 )}
@@ -88,7 +88,7 @@ export default function PricingSelector({ compact = false }: { compact?: boolean
                     <span className="text-5xl font-black tracking-tight text-white">{formatPrice(plan.price)}</span>
                     <span className="pb-2 text-sm font-bold text-white/45">USD</span>
                   </div>
-                  <p className="mt-2 text-sm font-bold text-brand">
+                  <p className="mt-2 text-sm font-bold text-accent">
                     {plan.monthlyEquivalent ?? `Save ${plan.save}`}
                   </p>
                   {plan.description && <p className="mt-1 text-sm text-white/55">{plan.description}</p>}
@@ -110,8 +110,8 @@ export default function PricingSelector({ compact = false }: { compact?: boolean
                   data-cta="pricing-whatsapp"
                   className={`inline-flex h-14 items-center justify-center gap-2 rounded-full px-5 py-4 text-sm font-black uppercase tracking-wider transition ${
                     isBest
-                      ? "bg-green-500 text-white shadow-lg shadow-green-500/25 hover:bg-green-400"
-                      : "bg-white text-black hover:bg-brand"
+                      ? "bg-gradient-to-r from-accent to-[#c9a227] text-background shadow-lg shadow-accent/25 hover:-translate-y-0.5"
+                      : "bg-gradient-to-r from-accent to-[#c9a227] text-background hover:-translate-y-0.5"
                   }`}
                 >
                   <WhatsAppIcon className="h-5 w-5" />
@@ -124,28 +124,28 @@ export default function PricingSelector({ compact = false }: { compact?: boolean
 
         <div className="mt-10 grid gap-4 rounded-2xl border border-white/10 bg-black/35 p-5 text-sm text-white/70 md:grid-cols-3">
           <div className="flex items-center gap-3">
-            <ShieldCheck className="h-5 w-5 text-green-300" />
+            <ShieldCheck className="h-5 w-5 text-accent" />
             <span>7-day money-back guarantee</span>
           </div>
           <div className="flex items-center gap-3">
-            <MessageCircle className="h-5 w-5 text-green-300" />
+            <MessageCircle className="h-5 w-5 text-accent" />
             <span>Fast WhatsApp activation</span>
           </div>
           <div className="flex items-center gap-3">
-            <Sparkles className="h-5 w-5 text-brand" />
+            <Sparkles className="h-5 w-5 text-accent" />
             <span>EPG and setup guidance included</span>
           </div>
         </div>
 
         <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.045] p-6">
           <div className="mb-6 flex items-center gap-3">
-            <CreditCard className="h-5 w-5 text-brand" />
+            <CreditCard className="h-5 w-5 text-accent" />
             <h3 className="text-lg font-black text-white">What happens after payment?</h3>
           </div>
           <div className="grid gap-4 md:grid-cols-5">
             {steps.map((step, index) => (
               <div key={step} className="rounded-xl border border-white/10 bg-black/30 p-4">
-                <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-brand text-sm font-black text-black">
+                <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-accent text-sm font-black text-background">
                   {index + 1}
                 </span>
                 <p className="text-sm font-semibold text-white/75">{step}</p>

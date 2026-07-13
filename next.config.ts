@@ -21,6 +21,11 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "logos-world.net",         pathname: "/**" },
       { protocol: "https", hostname: "freepnglogo.com",         pathname: "/**" },
       { protocol: "https", hostname: "static.vecteezy.com",     pathname: "/**" },
+      { protocol: "https", hostname: "www.modeiptv.ca",         pathname: "/**" },
+      { protocol: "https", hostname: "english.cdn.zeenews.com", pathname: "/**" },
+      { protocol: "https", hostname: "encrypted-tbn0.gstatic.com", pathname: "/**" },
+      { protocol: "https", hostname: "cwuobserver.com",         pathname: "/**" },
+      { protocol: "https", hostname: "image.tmdb.org",          pathname: "/**" },
     ],
   },
 };

@@ -2,7 +2,7 @@ export const siteConfig = {
   brandName: "iFlex IPTV",
   domain: "https://www.iflexiptv.pro",
   supportEmail: "support@iflexiptv.pro",
-  whatsappNumber: "+44 7828 714977",
+  whatsappNumber: "+212 624637669",
   logoPath: "/logo.png",
   ogImagePath: "/og-image.jpg",
   defaultTitle: "iFlex IPTV - Premium IPTV for Live Sports, Movies & 4K TV",

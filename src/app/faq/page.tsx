@@ -60,37 +60,39 @@ export default function FAQPage() {
     <>
       <SchemaMarkup schema={schema} />
       <div>
-        <section className="relative isolate overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24">
+        <section className="relative isolate overflow-hidden bg-background noise-overlay pt-24 pb-16 sm:pt-32 sm:pb-24">
           <Image
             src={premiumImages.faqHero}
-            alt="Dark premium television room behind iFlex IPTV frequently asked questions"
+            alt=""
             fill
             priority
+            unoptimized
             sizes="100vw"
-            className="-z-20 object-cover"
+            className="-z-30 object-cover opacity-20"
           />
-          <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(5,5,6,0.96),rgba(5,5,6,0.76)_52%,rgba(5,5,6,0.96)),radial-gradient(circle_at_74%_20%,rgba(244,199,107,0.22),transparent_32rem)]" />
+          <div className="pointer-events-none absolute inset-0 -z-20 bg-gradient-to-b from-background/80 via-background/50 to-background" />
+          <div className="pointer-events-none absolute inset-0 -z-19 bg-gradient-to-r from-background/90 via-background/40 to-background/60" />
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">Clear answers</p>
-              <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-6xl">Frequently Asked Questions</h1>
+              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-accent">Clear answers</p>
+              <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-6xl font-serif">Frequently Asked Questions</h1>
               <p className="mt-6 text-lg leading-8 text-muted-foreground">Find answers to common questions about our premium IPTV service.</p>
             </div>
           </div>
         </section>
 
-        <section className="py-20">
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
               <FAQAccordion items={faqs} />
 
               <div className="mt-16 luxury-surface rounded-[1.5rem] p-8 text-center">
-                <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand">24/7 support</p>
+                <p className="text-sm font-semibold uppercase tracking-[0.28em] text-accent">24/7 support</p>
                 <h2 className="mt-3 text-2xl font-bold mb-4">Still have questions?</h2>
                 <p className="text-muted-foreground mb-6">Our dedicated support team is available 24/7 to help you with any issues.</p>
                 <Link
                   href="/contact"
-                  className="button-glow inline-flex h-11 items-center justify-center gap-2 rounded-full bg-brand px-6 text-sm font-bold text-background transition hover:-translate-y-0.5 hover:bg-brand-hover"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-[#c9a227] px-6 text-sm font-bold text-background transition hover:-translate-y-0.5"
                 >
                   Contact Support
                   <ArrowRight className="h-4 w-4" />

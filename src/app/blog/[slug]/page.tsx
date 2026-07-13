@@ -45,7 +45,7 @@ function renderInline(text: string) {
     const link = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
     if (link) {
       return (
-        <Link key={index} href={link[2]} className="font-semibold text-brand underline-offset-4 hover:underline">
+        <Link key={index} href={link[2]} className="font-semibold text-accent underline-offset-4 hover:underline">
           {link[1]}
         </Link>
       );
@@ -66,11 +66,11 @@ function renderInline(text: string) {
 function renderContent(content: string) {
   return content.trim().split("\n\n").map((block, index) => {
     if (block.startsWith("## ")) {
-      return <h2 key={index} className="mt-10 mb-4 text-2xl font-black text-white">{block.replace("## ", "")}</h2>;
+      return <h2 key={index} className="mt-10 mb-4 font-serif text-2xl font-black text-white">{block.replace("## ", "")}</h2>;
     }
 
     if (block.startsWith("### ")) {
-      return <h3 key={index} className="mt-8 mb-3 text-xl font-black text-white">{block.replace("### ", "")}</h3>;
+      return <h3 key={index} className="mt-8 mb-3 font-serif text-xl font-black text-white">{block.replace("### ", "")}</h3>;
     }
 
     if (block.startsWith("- ")) {
@@ -99,9 +99,9 @@ function renderContent(content: string) {
         const headers = rows[0].split("|").map((cell) => cell.trim()).filter(Boolean);
         const dataRows = rows.slice(2);
         return (
-          <div key={index} className="mb-8 overflow-x-auto rounded-2xl border border-white/10">
+          <div key={index} className="mb-8 overflow-x-auto rounded-2xl border border-border">
             <table className="w-full min-w-[34rem] text-sm">
-              <thead className="bg-white/[0.08]">
+              <thead className="bg-card/80">
                 <tr>
                   {headers.map((header) => (
                     <th key={header} className="px-4 py-3 text-left font-black text-white">{header}</th>
@@ -110,7 +110,7 @@ function renderContent(content: string) {
               </thead>
               <tbody>
                 {dataRows.map((row) => (
-                  <tr key={row} className="border-t border-white/10">
+                  <tr key={row} className="border-t border-border">
                     {row.split("|").map((cell) => cell.trim()).filter(Boolean).map((cell) => (
                       <td key={cell} className="px-4 py-3 text-white/68">{renderInline(cell)}</td>
                     ))}
@@ -190,28 +190,32 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
     <>
       <SchemaMarkup schema={schema} />
 
-      <article className="bg-black pb-20">
-        <section className="relative isolate overflow-hidden border-b border-white/10 pt-28 pb-16 sm:pt-36">
+      <article className="bg-background pb-20">
+        <section className="relative isolate overflow-hidden bg-background noise-overlay pt-24 pb-16 sm:pt-32 sm:pb-24">
           <Image
-            src={post.image}
-            alt={post.title}
+            src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=2000"
+            alt=""
             fill
+            unoptimized
             priority
             sizes="100vw"
-            className="-z-20 object-cover opacity-20 blur-sm"
+            className="-z-30 object-cover opacity-20"
           />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-black/90 to-black/70" />
+          <div className="pointer-events-none absolute inset-0 -z-20 bg-gradient-to-b from-navy/80 via-navy/50 to-navy" />
+          <div className="pointer-events-none absolute inset-0 -z-19 bg-gradient-to-r from-navy/90 via-navy/40 to-navy/60" />
 
           <div className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <Link href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-black text-brand hover:text-brand-hover">
+            <Link href="/blog" className="mb-8 inline-flex items-center gap-2 text-sm font-black text-accent hover:text-accent-hover">
               <ArrowLeft className="h-4 w-4" /> Back to Blog
             </Link>
-            <div className="mb-4 flex items-center gap-3 text-xs font-black uppercase tracking-widest text-brand">
+            <div className="mb-4 flex items-center gap-3 text-xs font-black uppercase tracking-widest text-accent">
               <span>{post.category}</span>
               <span className="h-1 w-1 rounded-full bg-white/25" />
               <span>{post.readTime}</span>
             </div>
-            <h1 className="text-4xl font-black tracking-tight text-white sm:text-6xl">{post.title}</h1>
+            <h1 className="text-4xl font-black tracking-tight text-white sm:text-6xl">
+              <span className="font-serif luxury-gradient-text">{post.title}</span>
+            </h1>
             <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/55">
               <time dateTime={post.date}>{new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</time>
               <span>•</span>
@@ -222,19 +226,19 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
         <div className="container mx-auto mt-12 grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_22rem] lg:px-8">
           <div>
-            <div className="relative mb-10 aspect-video overflow-hidden rounded-2xl border border-white/10">
-              <Image src={post.image} alt={post.title} fill sizes="(min-width: 1024px) 62vw, 92vw" className="object-cover" />
+            <div className="relative mb-10 aspect-video overflow-hidden rounded-2xl border border-border">
+              <Image src={post.image} alt={post.title} fill unoptimized sizes="(min-width: 1024px) 62vw, 92vw" className="object-cover" />
             </div>
-            <p className="mb-10 border-l-4 border-brand pl-6 text-xl font-semibold leading-8 text-white/88">{post.description}</p>
+            <p className="mb-10 border-l-4 border-accent pl-6 text-xl font-semibold leading-8 text-white/88">{post.description}</p>
             {renderContent(post.content)}
 
             {post.imagePlan?.length ? (
               <section className="mt-12">
-                <h2 className="mb-5 text-2xl font-black text-white">Recommended Images & Media Plan</h2>
+                <h2 className="mb-5 font-serif text-2xl font-black text-white">Recommended Images &amp; Media Plan</h2>
                 <div className="space-y-4">
                   {post.imagePlan.map((item) => (
-                    <div key={item.filename} className="rounded-2xl border border-white/10 bg-white/[0.045] p-5">
-                      <h3 className="text-lg font-black text-white">{item.filename}</h3>
+                    <div key={item.filename} className="rounded-2xl border border-border bg-card/50 p-5">
+                      <h3 className="font-serif text-lg font-black text-white">{item.filename}</h3>
                       <dl className="mt-3 grid gap-3 text-sm leading-6 text-white/68 sm:grid-cols-2">
                         <div>
                           <dt className="font-semibold text-white">Placement</dt>
@@ -269,7 +273,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
                           <dd>{item.sizeTarget}</dd>
                         </div>
                       </dl>
-                      <p className="mt-4 rounded-xl bg-black/25 p-4 text-sm leading-6 text-white/62">{item.prompt}</p>
+                      <p className="mt-4 rounded-xl bg-background/80 p-4 text-sm leading-6 text-white/62">{item.prompt}</p>
                     </div>
                   ))}
                 </div>
@@ -278,11 +282,11 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
             {post.faqs?.length ? (
               <section className="mt-12">
-                <h2 className="mb-5 text-2xl font-black text-white">FAQs</h2>
+                <h2 className="mb-5 font-serif text-2xl font-black text-white">FAQs</h2>
                 <div className="space-y-4">
                   {post.faqs.map((faq) => (
-                    <div key={faq.question} className="rounded-2xl border border-white/10 bg-white/[0.045] p-5">
-                      <h3 className="text-lg font-black text-white">{faq.question}</h3>
+                    <div key={faq.question} className="rounded-2xl border border-border bg-card/50 p-5">
+                      <h3 className="font-serif text-lg font-black text-white">{faq.question}</h3>
                       <p className="mt-2 leading-7 text-white/68">{renderInline(faq.answer)}</p>
                     </div>
                   ))}
@@ -290,15 +294,15 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               </section>
             ) : null}
 
-            <div className="mt-14 rounded-2xl border border-green-400/20 bg-green-500/10 p-8">
-              <h2 className="text-2xl font-black text-white">Need help with this setup?</h2>
+            <div className="mt-14 rounded-2xl border border-border bg-card/50 p-8">
+              <h2 className="font-serif text-2xl font-black text-white">Need help with this setup?</h2>
               <p className="mt-3 leading-7 text-white/64">Message iFlex IPTV support with your device, app, internet speed, and the article topic you are following.</p>
               <Link
                 href={createWhatsAppSupportUrl(`help with ${post.title}`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-cta="support-whatsapp"
-                className="mt-6 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-green-500 px-6 font-black text-white transition hover:bg-green-400"
+                className="mt-6 inline-flex h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-6 font-black text-background transition hover:brightness-110"
               >
                 <WhatsAppIcon className="h-5 w-5" />
                 Message Support
@@ -307,12 +311,12 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.055] p-6">
-              <h2 className="text-lg font-black text-white">Related guides</h2>
+            <div className="rounded-2xl border border-border bg-card/50 p-6">
+              <h2 className="font-serif text-lg font-black text-white">Related guides</h2>
               <div className="mt-5 space-y-4">
                 {blogPosts.filter((item) => item.slug !== post.slug).slice(0, 4).map((item) => (
-                  <Link key={item.slug} href={`/blog/${item.slug}`} className="block rounded-xl border border-white/10 bg-black/25 p-4 transition hover:border-brand/40">
-                    <p className="text-xs font-bold uppercase tracking-widest text-brand">{item.category}</p>
+                  <Link key={item.slug} href={`/blog/${item.slug}`} className="block rounded-xl border border-border bg-background/50 p-4 transition hover:border-accent/40">
+                    <p className="text-xs font-bold uppercase tracking-widest text-accent">{item.category}</p>
                     <h3 className="mt-2 text-sm font-black leading-5 text-white">{item.title}</h3>
                   </Link>
                 ))}

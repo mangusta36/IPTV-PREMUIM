@@ -97,12 +97,13 @@ export default function PremiumCarousel({
             >
               <Link
                 href={item.href ?? "/pricing"}
-                className="group relative block h-[27rem] overflow-hidden rounded-[1.75rem] border border-white/10 bg-card shadow-2xl shadow-black/30 transition duration-500 hover:-translate-y-1 hover:border-brand/40 hover:shadow-brand/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                className="group relative block h-[22rem] overflow-hidden rounded-[1.75rem] border border-white/10 bg-card shadow-2xl shadow-black/30 transition duration-500 hover:-translate-y-1 hover:border-brand/40 hover:shadow-brand/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand sm:h-[27rem]"
               >
                 <Image
                   src={item.image}
                   alt={item.alt}
                   fill
+                  unoptimized
                   sizes="(min-width: 1024px) 31vw, (min-width: 640px) 48vw, 86vw"
                   className="object-cover transition duration-700 group-hover:scale-105"
                 />
@@ -133,8 +134,8 @@ export default function PremiumCarousel({
             type="button"
             aria-label={`Go to ${title} slide ${index + 1}`}
             onClick={() => scrollTo(index)}
-            className={`h-2.5 rounded-full transition-all ${
-              selectedIndex === index ? "w-8 bg-brand" : "w-2.5 bg-white/20 hover:bg-white/40"
+            className={`h-3 rounded-full transition-all ${
+              selectedIndex === index ? "w-8 bg-brand" : "w-3 bg-white/20 hover:bg-white/40"
             }`}
           />
         ))}

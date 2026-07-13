@@ -37,31 +37,46 @@ export default function BlogIndex() {
     <>
       <SchemaMarkup schema={schema} />
 
-      <section className="relative isolate overflow-hidden border-b border-white/10 bg-black pt-28 pb-16 sm:pt-36">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_22%_16%,rgba(59,130,246,0.2),transparent_25rem),radial-gradient(circle_at_80%_16%,rgba(234,179,8,0.16),transparent_24rem),linear-gradient(180deg,#020617,#000)]" />
-        <div className="container mx-auto px-4 text-center sm:px-6 lg:px-8">
-          <p className="text-sm font-bold uppercase tracking-[0.28em] text-brand">Resources & guides</p>
-          <h1 className="mx-auto mt-3 max-w-4xl text-4xl font-black tracking-tight text-white sm:text-6xl">iFlex IPTV Blog</h1>
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-white/68">
-            Helpful 2026 IPTV guides for live sports readiness, EPG, buffering fixes, Smart TV setup, Fire Stick setup, internet speed, and active device plans.
-          </p>
+      <section className="relative isolate overflow-hidden bg-background noise-overlay pt-24 pb-16 sm:pt-32 sm:pb-24">
+        <Image
+          src="https://images.pexels.com/photos/1201996/pexels-photo-1201996.jpeg?auto=compress&cs=tinysrgb&w=2000"
+          alt=""
+          fill
+          unoptimized
+          priority
+          sizes="100vw"
+          className="-z-30 object-cover opacity-20"
+        />
+        <div className="pointer-events-none absolute inset-0 -z-20 bg-gradient-to-b from-navy/80 via-navy/50 to-navy" />
+        <div className="pointer-events-none absolute inset-0 -z-19 bg-gradient-to-r from-navy/90 via-navy/40 to-navy/60" />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <p className="text-sm font-bold uppercase tracking-[0.28em] text-accent">Resources &amp; guides</p>
+            <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-6xl">
+              <span className="font-serif luxury-gradient-text">iFlex IPTV Blog</span>
+            </h1>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-white/68">
+              Helpful 2026 IPTV guides for live sports readiness, EPG, buffering fixes, Smart TV setup, Fire Stick setup, internet speed, and active device plans.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="bg-black py-20">
+      <section className="bg-background py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
             {blogPosts.map((post) => (
-              <article key={post.slug} className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055] shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:border-brand/40">
+              <article key={post.slug} className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card/50 shadow-xl shadow-black/20 transition hover:-translate-y-1 hover:border-accent/40">
                 <Link href={`/blog/${post.slug}`} className="relative aspect-[16/9] overflow-hidden">
                   <Image
                     src={post.image}
                     alt={post.title}
                     fill
+                    unoptimized
                     sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                     className="object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-4 top-4 rounded-full bg-black/70 px-3 py-1 text-xs font-bold text-brand backdrop-blur">
+                  <span className="absolute left-4 top-4 rounded-full bg-background/70 px-3 py-1 text-xs font-bold text-accent backdrop-blur">
                     {post.category}
                   </span>
                 </Link>
@@ -72,10 +87,10 @@ export default function BlogIndex() {
                     <span>{post.readTime}</span>
                   </div>
                   <Link href={`/blog/${post.slug}`}>
-                    <h2 className="text-xl font-black text-white transition group-hover:text-brand">{post.title}</h2>
+                    <h2 className="font-serif text-xl font-black text-white transition group-hover:text-accent">{post.title}</h2>
                   </Link>
                   <p className="mt-3 line-clamp-3 text-sm leading-6 text-white/60">{post.description}</p>
-                  <Link href={`/blog/${post.slug}`} className="mt-6 inline-flex items-center gap-2 text-sm font-black text-brand">
+                  <Link href={`/blog/${post.slug}`} className="mt-6 inline-flex items-center gap-2 text-sm font-black text-accent">
                     Read article <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
@@ -83,15 +98,15 @@ export default function BlogIndex() {
             ))}
           </div>
 
-          <div className="mx-auto mt-20 max-w-4xl rounded-3xl border border-white/10 bg-white/[0.055] p-8 text-center md:p-12">
-            <h3 className="text-2xl font-black text-white md:text-3xl">Need help setting up?</h3>
+          <div className="mx-auto mt-20 max-w-4xl rounded-3xl border border-border bg-card/50 p-8 text-center md:p-12">
+            <h3 className="font-serif text-2xl font-black text-white md:text-3xl">Need help setting up?</h3>
             <p className="mt-4 text-white/62">Message iFlex IPTV support with your device, selected app, internet speed, and package questions.</p>
             <Link
               href={createWhatsAppSupportUrl("help with an IPTV setup question from the blog")}
               target="_blank"
               rel="noopener noreferrer"
               data-cta="support-whatsapp"
-              className="mt-8 inline-flex h-14 items-center justify-center gap-2 rounded-full bg-green-500 px-8 font-black text-white transition hover:bg-green-400"
+              className="mt-8 inline-flex h-14 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-accent to-accent-hover px-8 font-black text-background transition hover:brightness-110"
             >
               <WhatsAppIcon className="h-6 w-6" />
               Chat with Support

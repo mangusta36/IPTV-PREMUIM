@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 
 export default function DisclaimerPage() {
   return (
-    <main className="bg-black py-24 sm:py-32">
+    <main className="bg-background py-24 sm:py-32">
       <article className="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <p className="text-sm font-bold uppercase tracking-[0.28em] text-brand">Disclaimer</p>
-        <h1 className="mt-3 text-4xl font-black text-white sm:text-6xl">Service Disclaimer</h1>
-        <div className="mt-10 space-y-8 text-white/68">
+        <p className="text-sm font-bold uppercase tracking-[0.28em] luxury-gradient-text">Disclaimer</p>
+        <h1 className="mt-3 text-4xl font-black text-white sm:text-6xl font-serif">Service Disclaimer</h1>
+        <div className="mt-10 space-y-8 text-muted-foreground">
           <section>
             <h2 className="text-xl font-black text-white">Independent Service</h2>
             <p className="mt-3 leading-7">{siteConfig.legalDisclaimer}</p>

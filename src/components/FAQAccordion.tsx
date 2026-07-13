@@ -20,6 +20,7 @@ export default function FAQAccordion({ items }: { items: FAQItem[] }) {
       {items.map((item, index) => (
         <div key={index} className="overflow-hidden rounded-2xl border border-white/10 bg-white/6 shadow-lg shadow-black/15 backdrop-blur">
           <button
+            aria-expanded={openIndex === index}
             className="w-full text-left px-6 py-5 flex justify-between items-center gap-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
             onClick={() => toggle(index)}
           >
