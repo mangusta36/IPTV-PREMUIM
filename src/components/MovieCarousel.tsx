@@ -130,7 +130,7 @@ export default function MovieCarousel() {
       {/* Carousel */}
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="-ml-6 flex pl-6">
-          {movies.map((movie, i) => (
+          {movies.map((movie) => (
             <article
               key={movie.title}
               className="relative min-w-0 flex-[0_0_85%] pl-6 sm:flex-[0_0_50%] lg:flex-[0_0_33%]"

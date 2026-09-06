@@ -50,7 +50,7 @@ export default function HeroStreamingMockup() {
 
               <div className="relative z-10">
                 <RadioTower className="mb-6 h-11 w-11 text-brand/90" />
-                <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-brand/80">Tonight's Feature</p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-brand/80">Tonight&apos;s Feature</p>
                 <h3 className="mt-2 text-2xl font-black leading-tight text-white sm:text-[1.6rem]">Live sports, curated without compromise.</h3>
                 <div className="mt-5 grid grid-cols-3 gap-2 text-center text-[11px] font-bold text-white/70">
                   <span className="rounded-lg border border-white/8 bg-white/[0.04] py-2.5">FHD</span>

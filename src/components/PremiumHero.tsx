@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CheckCircle, Shield, Star, Tv, Zap, Gem } from "lucide-react";
+import { ArrowRight, Shield, Star, Tv, Zap, Gem } from "lucide-react";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
+import HeroStreamingMockup from "@/components/HeroStreamingMockup";
 import { createWhatsAppSupportUrl } from "@/lib/whatsapp";
 import { siteConfig } from "@/lib/site-config";
 
@@ -81,28 +82,7 @@ function NowPlayingTicker({ mounted }: { mounted: boolean }) {
   );
 }
 
-function FloatingFeatureCards() {
-  return (
-    <div className="relative hidden h-full lg:flex lg:flex-col lg:justify-center lg:gap-5 lg:pl-8">
-      {floatingFeatures.map((feature, i) => {
-        const Icon = feature.icon;
-        return (
-          <div
-            key={feature.label}
-            className="hero-float-card premium-card group relative w-72 rounded-2xl border border-white/[0.06] bg-white/[0.03] p-5 backdrop-blur-xl transition-all duration-500 hover:border-accent/20 hover:bg-white/[0.06] hover:shadow-[0_20px_60px_-12px_rgba(212,175,55,0.08)]"
-            style={{ animationDelay: `${0.8 + i * 0.2}s` }}
-          >
-            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-accent/[0.04] blur-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-            <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl border border-accent/15 bg-accent/[0.06]">
-              <Icon className="h-5 w-5 text-accent" />
-            </div>
-            <p className="text-sm font-bold text-foreground">{feature.label}</p>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+
 
 export default function PremiumHero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -110,10 +90,13 @@ export default function PremiumHero() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    const frame = requestAnimationFrame(() => setMounted(true));
     const onScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
@@ -234,9 +217,9 @@ export default function PremiumHero() {
           </div>
         </div>
 
-        {/* Right: Floating feature cards (desktop) */}
-        <div className="relative mt-12 hidden flex-1 lg:block">
-          <FloatingFeatureCards />
+        {/* Right: Interactive Streaming Console (desktop) */}
+        <div className="relative mt-8 hidden flex-1 lg:block max-w-xl">
+          <HeroStreamingMockup />
         </div>
       </div>
 
